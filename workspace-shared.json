@@ -1417,6 +1417,16 @@
           "name": "schemaByName",
           "type": "function",
           "content": "export function schemaByName(\n  json: { data: ICorSchemaRet[\"data\"] },\n  name: string,\n): ICorSchemaInfo | null {\n  for (const entry of json?.data ?? []) {\n    const found = entry.data?.find(\n      (info: ICorSchemaInfo) => info.name === name,\n    );\n    if (found) return found;\n  }\n  return null;\n}"
+        },
+        {
+          "name": "ICorSchemaInfoGroupByType",
+          "type": "interface",
+          "content": "export interface ICorSchemaInfoGroupByType {\n  type: TCorSchemaInfo;\n  data: ICorSchemaInfo[];\n}"
+        },
+        {
+          "name": "schemaGroupByType",
+          "type": "function",
+          "content": "/**\n * schemaGroupByType\n * Agrupa um array de ICorSchemaInfo pelos seus respectivos tipos.\n * @param data ICorSchemaInfo[]\n * @returns ICorSchemaInfoGroupByType[]\n */\nexport function schemaGroupByType(\n  data: ICorSchemaInfo[],\n): ICorSchemaInfoGroupByType[] {\n  const map = new Map<TCorSchemaInfo, ICorSchemaInfo[]>();\n\n  for (const item of data) {\n    const list = map.get(item.type) ?? [];\n    list.push(item);\n    map.set(item.type, list);\n  }\n\n  return Array.from(map.entries()).map(([type, data]) => ({ type, data }));\n}"
         }
       ]
     },
@@ -1782,6 +1792,11 @@
           "name": "CorSchemaByNamePipe",
           "type": "pipe",
           "content": "@Pipe({\n  name: \"schemaByName\",\n  standalone: true,\n  pure: true,\n})\nexport class CorSchemaByNamePipe implements PipeTransform {\n  transform(\n    json: ICorSchemaRet | null | undefined,\n    name: string,\n    field?: keyof ICorSchemaInfo,\n  ): any {\n    if (!json) return field === \"content\" || !field ? \"\" : null;\n\n    const found = schemaByName(json, name);\n    if (!found) return field === \"content\" || !field ? \"\" : null;\n\n    return field ? found[field] : found.content;\n  }\n}"
+        },
+        {
+          "name": "CorSchemaGroupByTypePipe",
+          "type": "pipe",
+          "content": "@Pipe({\n  name: \"schemaGroupByType\",\n  standalone: true,\n  pure: true,\n})\nexport class CorSchemaGroupByTypePipe implements PipeTransform {\n  transform(\n    data: ICorSchemaInfo[] | null | undefined,\n  ): ICorSchemaInfoGroupByType[] {\n    if (!data) return [];\n    return schemaGroupByType(data);\n  }\n}"
         },
         {
           "name": "CorTruncatePipe",

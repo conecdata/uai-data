@@ -76,6 +76,26 @@
       ]
     },
     {
+      "id": "shared/core/models/interfaces/schemas",
+      "data": [
+        {
+          "name": "TCorSchemaInfo",
+          "type": "type",
+          "content": "export type TCorSchemaInfo =\n  | \"const\"\n  | \"component\"\n  | \"directive\"\n  | \"event\"\n  | \"function\"\n  | \"interface\"\n  | \"pipe\"\n  | \"service\"\n  | \"record\"\n  | \"type\";"
+        },
+        {
+          "name": "ICorSchemaInfo",
+          "type": "interface",
+          "content": "export interface ICorSchemaInfo {\n  name: string;\n  type: TCorSchemaInfo;\n  content: string;\n}"
+        },
+        {
+          "name": "ICorSchemaRet",
+          "type": "interface",
+          "content": "export interface ICorSchemaRet {\n  data: {\n    id: string;\n    data: ICorSchemaInfo[];\n  }[];\n}"
+        }
+      ]
+    },
+    {
       "id": "shared/core/models/interfaces/ui",
       "data": [
         {
@@ -1386,6 +1406,21 @@
       ]
     },
     {
+      "id": "shared/core/utils/schemas",
+      "data": [
+        {
+          "name": "schemaById",
+          "type": "function",
+          "content": "// export function schemaById(\n//   json: { data: ICorSchemaRet[\"data\"] },\n//   id: string,\n// ): ICorSchemaInfo[] {\n//   const entry = json?.data?.find((item) => item.id === id);\n//   return entry?.data ?? [];\n// }\n\n/**\n * schemaById\n * Retorna a lista de ICorDataInfo correspondente ao id informado.\n */\nexport function schemaById(json: ICorSchemaRet, id: string): ICorSchemaInfo[] {\n  const entry = json?.data?.find((item) => item.id === id);\n  return entry?.data ?? [];\n}"
+        },
+        {
+          "name": "schemaByName",
+          "type": "function",
+          "content": "export function schemaByName(\n  json: { data: ICorSchemaRet[\"data\"] },\n  name: string,\n): ICorSchemaInfo | null {\n  for (const entry of json?.data ?? []) {\n    const found = entry.data?.find(\n      (info: ICorSchemaInfo) => info.name === name,\n    );\n    if (found) return found;\n  }\n  return null;\n}"
+        }
+      ]
+    },
+    {
       "id": "shared/core/utils/strings",
       "data": [
         {
@@ -1739,6 +1774,16 @@
           "content": "@Pipe({\n  name: 'paginate',\n  pure: true,\n})\nexport class CorPaginatePipe implements PipeTransform {\n  // transform<T>(items: T[], page: number, itemsPerPage: number): T[] {\n  //   if (!items?.length) return [];\n  //   const start = (page - 1) * itemsPerPage;\n  //   const end = start + itemsPerPage;\n  //   // console.log({ page, itemsPerPage, start, end });\n  //   return items.slice(start, end);\n  // }\n\n  transform<T>(items: T[], pag: Partial<ICorPaginationChange>): T[] {\n    if (!items?.length) return [];\n\n    const page = pag?.page ?? 1;\n    const itemsPerPage = pag?.itemsPerPage ?? items.length;\n\n    if (page <= 0 || itemsPerPage <= 0) return items;\n\n    const start = (page - 1) * itemsPerPage;\n    const end = start + itemsPerPage;\n\n    return items.slice(start, end);\n  }\n}"
         },
         {
+          "name": "CorSchemaByIdPipe",
+          "type": "pipe",
+          "content": "@Pipe({\n  name: \"schemaById\",\n  standalone: true,\n  pure: true,\n})\nexport class CorSchemaByIdPipe implements PipeTransform {\n  transform(\n    json: ICorSchemaRet | null | undefined,\n    id: string,\n  ): ICorSchemaInfo[] {\n    if (!json) return [];\n    return schemaById(json, id);\n  }\n}"
+        },
+        {
+          "name": "CorSchemaByNamePipe",
+          "type": "pipe",
+          "content": "@Pipe({\n  name: \"schemaByName\",\n  standalone: true,\n  pure: true,\n})\nexport class CorSchemaByNamePipe implements PipeTransform {\n  transform(\n    json: ICorSchemaRet | null | undefined,\n    name: string,\n    field?: keyof ICorSchemaInfo,\n  ): any {\n    if (!json) return field === \"content\" || !field ? \"\" : null;\n\n    const found = schemaByName(json, name);\n    if (!found) return field === \"content\" || !field ? \"\" : null;\n\n    return field ? found[field] : found.content;\n  }\n}"
+        },
+        {
           "name": "CorTruncatePipe",
           "type": "pipe",
           "content": "@Pipe({\n  name: 'truncate',\n  standalone: true,\n  pure: true,\n})\nexport class CorTruncatePipe implements PipeTransform {\n  transform(value: string | null | undefined, length = 50, suffix = '…'): string {\n    if (!value) return '';\n    return value.length > length ? value.slice(0, length) + suffix : value;\n  }\n}"
@@ -1748,16 +1793,6 @@
     {
       "id": "shared/core-ng/services",
       "data": [
-        {
-          "name": "TCorDataInfo",
-          "type": "type",
-          "content": "// models\nexport type TCorDataInfo =\n  | \"const\"\n  | \"component\"\n  | \"directive\"\n  | \"event\"\n  | \"function\"\n  | \"interface\"\n  | \"pipe\"\n  | \"service\"\n  | \"record\"\n  | \"type\";"
-        },
-        {
-          "name": "ICorDataInfo",
-          "type": "interface",
-          "content": "export interface ICorDataInfo {\n  name: string;\n  type: TCorDataInfo;\n  content: string;\n}"
-        },
         {
           "name": "CorDataService",
           "type": "service",

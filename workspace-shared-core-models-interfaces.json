@@ -1,0 +1,74 @@
+{
+  "data": [
+    {
+      "id": "shared/core/models/interfaces/apis/brasil-api",
+      "data": [
+        {
+          "name": "IBrasilApiCidadeRet",
+          "type": "interface",
+          "content": "export interface IBrasilApiCidadeRet {\n  id: number;\n  nome: string;\n  estado: string;\n}"
+        }
+      ]
+    },
+    {
+      "id": "shared/core/models/interfaces/misc",
+      "data": [
+        {
+          "name": "ICorFoneInfoRet",
+          "type": "interface",
+          "content": "export interface ICorFoneInfoRet {\r\n  country: string;\r\n  ddd: string;\r\n  number: string;\r\n  n1: string;\r\n  n2: string;\r\n  cellphone: boolean;\r\n}"
+        }
+      ]
+    },
+    {
+      "id": "shared/core/models/interfaces/rets",
+      "data": [
+        {
+          "name": "ICorLoginRet",
+          "type": "interface",
+          "content": "export interface ICorLoginRet {\r\n  email: string;\r\n  senha: string;\r\n  lembrar?: boolean;\r\n}"
+        }
+      ]
+    },
+    {
+      "id": "shared/core/models/interfaces/ui",
+      "data": [
+        {
+          "name": "ICorAccItem",
+          "type": "interface",
+          "content": "export interface ICorAccItem {\n  id?: number;\n  caption: string;\n  html: string;\n  __open?: boolean;\n}"
+        },
+        {
+          "name": "ICorExpItem",
+          "type": "interface",
+          "content": "export interface ICorExpItem {\n  pos: number;\n  title: string;\n  html?: string;\n  img?: string;\n}"
+        },
+        {
+          "name": "ICorNavItem",
+          "type": "interface",
+          "content": "export interface ICorNavItem {\n  id: string;\n  // active: boolean;\n  badge?: string;\n  caption?: string;\n  children: ICorNavItem[];\n  __count?: number;\n  extras?: any;\n  __found?: boolean;\n  // __hasIcons?: boolean;\n  // __hasTarget?: boolean;\n  icon?: string;\n  iconHovered?: string;\n  off: boolean;\n  __open?: boolean;\n  url?: string;\n  __visible?: boolean;\n\n  __countAll?: number;\n  __foundAll?: number;\n}"
+        },
+        {
+          "name": "ICorPagInfo",
+          "type": "interface",
+          "content": "export interface ICorPagInfo {\n  // user\n  page?: number;\n  perPage?: number;\n  count?: number;\n\n  // realtime\n  __pages?: {\n    last?: number;\n    maxVisible?: number;\n    list?: number[];\n  },\n  __isFirst: boolean;\n  __isLast: boolean;\n}"
+        },
+        {
+          "name": "ICorPag",
+          "type": "interface",
+          "content": "export interface ICorPag {\n  page?: number;\n  perPage?: number;\n  count?: number;\n}"
+        },
+        {
+          "name": "ICorSwiperCardInfo",
+          "type": "interface",
+          "content": "export interface ICorSwiperCardInfo {\r\n  id: number;\r\n  img?: string;\r\n  caption?: string;\r\n  html?: string;\r\n  cta?: {\r\n    url?: string;\r\n    caption?: string;\r\n    isActive?: boolean;\r\n  },\r\n  // url?: string;\r\n}"
+        },
+        {
+          "name": "ICorTabItem",
+          "type": "interface",
+          "content": "export interface ICorTabItem {\n  id: string;\n  badge?: string;\n  caption?: string;\n  icon?: string;\n  iconHovered?: string;\n  off?: boolean;\n}"
+        }
+      ]
+    }
+  ]
+}

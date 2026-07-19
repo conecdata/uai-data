@@ -1,0 +1,1039 @@
+{
+  "data": [
+    {
+      "id": "shared/core/models/types/bs",
+      "data": [
+        {
+          "name": "TCorBsBtnGroupSizes",
+          "type": "type",
+          "content": "export type TCorBsBtnGroupSizes = 'btn-group-sm' | 'btn-group-lg';"
+        },
+        {
+          "name": "TCorBsSpacings",
+          "type": "type",
+          "content": "export type TCorBsSpacings = '0' | '1' | '2' | '3' | '4' | '5';"
+        },
+        {
+          "name": "RCorBsSpacings",
+          "type": "record",
+          "content": "export type RCorBsSpacings = Record<TCorBsSpacings, number>;"
+        },
+        {
+          "name": "COR_BS_SPACINGS",
+          "type": "const",
+          "content": "export const COR_BS_SPACINGS: RCorBsSpacings = {\n  '0': 0,\n  '1': 0.25,\n  '2': 0.5,\n  '3': 1,\n  '4': 1.5,\n  '5': 3,\n};"
+        }
+      ]
+    },
+    {
+      "id": "shared/core/models/types/numbers",
+      "data": [
+        {
+          "name": "TNumericRange",
+          "type": "type",
+          "content": "export type TNumericRange<\n  From extends number,\n  To extends number\n> = Exclude<TEnumerate<To>, TEnumerate<From>>;"
+        }
+      ]
+    },
+    {
+      "id": "shared/core/models/types/styles",
+      "data": [
+        {
+          "name": "COR_ANIMATION_DIRECTIONS",
+          "type": "const",
+          "content": "export const COR_ANIMATION_DIRECTIONS = ['normal', 'reverse', 'alternate', 'alternate-reverse'] as const;"
+        },
+        {
+          "name": "TCorAnimationDirections",
+          "type": "type",
+          "content": "export type TCorAnimationDirections = typeof COR_ANIMATION_DIRECTIONS[number];"
+        },
+        {
+          "name": "COR_ANIMATIONS",
+          "type": "const",
+          "content": "export const COR_ANIMATIONS = ['bounce', 'bounce-in', 'bounce-out', 'bounce2', 'elastic-spin', 'fade-in', 'fade-in-from', 'fade-out', 'flash', 'flip', 'flip-card', 'floating', 'from-down', 'from-left', 'from-right', 'from-up', 'gelatine', 'grow', 'hinge', 'hi-there', 'hover-grow', 'kreep', 'loading', 'pulse', 'pulsing', 'rain', 'shake', 'spin', 'swing', 'wiggle', 'wooble'] as const;"
+        },
+        {
+          "name": "TCorAnimations",
+          "type": "type",
+          "content": "export type TCorAnimations = typeof COR_ANIMATIONS[number];"
+        },
+        {
+          "name": "TCorAspectRatios",
+          "type": "type",
+          "content": "export type TCorAspectRatios = 'aspect-auto' | 'aspect-square' | 'aspect-video';"
+        },
+        {
+          "name": "RCorAspectRatios",
+          "type": "record",
+          "content": "export type RCorAspectRatios = Record<TCorAspectRatios, string>;"
+        },
+        {
+          "name": "COR_ASPECT_RATIOS",
+          "type": "const",
+          "content": "export const COR_ASPECT_RATIOS: RCorAspectRatios = {\n  \"aspect-auto\": 'auto',\n  \"aspect-square\": '1 / 1',\n  \"aspect-video\": '16 / 9',\n};"
+        },
+        {
+          "name": "TCorBackdropContrast",
+          "type": "type",
+          "content": "export type TCorBackdropContrast = 0 | 50 | 75 | 100 | 100 | 125 | 150 | 200;"
+        },
+        {
+          "name": "RCorBackdropContrast",
+          "type": "record",
+          "content": "export type RCorBackdropContrast = Record<TCorBackdropContrast, string>;"
+        },
+        {
+          "name": "COR_BACKDROP_CONTRAST",
+          "type": "const",
+          "content": "export const COR_BACKDROP_CONTRAST: RCorBackdropContrast = {\n  \"0\": \"0\",\n  \"50\": \"50\",\n  \"75\": \"75\",\n  \"100\": \"100\",\n  \"125\": \"125\",\n  \"150\": \"150\",\n  \"200\": \"200\",\n};"
+        },
+        {
+          "name": "TCorBackgroundAttachments",
+          "type": "type",
+          "content": "export type TCorBackgroundAttachments = 'fixed' | 'local' | 'scroll';"
+        },
+        {
+          "name": "RCorBackgroundAttachments",
+          "type": "record",
+          "content": "export type RCorBackgroundAttachments = Record<TCorBackgroundAttachments, string>;"
+        },
+        {
+          "name": "COR_BACKGROUND_ATTACHMENTS",
+          "type": "const",
+          "content": "export const COR_BACKGROUND_ATTACHMENTS: RCorBackgroundAttachments = {\n  \"fixed\": \"fixed\",\n  \"local\": \"local\",\n  \"scroll\": \"scroll\",\n};"
+        },
+        {
+          "name": "TCorBackgroundBlurs",
+          "type": "type",
+          "content": "export type TCorBackgroundBlurs = \"backdrop-blur-none\" | \"backdrop-blur-sm\" | \"backdrop-blur\" | \"backdrop-blur-md\" | \"backdrop-blur-lg\" | \"backdrop-blur-xl\" | \"backdrop-blur-2xl\" | \"backdrop-blur-3xl\";"
+        },
+        {
+          "name": "RCorBackgroundBlurs",
+          "type": "record",
+          "content": "export type RCorBackgroundBlurs = Record<TCorBackgroundBlurs, number>;"
+        },
+        {
+          "name": "COR_BACKGROUND_BLURS",
+          "type": "const",
+          "content": "export const COR_BACKGROUND_BLURS: RCorBackgroundBlurs = {\n  \"backdrop-blur-none\": 0,\n  \"backdrop-blur-sm\": 4,\n  \"backdrop-blur\": 8,\n  \"backdrop-blur-md\": 12,\n  \"backdrop-blur-lg\": 16,\n  \"backdrop-blur-xl\": 24,\n  \"backdrop-blur-2xl\": 40,\n  \"backdrop-blur-3xl\": 64,\n};"
+        },
+        {
+          "name": "TCorBackgroundClips",
+          "type": "type",
+          "content": "export type TCorBackgroundClips = \"border\" | \"padding\" | \"content\" | \"text\";"
+        },
+        {
+          "name": "RCorBackgroundClips",
+          "type": "record",
+          "content": "export type RCorBackgroundClips = Record<TCorBackgroundClips, string>;"
+        },
+        {
+          "name": "COR_BACKGROUND_CLIPS",
+          "type": "const",
+          "content": "export const COR_BACKGROUND_CLIPS: RCorBackgroundClips = {\n  \"border\": \"border-box\",\n  \"padding\": \"padding-box\",\n  \"content\": \"content-box\",\n  \"text\": \"text\",\n};"
+        },
+        {
+          "name": "TCorBackgroundOrigins",
+          "type": "type",
+          "content": "export type TCorBackgroundOrigins = \"border\" | \"padding\" | \"content\";"
+        },
+        {
+          "name": "RCorBackgroundOrigins",
+          "type": "record",
+          "content": "export type RCorBackgroundOrigins = Record<TCorBackgroundOrigins, string>;"
+        },
+        {
+          "name": "COR_BACKGROUND_ORIGINS",
+          "type": "const",
+          "content": "export const COR_BACKGROUND_ORIGINS: RCorBackgroundOrigins = {\n  \"border\": \"border-box\",\n  \"padding\": \"padding-box\",\n  \"content\": \"content-box\"\n};"
+        },
+        {
+          "name": "TCorBackgroundPositions",
+          "type": "type",
+          "content": "export type TCorBackgroundPositions = \"bottom\" | \"center\" | \"left\" | \"left-bottom\" | \"left-top\" | \"right\" | \"right-bottom\" | \"right-top\" | \"top\";"
+        },
+        {
+          "name": "RCorBackgroundPositions",
+          "type": "record",
+          "content": "export type RCorBackgroundPositions = Record<TCorBackgroundPositions, string>;"
+        },
+        {
+          "name": "COR_BACKGROUND_POSITIONS",
+          "type": "const",
+          "content": "export const COR_BACKGROUND_POSITIONS: RCorBackgroundPositions = {\n  \"bottom\": \"bottom\",\n  \"center\": \"center\",\n  \"left\": \"left\",\n  \"left-bottom\": \"left-bottom\",\n  \"left-top\": \"left-top\",\n  \"right\": \"right\",\n  \"right-bottom\": \"right-bottom\",\n  \"right-top\": \"right-top\",\n  \"top\": \"top\"\n};"
+        },
+        {
+          "name": "TCorBackgroundRepeats",
+          "type": "type",
+          "content": "export type TCorBackgroundRepeats = \"repeat\" | \"no-repeat\" | \"repeat-x\" | \"repeat-y\" | \"repeat-round\" | \"repeat-space\";"
+        },
+        {
+          "name": "RCorBackgroundRepeats",
+          "type": "record",
+          "content": "export type RCorBackgroundRepeats = Record<TCorBackgroundRepeats, string>;"
+        },
+        {
+          "name": "COR_BACKGROUND_REPEATS",
+          "type": "const",
+          "content": "export const COR_BACKGROUND_REPEATS: RCorBackgroundRepeats = {\n  \"repeat\": \"repeat\",\n  \"no-repeat\": \"no-repeat\",\n  \"repeat-x\": \"repeat-x\",\n  \"repeat-y\": \"repeat-y\",\n  \"repeat-round\": \"repeat-round\",\n  \"repeat-space\": \"repeat-space\",\n};"
+        },
+        {
+          "name": "TCorBackgroundSizes",
+          "type": "type",
+          "content": "export type TCorBackgroundSizes = \"auto\" | \"cover\" | \"contain\";"
+        },
+        {
+          "name": "RCorBackgroundSizes",
+          "type": "record",
+          "content": "export type RCorBackgroundSizes = Record<TCorBackgroundSizes, string>;"
+        },
+        {
+          "name": "COR_BACKGROUND_SIZES",
+          "type": "const",
+          "content": "export const COR_BACKGROUND_SIZES: RCorBackgroundSizes = {\n  \"auto\": \"auto\",\n  \"cover\": \"cover\",\n  \"contain\": \"contain\",\n};"
+        },
+        {
+          "name": "COR_BASE_COLOR_IDS",
+          "type": "const",
+          "content": "export const COR_BASE_COLOR_IDS: string[] = ['base-100', 'base-200', 'base-300', 'base-400', 'base-500', 'base-600', 'base-contrast', 'base-700', 'base-800', 'base-900'] as const;"
+        },
+        {
+          "name": "TCorBaseColorIds",
+          "type": "type",
+          "content": "export type TCorBaseColorIds = typeof COR_BASE_COLOR_IDS[number];"
+        },
+        {
+          "name": "TCorBlurs",
+          "type": "type",
+          "content": "export type TCorBlurs = \"blur-none\" | \"blur-sm\" | \"blur\" | \"blur-md\" | \"blur-lg\" | \"blur-xl\" | \"blur-2xl\" | \"blur-3xl\";"
+        },
+        {
+          "name": "RCorBlurs",
+          "type": "record",
+          "content": "export type RCorBlurs = Record<TCorBlurs, string>;"
+        },
+        {
+          "name": "COR_BLURS",
+          "type": "const",
+          "content": "export const COR_BLURS: RCorBlurs = {\n  \"blur-none\": \"none\",\n  \"blur-sm\": \"4px\",\n  \"blur\": \"8px\",\n  \"blur-md\": \"12px\",\n  \"blur-lg\": \"16px\",\n  \"blur-xl\": \"24px\",\n  \"blur-2xl\": \"40px\",\n  \"blur-3xl\": \"6px\",\n};"
+        },
+        {
+          "name": "TCorBorderSizes",
+          "type": "type",
+          "content": "export type TCorBorderSizes = 'border-0' | 'border' | 'border-2' | 'border-4' | 'border-8';"
+        },
+        {
+          "name": "RCorBorderSizes",
+          "type": "record",
+          "content": "export type RCorBorderSizes = Record<TCorBorderSizes, number>;"
+        },
+        {
+          "name": "COR_BORDER_SIZES",
+          "type": "const",
+          "content": "export const COR_BORDER_SIZES: RCorBorderSizes = {\n  \"border-0\": 0,\n  \"border\": 1,\n  \"border-2\": 2,\n  \"border-4\": 4,\n  \"border-8\": 8,\n};"
+        },
+        {
+          "name": "TCorBorderStyles",
+          "type": "type",
+          "content": "export type TCorBorderStyles = \"border-solid\" | \"border-dashed\" | \"border-dotted\" | \"border-double\" | \"border-hidden\" | \"border-none\";"
+        },
+        {
+          "name": "RCorBorderStyles",
+          "type": "record",
+          "content": "export type RCorBorderStyles = Record<TCorBorderStyles, string>;"
+        },
+        {
+          "name": "COR_BORDER_STYLES",
+          "type": "const",
+          "content": "export const COR_BORDER_STYLES: RCorBorderStyles = {\n  \"border-solid\": \"solid\",\n  \"border-dashed\": \"dashed\",\n  \"border-dotted\": \"dotted\",\n  \"border-double\": \"double\",\n  \"border-hidden\": \"hidden\",\n  \"border-none\": \"none\",\n};"
+        },
+        {
+          "name": "TCorBoxShadows",
+          "type": "type",
+          "content": "export type TCorBoxShadows = 'shadow-none' | 'shadow-xs' | 'shadow-sm' | 'shadow' | 'shadow-md' | 'shadow-lg' | 'shadow-ls' | 'shadow-xl' | 'shadow-2xl' | 'shadow-inset-sm' | 'shadow-inset' | 'shadow-inset-lg' | 'shadow-retro' | 'shadow-sharp' | 'shadow-long' | 'shadow-halo';"
+        },
+        {
+          "name": "RCorBoxShadows",
+          "type": "record",
+          "content": "export type RCorBoxShadows = Record<TCorBoxShadows, string>;"
+        },
+        {
+          "name": "COR_BOX_SHADOWS",
+          "type": "const",
+          "content": "export const COR_BOX_SHADOWS: RCorBoxShadows = {\n  \"shadow-none\": 'none',\n  \"shadow-xs\": '0 0 0 1px rgba(var(--clr-base-raw-900), 0.05)',\n  'shadow-sm': 'rgba(var(--clr-base-raw-900), 0.16) 0px 1px 4px',\n  'shadow': 'rgba(var(--clr-base-raw-900), 0.12) 0px 1px 3px, rgba(var(--clr-base-raw-900), 0.24) 0px 1px 2px',\n  \"shadow-md\": 'rgba(var(--clr-base-raw-900), 0.16) 0px 3px 6px, rgba(var(--clr-base-raw-900), 0.23) 0px 3px 6px',\n  \"shadow-lg\": \"rgba(var(--clr-base-raw-900), 0.19) 0px 10px 20px, rgba(var(--clr-base-raw-900), 0.23) 0px 6px 6px\",\n  \"shadow-ls\": '0 20px 25px -5px rgba(var(--clr-base-raw-900), 0.1), 0 10px 10px -5px rgba(var(--clr-base-raw-900), 0.04)',\n  \"shadow-xl\": '9px 9px 16px rgb(163, 177, 198, 0.6), -9px -9px 16px rgba(var(--clr-base-raw-100), 0.5',\n  \"shadow-2xl\": 'rgba(var(--clr-base-raw-900), 0.25) 0px 14px 28px, rgba(var(--clr-base-raw-900), 0.22) 0px 10px 10px',\n  \"shadow-inset-sm\": 'inset 0 2px 4px 0 rgba(var(--clr-base-raw-900), 0.06)',\n  \"shadow-inset\": 'inset 4px 4px 10px rgba(var(--clr-base-raw-900), 0.12), inset -4px -4px 10px rgba(var(--clr-base-raw-100), 0.65)',\n  \"shadow-inset-lg\": 'inset 6px 6px 12px rgba(var(--clr-base-raw-900), 0.2), inset -6px -6px 12px var(--clr-base-100)',\n  \"shadow-retro\": '8px 8px 0px 0px var(--clr-base-900)',\n  \"shadow-sharp\": '4px 4px 0 rgba(var(--clr-base-raw-900), 0.25)',\n  \"shadow-long\": '10px 10px 0 rgba(var(--clr-base-raw-900), 0.1)',\n  \"shadow-halo\": '0 0 0 6px rgba(var(--clr-base-raw-900), 0.05), 0 0 0 12px rgba(var(--clr-base-raw-900), 0.03)',\n};"
+        },
+        {
+          "name": "TCorBreakpoints",
+          "type": "type",
+          "content": "export type TCorBreakpoints = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';"
+        },
+        {
+          "name": "RCorBreakpoints",
+          "type": "record",
+          "content": "export type RCorBreakpoints = Record<TCorBreakpoints, number>;"
+        },
+        {
+          "name": "COR_BREAKPOINTS",
+          "type": "const",
+          "content": "export const COR_BREAKPOINTS: RCorBreakpoints = {\n  xs: 0,\n  sm: 576,\n  md: 768,\n  lg: 992,\n  xl: 1200,\n  xxl: 1400\n};"
+        },
+        {
+          "name": "TCorBrightness",
+          "type": "type",
+          "content": "export type TCorBrightness = \"0\" | \"50\" | \"75\" | \"90\" | \"95\" | \"100\" | \"105\" | \"110\" | \"125\" | \"150\" | \"200\";"
+        },
+        {
+          "name": "RCorBrightness",
+          "type": "record",
+          "content": "export type RCorBrightness = Record<TCorBrightness, string>;"
+        },
+        {
+          "name": "COR_BRIGHTNESS",
+          "type": "const",
+          "content": "export const COR_BRIGHTNESS: RCorBrightness = {\n  \"0\": \"0\",\n  \"50\": \".5\",\n  \"75\": \".75\",\n  \"90\": \".9\",\n  \"95\": \".95\",\n  \"100\": \"1\",\n  \"105\": \"1.05\",\n  \"110\": \"1.10\",\n  \"125\": \"1.25\",\n  \"150\": \"1.50\",\n  \"200\": \"2.00\",\n};"
+        },
+        {
+          "name": "TCorContrasts",
+          "type": "type",
+          "content": "export type TCorContrasts = \"0\" | \"50\" | \"75\" | \"100\" | \"125\" | \"150\" | \"200\";"
+        },
+        {
+          "name": "RCorContrasts",
+          "type": "record",
+          "content": "export type RCorContrasts = Record<TCorContrasts, string>;"
+        },
+        {
+          "name": "COR_CONTRASTS",
+          "type": "const",
+          "content": "export const COR_CONTRASTS: RCorContrasts = {\n  \"0\": \"0\",\n  \"50\": \"0.5\",\n  \"75\": \"0.75\",\n  \"100\": \"1\",\n  \"125\": \"1.25\",\n  \"150\": \"1.5\",\n  \"200\": \"2\",\n};"
+        },
+        {
+          "name": "COR_CTA_COLOR_IDS",
+          "type": "const",
+          "content": "export const COR_CTA_COLOR_IDS: string[] = ['cta-400', 'cta-500', 'cta-600', 'cta-contrast'] as const;"
+        },
+        {
+          "name": "TCorCtaColorIds",
+          "type": "type",
+          "content": "export type TCorCtaColorIds = typeof COR_CTA_COLOR_IDS[number];"
+        },
+        {
+          "name": "TCorCursors",
+          "type": "type",
+          "content": "export type TCorCursors = \"auto\" | \"default\" | \"pointer\" | \"wait\" | \"text\" | \"move\" | \"help\" | \"not-allowed\" | \"none\" | \"context-menu\" | \"progress\" | \"cell\" | \"crosshair\" | \"vertical-text\" | \"alias\" | \"copy\" | \"no-drop\" | \"grab\" | \"grabbing\" | \"all-scroll\" | \"col-resize\" | \"row-resize\" | \"n-resize\" | \"e-resize\" | \"s-resize\" | \"w-resize\" | \"ne-resize\" | \"nw-resize\" | \"se-resize\" | \"sw-resize\" | \"ew-resize\" | \"ns-resize\" | \"nesw-resize\" | \"nwse-resize\" | \"zoom-in\" | \"zoom-out\";"
+        },
+        {
+          "name": "RCorCursors",
+          "type": "record",
+          "content": "export type RCorCursors = Record<TCorCursors, string>;"
+        },
+        {
+          "name": "COR_CURSORS",
+          "type": "const",
+          "content": "export const COR_CURSORS: RCorCursors = {\n  \"auto\": \"auto\",\n  \"default\": \"default\",\n  \"pointer\": \"pointer\",\n  \"wait\": \"wait\",\n  \"text\": \"text\",\n  \"move\": \"move\",\n  \"help\": \"help\",\n  \"not-allowed\": \"not-allowed\",\n  \"none\": \"none\",\n  \"context-menu\": \"context-menu\",\n  \"progress\": \"progress\",\n  \"cell\": \"cell\",\n  \"crosshair\": \"crosshair\",\n  \"vertical-text\": \"vertical-text\",\n  \"alias\": \"alias\",\n  \"copy\": \"copy\",\n  \"no-drop\": \"no-drop\",\n  \"grab\": \"grab\",\n  \"grabbing\": \"grabbing\",\n  \"all-scroll\": \"all-scroll\",\n  \"col-resize\": \"col-resize\",\n  \"row-resize\": \"row-resize\",\n  \"n-resize\": \"n-resize\",\n  \"e-resize\": \"e-resize\",\n  \"s-resize\": \"s-resize\",\n  \"w-resize\": \"w-resize\",\n  \"ne-resize\": \"ne-resize\",\n  \"nw-resize\": \"nw-resize\",\n  \"se-resize\": \"se-resize\",\n  \"sw-resize\": \"sw-resize\",\n  \"ew-resize\": \"ew-resize\",\n  \"ns-resize\": \"ns-resize\",\n  \"nesw-resize\": \"nesw-resize\",\n  \"nwse-resize\": \"nwse-resize\",\n  \"zoom-in\": \"zoom-in\",\n  \"zoom-out\": \"zoom-out\",\n};"
+        },
+        {
+          "name": "TCorFontSizes",
+          "type": "type",
+          "content": "export type TCorFontSizes = 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl';"
+        },
+        {
+          "name": "RCorFontSizes",
+          "type": "record",
+          "content": "export type RCorFontSizes = Record<TCorFontSizes, number>;"
+        },
+        {
+          "name": "COR_FONT_SIZES",
+          "type": "const",
+          "content": "export const COR_FONT_SIZES: RCorFontSizes = {\n  'xs': .75,\n  'sm': .875,\n  'base': 1,\n  'lg': 1.125,\n  'xl': 1.25,\n  '2xl': 1.5,\n  '3xl': 1.625,\n  '4xl': 1.75,\n  '5xl': 1.875,\n  '6xl': 2,\n  '7xl': 2.125,\n  '8xl': 2.25,\n  '9xl': 2.375,\n};"
+        },
+        {
+          "name": "TCorFontWeights",
+          "type": "type",
+          "content": "export type TCorFontWeights = 'thin' | 'extralight' | 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold' | 'black';"
+        },
+        {
+          "name": "RCorFontWeights",
+          "type": "record",
+          "content": "export type RCorFontWeights = Record<TCorFontWeights, number>;"
+        },
+        {
+          "name": "COR_FONT_WEIGHTS",
+          "type": "const",
+          "content": "export const COR_FONT_WEIGHTS: RCorFontWeights = {\n  'thin': 100,\n  'extralight': 200,\n  'light': 300,\n  'normal': 400,\n  'medium': 500,\n  'semibold': 600,\n  'bold': 700,\n  'extrabold': 800,\n  'black': 900\n};"
+        },
+        {
+          "name": "TCorGrayscales",
+          "type": "type",
+          "content": "export type TCorGrayscales = 0 | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100;"
+        },
+        {
+          "name": "RCorGrayscales",
+          "type": "record",
+          "content": "export type RCorGrayscales = Record<TCorGrayscales, number>;"
+        },
+        {
+          "name": "COR_GRAYSCALES",
+          "type": "const",
+          "content": "export const COR_GRAYSCALES: RCorGrayscales = {\n  \"0\": 0,\n  \"10\": 10,\n  \"20\": 20,\n  \"30\": 30,\n  \"40\": 40,\n  \"50\": 50,\n  \"60\": 60,\n  \"70\": 70,\n  \"80\": 80,\n  \"90\": 90,\n  \"100\": 100,\n};"
+        },
+        {
+          "name": "RCorHeights",
+          "type": "record",
+          "content": "export type RCorHeights = Record<TCorSpacings, string>;"
+        },
+        {
+          "name": "COR_HEIGHTS",
+          "type": "const",
+          "content": "export const COR_HEIGHTS: RCorHeights = {\n  \"none\": \"0\",\n  \"sm\": \".5\",\n  \"base\": \"1\",\n  \"md\": \"1.5\",\n  \"ls\": \"2\",\n  \"xl\": \"2.5\",\n  \"xls\": \"3\",\n  \"2xls\": \"4\",\n  \"3xls\": \"5\",\n  \"4xls\": \"6\",\n  \"5xls\": \"7\",\n  \"auto\": \"auto\",\n};"
+        },
+        {
+          "name": "TCorHueRotates",
+          "type": "type",
+          "content": "export type TCorHueRotates = 0 | 15 | 30 | 60 | 90 | 180;"
+        },
+        {
+          "name": "RCorHueRotates",
+          "type": "record",
+          "content": "export type RCorHueRotates = Record<TCorHueRotates, number>;"
+        },
+        {
+          "name": "COR_HUE_ROTATES",
+          "type": "const",
+          "content": "export const COR_HUE_ROTATES: RCorHueRotates = {\n  \"0\": 0,\n  \"15\": 15,\n  \"30\": 30,\n  \"60\": 60,\n  \"90\": 90,\n  \"180\": 180,\n};"
+        },
+        {
+          "name": "TCorInverts",
+          "type": "type",
+          "content": "export type TCorInverts = 0 | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100;"
+        },
+        {
+          "name": "RCorInverts",
+          "type": "record",
+          "content": "export type RCorInverts = Record<TCorInverts, number>;"
+        },
+        {
+          "name": "COR_INVERTS",
+          "type": "const",
+          "content": "export const COR_INVERTS: RCorInverts = {\n  \"0\": 0,\n  \"10\": 10,\n  \"20\": 20,\n  \"30\": 30,\n  \"40\": 40,\n  \"50\": 50,\n  \"60\": 60,\n  \"70\": 70,\n  \"80\": 80,\n  \"90\": 90,\n  \"100\": 100,\n};"
+        },
+        {
+          "name": "TCorLetterSpacings",
+          "type": "type",
+          "content": "export type TCorLetterSpacings = \"tighter\" | \"tight\" | \"normal\" | \"wide\" | \"wider\" | \"widest\";"
+        },
+        {
+          "name": "RCorLetterSpacings",
+          "type": "record",
+          "content": "export type RCorLetterSpacings = Record<TCorLetterSpacings, number>;"
+        },
+        {
+          "name": "COR_LETTER_SPACINGS",
+          "type": "const",
+          "content": "export const COR_LETTER_SPACINGS: RCorLetterSpacings = {\n  \"tighter\": -0.05,\n  \"tight\": -0.025,\n  \"normal\": 0,\n  \"wide\": 0.025,\n  \"wider\": 0.05,\n  \"widest\": 0.1,\n};"
+        },
+        {
+          "name": "TCorLineHeights",
+          "type": "type",
+          "content": "export type TCorLineHeights = \"none\" | \"tight\" | \"snug\" | \"normal\" | \"relaxed\" | \"loose\" | \"3\" | \"4\" | \"5\" | \"6\" | \"7\" | \"8\" | \"9\" | \"10\";"
+        },
+        {
+          "name": "RCorLineHeights",
+          "type": "record",
+          "content": "export type RCorLineHeights = Record<TCorLineHeights, number>;"
+        },
+        {
+          "name": "COR_LINE_HEIGHTS",
+          "type": "const",
+          "content": "export const COR_LINE_HEIGHTS = {\n  \"none\": 1,\n  \"tight\": 1.25,\n  \"snug\": 1.375,\n  \"normal\": 1.5,\n  \"relaxed\": 1.625,\n  \"loose\": 2,\n  \"3\": .75,\n  \"4\": 1,\n  \"5\": 1.25,\n  \"6\": 1.5,\n  \"7\": 1.75,\n  \"8\": 2,\n  \"9\": 2.25,\n  \"10\": 2.5,\n};"
+        },
+        {
+          "name": "TCorListStyles",
+          "type": "type",
+          "content": "export type TCorListStyles = \"none\" | \"disc\" | \"decimal\";"
+        },
+        {
+          "name": "RCorListStyles",
+          "type": "record",
+          "content": "export type RCorListStyles = Record<TCorListStyles, number>;"
+        },
+        {
+          "name": "COR_LINE_STYLES",
+          "type": "const",
+          "content": "export const COR_LINE_STYLES = {\n  \"none\": \"none\",\n  \"disc\": \"disc\",\n  \"decimal\": \"decimal\",\n};"
+        },
+        {
+          "name": "RCorMargins",
+          "type": "record",
+          "content": "export type RCorMargins = Record<Exclude<TCorSpacings, 'auto'>, number>;"
+        },
+        {
+          "name": "COR_MARGINS",
+          "type": "const",
+          "content": "export const COR_MARGINS: RCorMargins = {\n  \"none\": 0,\n  \"sm\": .5,\n  \"base\": 1,\n  \"md\": 1.5,\n  \"ls\": 2,\n  \"xl\": 2.5,\n  \"xls\": 3,\n  \"2xls\": 4,\n  \"3xls\": 5,\n  \"4xls\": 6,\n  \"5xls\": 7,\n};"
+        },
+        {
+          "name": "TCorMaxSizes",
+          "type": "type",
+          "content": "export type TCorMaxSizes = \"0\" | \"none\" | \"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"3xl\" | \"4xl\" | \"5xl\" | \"6xl\" | \"7xl\" | \"full\" | \"min\" | \"max\" | \"fit\" | \"prose\" | \"screen-xs\" | \"screen-sm\" | \"screen-md\" | \"screen-lg\" | \"base\" | \"ls\" | \"xls\" | \"2xls\" | \"3xls\" | \"4xls\" | \"5xls\" | \"auto\";"
+        },
+        {
+          "name": "RCorMaxSizes",
+          "type": "record",
+          "content": "export type RCorMaxSizes = Record<TCorMaxSizes, string>;"
+        },
+        {
+          "name": "COR_MAX_SIZES",
+          "type": "const",
+          "content": "export const COR_MAX_SIZES: RCorMaxSizes = {\n  \"0\": \"0\",\n  \"none\": \"none\",\n  \"xs\": \"1.25rem\",\n  \"sm\": \"1.5rem\",\n  \"md\": \"1.75rem\",\n  \"lg\": \"2rem\",\n  \"xl\": \"2.25rem\",\n  \"2xl\": \"2.625rem\",\n  \"3xl\": \"3rem\",\n  \"4xl\": \"3.5rem\",\n  \"5xl\": \"4rem\",\n  \"6xl\": \"4.5rem\",\n  \"7xl\": \"5rem\",\n  \"full\": \"100%\",\n  \"min\": \"min-content\",\n  \"max\": \"max-content\",\n  \"fit\": \"fit-content\",\n  \"prose\": \"65ch\",\n  \"screen-xs\": \"35.9675em\",\n  \"screen-sm\": \"47.9375em\",\n  \"screen-md\": \"61.9375em\",\n  \"screen-lg\": \"69.9375em\",\n  \"base\": \"1rem\",\n  \"ls\": \"2rem\",\n  \"xls\": \"3rem\",\n  \"2xls\": \"3.5rem\",\n  \"3xls\": \"4rem\",\n  \"4xls\": \"4.5rem\",\n  \"5xls\": \"5rem\",\n  \"auto\": \"auto\",\n};"
+        },
+        {
+          "name": "TCorMinSizes",
+          "type": "type",
+          "content": "export type TCorMinSizes = \"0\" | \"full\" | \"screen\" | \"min\" | \"max\" | \"fit\";"
+        },
+        {
+          "name": "RCorMinSizes",
+          "type": "record",
+          "content": "export type RCorMinSizes = Record<TCorMinSizes, string>;"
+        },
+        {
+          "name": "COR_MIN_SIZES",
+          "type": "const",
+          "content": "export const COR_MIN_SIZES: RCorMinSizes = {\n  \"0\": \"0\",\n  \"full\": \"100%\",\n  \"screen\": \"100vw\",\n  \"min\": \"min-content\",\n  \"max\": \"max-content\",\n  \"fit\": \"fit-content\",\n};"
+        },
+        {
+          "name": "TCorMixBlends",
+          "type": "type",
+          "content": "export type TCorMixBlends = \"normal\" | \"multiply\" | \"screen\" | \"overlay\" | \"darken\" | \"lighten\" | \"color-dodge\" | \"color-burn\" | \"hard-light\" | \"soft-light\" | \"difference\" | \"exclusion\" | \"hue\" | \"saturation\" | \"color\" | \"luminosity\" | \"luminosity\";"
+        },
+        {
+          "name": "RCorMixBlends",
+          "type": "record",
+          "content": "export type RCorMixBlends = Record<TCorMixBlends, string>;"
+        },
+        {
+          "name": "COR_MIX_BLENDS",
+          "type": "const",
+          "content": "export const COR_MIX_BLENDS: RCorMixBlends = {\n  \"normal\": \"normal\",\n  \"multiply\": \"multiply\",\n  \"screen\": \"screen\",\n  \"overlay\": \"overlay\",\n  \"darken\": \"darken\",\n  \"lighten\": \"lighten\",\n  \"color-dodge\": \"color-dodge\",\n  \"color-burn\": \"color-burn\",\n  \"hard-light\": \"hard-light\",\n  \"soft-light\": \"soft-light\",\n  \"difference\": \"difference\",\n  \"exclusion\": \"exclusion\",\n  \"hue\": \"hue\",\n  \"saturation\": \"saturation\",\n  \"color\": \"color\",\n  \"luminosity\": \"luminosity\",\n};"
+        },
+        {
+          "name": "TCorOpacities",
+          "type": "type",
+          "content": "// export const COR_OPACITIES = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100] as const;\n// export type TCorOpacities = typeof COR_OPACITIES[number];\n\nexport type TCorOpacities = 0 | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100;"
+        },
+        {
+          "name": "RCorOpacities",
+          "type": "record",
+          "content": "export type RCorOpacities = Record<TCorOpacities, number>;"
+        },
+        {
+          "name": "COR_OPACITIES",
+          "type": "const",
+          "content": "export const COR_OPACITIES: RCorOpacities = {\n  \"0\": 0,\n  \"10\": 10,\n  \"20\": 20,\n  \"30\": 30,\n  \"40\": 40,\n  \"50\": 50,\n  \"60\": 60,\n  \"70\": 70,\n  \"80\": 80,\n  \"90\": 90,\n  \"100\": 100,\n};"
+        },
+        {
+          "name": "COR_ORIENTATIONS",
+          "type": "const",
+          "content": "export const COR_ORIENTATIONS = ['horizontal', 'vertical'] as const;"
+        },
+        {
+          "name": "TCorOrientations",
+          "type": "type",
+          "content": "export type TCorOrientations = typeof COR_ORIENTATIONS[number];"
+        },
+        {
+          "name": "TCorOverflowsWebkit",
+          "type": "type",
+          "content": "export type TCorOverflowsWebkit = 'scrolling-touch' | 'scrolling-auto';"
+        },
+        {
+          "name": "RCorOverflowsWebkit",
+          "type": "record",
+          "content": "export type RCorOverflowsWebkit = Record<TCorOverflowsWebkit, string>;"
+        },
+        {
+          "name": "COR_OVERFLOWS_WEBKIT",
+          "type": "const",
+          "content": "export const COR_OVERFLOWS_WEBKIT: RCorOverflowsWebkit = {\n  \"scrolling-touch\": \"touch\",\n  \"scrolling-auto\": \"auto\",\n};"
+        },
+        {
+          "name": "TCorOverflowsX",
+          "type": "type",
+          "content": "export type TCorOverflowsX = 'overflow-x-auto' | 'overflow-x-hidden' | 'overflow-x-visible' | 'overflow-x-scroll';"
+        },
+        {
+          "name": "RCorOverflowsX",
+          "type": "record",
+          "content": "export type RCorOverflowsX = Record<TCorOverflowsX, string>;"
+        },
+        {
+          "name": "COR_OVERFLOWS_X",
+          "type": "const",
+          "content": "export const COR_OVERFLOWS_X: RCorOverflowsX = {\n  \"overflow-x-auto\": \"auto\",\n  \"overflow-x-hidden\": \"hidden\",\n  \"overflow-x-visible\": \"visible\",\n  \"overflow-x-scroll\": \"scroll\",\n};"
+        },
+        {
+          "name": "TCorOverflowsY",
+          "type": "type",
+          "content": "export type TCorOverflowsY = 'overflow-y-auto' | 'overflow-y-hidden' | 'overflow-y-visible' | 'overflow-y-scroll';"
+        },
+        {
+          "name": "RCorOverflowsY",
+          "type": "record",
+          "content": "export type RCorOverflowsY = Record<TCorOverflowsY, string>;"
+        },
+        {
+          "name": "COR_OVERFLOWS_Y",
+          "type": "const",
+          "content": "export const COR_OVERFLOWS_Y: RCorOverflowsY = {\n  \"overflow-y-auto\": \"auto\",\n  \"overflow-y-hidden\": \"hidden\",\n  \"overflow-y-visible\": \"visible\",\n  \"overflow-y-scroll\": \"scroll\",\n};"
+        },
+        {
+          "name": "TCorOverflows",
+          "type": "type",
+          "content": "export type TCorOverflows = 'overflow-auto' | 'overflow-hidden' | 'overflow-visible' | 'overflow-scroll';"
+        },
+        {
+          "name": "RCorOverflows",
+          "type": "record",
+          "content": "export type RCorOverflows = Record<TCorOverflows, string>;"
+        },
+        {
+          "name": "COR_OVERFLOWS",
+          "type": "const",
+          "content": "export const COR_OVERFLOWS: RCorOverflows = {\n  \"overflow-auto\": \"auto\",\n  \"overflow-hidden\": \"hidden\",\n  \"overflow-visible\": \"visible\",\n  \"overflow-scroll\": \"scroll\",\n};"
+        },
+        {
+          "name": "RCorPaddings",
+          "type": "record",
+          "content": "export type RCorPaddings = Record<Exclude<TCorSpacings, 'auto'>, number>;"
+        },
+        {
+          "name": "COR_PADDINGS",
+          "type": "const",
+          "content": "export const COR_PADDINGS: RCorPaddings = {\n  \"none\": 0,\n  \"sm\": .5,\n  \"base\": 1,\n  \"md\": 1.5,\n  \"ls\": 2,\n  \"xl\": 2.5,\n  \"xls\": 3,\n  \"2xls\": 4,\n  \"3xls\": 5,\n  \"4xls\": 6,\n  \"5xls\": 7,\n};"
+        },
+        {
+          "name": "TCorPointerEvents",
+          "type": "type",
+          "content": "export type TCorPointerEvents = \"none\" | \"auto\";"
+        },
+        {
+          "name": "RCorPointerEvents",
+          "type": "record",
+          "content": "export type RCorPointerEvents = Record<TCorPointerEvents, string>;"
+        },
+        {
+          "name": "COR_POINTER_EVENTS",
+          "type": "const",
+          "content": "export const COR_POINTER_EVENTS: RCorPointerEvents = {\n  \"none\": \"none\",\n  \"auto\": \"auto\"\n};"
+        },
+        {
+          "name": "TCorPositions",
+          "type": "type",
+          "content": "export type TCorPositions = \"static\" | \"fixed\" | \"absolute\" | \"relative\" | \"sticky\";"
+        },
+        {
+          "name": "RCorPositions",
+          "type": "record",
+          "content": "export type RCorPositions = Record<TCorPositions, string>;"
+        },
+        {
+          "name": "COR_POSITIONS",
+          "type": "const",
+          "content": "export const COR_POSITIONS: RCorPositions = {\n  \"static\": \"static\",\n  \"fixed\": \"fixed\",\n  \"absolute\": \"absolute\",\n  \"relative\": \"relative\",\n  \"sticky\": \"sticky\",\n};"
+        },
+        {
+          "name": "TCorResizings",
+          "type": "type",
+          "content": "export type TCorResizings = \"none\" | \"both\" | \"y\" | \"x\";"
+        },
+        {
+          "name": "RCorResizings",
+          "type": "record",
+          "content": "export type RCorResizings = Record<TCorResizings, string>;"
+        },
+        {
+          "name": "COR_RESIZINGS",
+          "type": "const",
+          "content": "export const COR_RESIZINGS: RCorResizings = {\n  \"none\": \"none\",\n  \"both\": \"both\",\n  \"y\": \"y\",\n  \"x\": \"x\",\n};"
+        },
+        {
+          "name": "TCorRgb",
+          "type": "type",
+          "content": "export type TCorRgb = [number, number, number];"
+        },
+        {
+          "name": "TCorRoundeds",
+          "type": "type",
+          "content": "export type TCorRoundeds = 'rounded-none' | 'rounded-sm' | 'rounded' | 'rounded-md' | 'rounded-lg' | 'rounded-xl' | 'rounded-2xl' | 'rounded-3xl' | 'rounded-full';"
+        },
+        {
+          "name": "RCorRoundeds",
+          "type": "record",
+          "content": "export type RCorRoundeds = Record<TCorRoundeds, number>;"
+        },
+        {
+          "name": "COR_ROUNDEDS",
+          "type": "const",
+          "content": "export const COR_ROUNDEDS: RCorRoundeds = {\n  'rounded-none': 0,\n  'rounded-sm': 0.125,\n  'rounded': 0.25,\n  'rounded-md': 0.375,\n  'rounded-lg': .5,\n  'rounded-xl': .75,\n  'rounded-2xl': 1,\n  'rounded-3xl': 1.5,\n  'rounded-full': 999\n};"
+        },
+        {
+          "name": "TCorSaturate",
+          "type": "type",
+          "content": "export type TCorSaturate = \"0\" | \"50\" | \"100\" | \"150\" | \"200\";"
+        },
+        {
+          "name": "RCorSaturate",
+          "type": "record",
+          "content": "export type RCorSaturate = Record<TCorSaturate, string>;"
+        },
+        {
+          "name": "COR_SATURATE",
+          "type": "const",
+          "content": "export const COR_SATURATE: RCorSaturate = {\n  \"0\": \"0\",\n  \"50\": \"50\",\n  \"100\": \"100\",\n  \"150\": \"150\",\n  \"200\": \"200\",\n};"
+        },
+        {
+          "name": "TCorScrollBehaviors",
+          "type": "type",
+          "content": "export type TCorScrollBehaviors = \"0\" | \"50\" | \"100\" | \"150\" | \"200\";"
+        },
+        {
+          "name": "RCorScrollBehaviors",
+          "type": "record",
+          "content": "export type RCorScrollBehaviors = Record<TCorScrollBehaviors, string>;"
+        },
+        {
+          "name": "COR_SCROLL_BEHAVIORS",
+          "type": "const",
+          "content": "export const COR_SCROLL_BEHAVIORS: RCorScrollBehaviors = {\n  \"0\": \"0\",\n  \"50\": \"50\",\n  \"100\": \"100\",\n  \"150\": \"150\",\n  \"200\": \"200\",\n};"
+        },
+        {
+          "name": "TCorScrollSnapAligns",
+          "type": "type",
+          "content": "export type TCorScrollSnapAligns = \"start\" | \"end\" | \"center\" | \"align-none\";"
+        },
+        {
+          "name": "RCorScrollSnapAligns",
+          "type": "record",
+          "content": "export type RCorScrollSnapAligns = Record<TCorScrollSnapAligns, string>;"
+        },
+        {
+          "name": "COR_SCROLL_SNAP_ALIGNS",
+          "type": "const",
+          "content": "export const COR_SCROLL_SNAP_ALIGNS: RCorScrollSnapAligns = {\n  \"start\": \"start\",\n  \"end\": \"end\",\n  \"center\": \"center\",\n  \"align-none\": \"align-none\",\n};"
+        },
+        {
+          "name": "TCorScrollSnapStops",
+          "type": "type",
+          "content": "export type TCorScrollSnapStops = \"normal\" | \"always\";"
+        },
+        {
+          "name": "RCorScrollSnapStops",
+          "type": "record",
+          "content": "export type RCorScrollSnapStops = Record<TCorScrollSnapStops, string>;"
+        },
+        {
+          "name": "COR_SCROLL_SNAP_STOPS",
+          "type": "const",
+          "content": "export const COR_SCROLL_SNAP_STOPS: RCorScrollSnapStops = {\n  \"normal\": \"normal\",\n  \"always\": \"always\"\n};"
+        },
+        {
+          "name": "TCorScrollSnapTypes",
+          "type": "type",
+          "content": "export type TCorScrollSnapTypes = \"none\" | \"x\" | \"y\" | \"both\" | \"mandatory\" | \"proximity\";"
+        },
+        {
+          "name": "RCorScrollSnapTypes",
+          "type": "record",
+          "content": "export type RCorScrollSnapTypes = Record<TCorScrollSnapTypes, string>;"
+        },
+        {
+          "name": "COR_SCROLL_SNAP_TYPES",
+          "type": "const",
+          "content": "export const COR_SCROLL_SNAP_TYPES: RCorScrollSnapTypes = {\n  \"none\": \"none\",\n  \"x\": \"x\",\n  \"y\": \"y\",\n  \"both\": \"both\",\n  \"mandatory\": \"mandatory\",\n  \"proximity\": \"proximity\",\n};"
+        },
+        {
+          "name": "TCorSepias",
+          "type": "type",
+          "content": "export type TCorSepias = 0 | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100;"
+        },
+        {
+          "name": "RCorSepias",
+          "type": "record",
+          "content": "export type RCorSepias = Record<TCorSepias, number>;"
+        },
+        {
+          "name": "COR_SEPIAS",
+          "type": "const",
+          "content": "export const COR_SEPIAS: RCorSepias = {\n  \"0\": 0,\n  \"10\": 10,\n  \"20\": 20,\n  \"30\": 30,\n  \"40\": 40,\n  \"50\": 50,\n  \"60\": 60,\n  \"70\": 70,\n  \"80\": 80,\n  \"90\": 90,\n  \"100\": 100,\n};"
+        },
+        {
+          "name": "COR_SIZES",
+          "type": "const",
+          "content": "export const COR_SIZES = ['sm', 'md', 'lg'] as const;"
+        },
+        {
+          "name": "TCorSizes",
+          "type": "type",
+          "content": "export type TCorSizes = typeof COR_SIZES[number];"
+        },
+        {
+          "name": "TCorSpacings",
+          "type": "type",
+          "content": "export type TCorSpacings = Extract<TCorMaxSizes, 'none' | 'sm' | 'base' | 'md' | 'ls' | 'xl' | 'xls' | '2xls' | '3xls' | '4xls' | '5xls' | 'auto'>;"
+        },
+        {
+          "name": "RCorSpacings",
+          "type": "record",
+          "content": "export type RCorSpacings = Record<TCorSpacings, string>;"
+        },
+        {
+          "name": "COR_SPACINGS",
+          "type": "const",
+          "content": "export const COR_SPACINGS: RCorSpacings = {\n  'none': \"0\",\n  'sm': \".5\",\n  'base': \"1\",\n  'md': \"1.5\",\n  'ls': \"2\",\n  'xl': \"2.5\",\n  'xls': \"3\",\n  '2xls': \"4\",\n  '3xls': \"5\",\n  '4xls': \"6\",\n  '5xls': \"7\",\n  'auto': \"auto\",\n};"
+        },
+        {
+          "name": "TCorTextAligns",
+          "type": "type",
+          "content": "export type TCorTextAligns = 'text-left' | 'text-center' | 'text-right' | 'text-justify';"
+        },
+        {
+          "name": "RCorTextAligns",
+          "type": "record",
+          "content": "export type RCorTextAligns = Record<TCorTextAligns, string>;"
+        },
+        {
+          "name": "COR_TEXT_ALIGNS",
+          "type": "const",
+          "content": "export const COR_TEXT_ALIGNS: RCorTextAligns = {\n  'text-left': 'left',\n  'text-right': 'right',\n  'text-center': 'center',\n  'text-justify': 'justify',\n};"
+        },
+        {
+          "name": "TCorTextDecorations",
+          "type": "type",
+          "content": "export type TCorTextDecorations = 'underline' | 'no-underline';"
+        },
+        {
+          "name": "RCorTextDecorations",
+          "type": "record",
+          "content": "export type RCorTextDecorations = Record<TCorTextDecorations, string>;"
+        },
+        {
+          "name": "COR_TEXT_DECORATIONS",
+          "type": "const",
+          "content": "export const COR_TEXT_DECORATIONS: RCorTextDecorations = {\n  \"underline\": \"underline\",\n  \"no-underline\": \"no-underline\",\n};"
+        },
+        {
+          "name": "TCorTextTransformations",
+          "type": "type",
+          "content": "export type TCorTextTransformations = \"uppercase\" | \"lowercase\" | \"capitalize\" | \"normal-case\";"
+        },
+        {
+          "name": "RCorTextTransformations",
+          "type": "record",
+          "content": "export type RCorTextTransformations = Record<TCorTextTransformations, string>;"
+        },
+        {
+          "name": "COR_TEXT_TRANSFORMATIONS",
+          "type": "const",
+          "content": "export const COR_TEXT_TRANSFORMATIONS: RCorTextTransformations = {\n  \"uppercase\": \"uppercase\",\n  \"lowercase\": \"lowercase\",\n  \"capitalize\": \"capitalize\",\n  \"normal-case\": \"normal-case\",\n};"
+        },
+        {
+          "name": "COR_THEMES_IDS",
+          "type": "const",
+          "content": "export const COR_THEMES_IDS: string[] = [\n  'primary-400', 'primary-500', 'primary-600', 'primary-contrast',\n  'secondary-400', 'secondary-500', 'secondary-600', 'secondary-contrast',\n  'success-400', 'success-500', 'success-600', 'success-contrast',\n  'danger-400', 'danger-500', 'danger-600', 'danger-contrast',\n  'warning-400', 'warning-500', 'warning-600', 'warning-contrast',\n  'info-400', 'info-500', 'info-600', 'info-contrast',\n  'light-400', 'light-500', 'light-600', 'light-contrast',\n  'dark-400', 'dark-500', 'dark-600', 'dark-contrast',\n] as const;"
+        },
+        {
+          "name": "TCorThemesIds",
+          "type": "type",
+          "content": "export type TCorThemesIds = typeof COR_THEMES[number];"
+        },
+        {
+          "name": "COR_THEMES",
+          "type": "const",
+          "content": "export const COR_THEMES: string[] = ['base', 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'cta'] as const;"
+        },
+        {
+          "name": "TCorThemes",
+          "type": "type",
+          "content": "export type TCorThemes = typeof COR_THEMES[number];"
+        },
+        {
+          "name": "TCorTouchActions",
+          "type": "type",
+          "content": "export type TCorTouchActions = \"auto\" | \"none\" | \"pan-x\" | \"pan-left\" | \"pan-right\" | \"pan-y\" | \"pan-up\" | \"pan-down\" | \"pinch-zoom\" | \"manipulation\";"
+        },
+        {
+          "name": "RCorTouchActions",
+          "type": "record",
+          "content": "export type RCorTouchActions = Record<TCorTouchActions, string>;"
+        },
+        {
+          "name": "COR_TOUCH_ACTIONS",
+          "type": "const",
+          "content": "export const COR_TOUCH_ACTIONS: RCorTouchActions = {\n  \"auto\": \"auto\",\n  \"none\": \"none\",\n  \"pan-x\": \"pan-x\",\n  \"pan-left\": \"pan-left\",\n  \"pan-right\": \"pan-right\",\n  \"pan-y\": \"pan-y\",\n  \"pan-up\": \"pan-up\",\n  \"pan-down\": \"pan-down\",\n  \"pinch-zoom\": \"pinch-zoom\",\n  \"manipulation\": \"manipulation\",\n};"
+        },
+        {
+          "name": "TCorUnderlineOffsets",
+          "type": "type",
+          "content": "export type TCorUnderlineOffsets = \"auto\" | \"from-font\" | \"0\" | \"1\" | \"2\" | \"4\" | \"8\";"
+        },
+        {
+          "name": "RCorUnderlineOffsets",
+          "type": "record",
+          "content": "export type RCorUnderlineOffsets = Record<TCorUnderlineOffsets, string>;"
+        },
+        {
+          "name": "COR_UNDERLINE_OFFSETS",
+          "type": "const",
+          "content": "export const COR_UNDERLINE_OFFSETS: RCorUnderlineOffsets = {\n  \"auto\": \"auto\",\n  \"from-font\": \"from-font\",\n  \"0\": \"0px\",\n  \"1\": \"1px\",\n  \"2\": \"2px\",\n  \"4\": \"4px\",\n  \"8\": \"8px\",\n};"
+        },
+        {
+          "name": "TCorUserSelections",
+          "type": "type",
+          "content": "export type TCorUserSelections = \"none\" | \"text\" | \"all\" | \"auto\";"
+        },
+        {
+          "name": "RCorUserSelections",
+          "type": "record",
+          "content": "export type RCorUserSelections = Record<TCorUserSelections, string>;"
+        },
+        {
+          "name": "COR_USER_SELECTIONS",
+          "type": "const",
+          "content": "export const COR_USER_SELECTIONS: RCorUserSelections = {\n  \"none\": \"none\",\n  \"text\": \"text\",\n  \"all\": \"all\",\n  \"auto\": \"auto\",\n};"
+        },
+        {
+          "name": "COR_UTILS_KEYS",
+          "type": "const",
+          "content": "export const COR_UTILS_KEYS = [\n  'aspect-ratio',\n  'backdrop-contrast',\n  'background-attachment',\n  'background-blur',\n  'background-clip',\n  'background-origin',\n  'background-position',\n  'background-repeat',\n  'background-size',\n  'blur',\n  'border-radius',\n  'border-style',\n  'border-width',\n  'box-shadow',\n  // 'breakpoints' ,\n  'brightness',\n  // 'colors' ,\n  'contrast',\n  'cursor',\n  // 'flexbox' ,\n  'font-size',\n  'font-weight',\n  'grayscale',\n  'height',\n  'hue-rotate',\n  'invert',\n  'letter-spacing',\n  'line-height',\n  'list-style',\n  'margin',\n  'max-height',\n  'max-width',\n  'min-height',\n  'min-width',\n  'mix-blend',\n  'opacity',\n  'overflow',\n  'overflow-x',\n  'overflow-y',\n  'overflow-webkit',\n  'padding',\n  'pointer-events',\n  'position',\n  'resize',\n  'saturate',\n  'scroll-behavior',\n  'scroll-snap-align',\n  'scroll-snap-stop',\n  'scroll-snap-type',\n  'sepia',\n  'text-align',\n  'text-decoration',\n  'text-transform',\n  'touch-action',\n  'underline-offset',\n  'user-select',\n  // 'vars' ,\n  'vertical-align',\n  'white-spaces',\n  'width',\n  'will-change',\n  'word-break',\n  'z-index'\n] as const;"
+        },
+        {
+          "name": "TCorUtils",
+          "type": "type",
+          "content": "export type TCorUtils = typeof COR_UTILS_KEYS[number];"
+        },
+        {
+          "name": "ICorUtil",
+          "type": "interface",
+          "content": "export interface ICorUtil {\n  unit?: string;\n  function?: string;\n  props: any[];\n}"
+        },
+        {
+          "name": "RCorUtils",
+          "type": "record",
+          "content": "export type RCorUtils = Record<TCorUtils, ICorUtil>;"
+        },
+        {
+          "name": "COR_UTILS",
+          "type": "const",
+          "content": "export const COR_UTILS: RCorUtils = {\n  'aspect-ratio': {\n    props: Object.entries(COR_ASPECT_RATIOS),\n    function: 'aspect-ratio: u.aspect(%val%);',\n  },\n  'backdrop-contrast': {\n    props: Object.entries(COR_BACKDROP_CONTRAST),\n    function: 'backdrop-contrast: u.backdrop-contrast(%val%);',\n  },\n  'background-attachment': {\n    props: Object.entries(COR_BACKGROUND_ATTACHMENTS),\n    function: 'backdrop-attachment: u.backdrop-attachment(%val%);',\n  },\n  'background-blur': {\n    unit: 'px',\n    props: Object.entries(COR_BACKGROUND_BLURS),\n    function: 'backdrop-filter: u.backdrop-blur(%val%);',\n  },\n  'background-clip': {\n    props: Object.entries(COR_BACKGROUND_CLIPS),\n    function: 'backdrop-clip: u.bg-clip(%val%);',\n  },\n  'background-origin': {\n    props: Object.entries(COR_BACKGROUND_ORIGINS),\n    function: 'backdrop-origin: u.bg-origin(%val%);',\n  },\n  'background-position': {\n    props: Object.entries(COR_BACKGROUND_POSITIONS),\n    function: 'backdrop-position: u.bg-position(%val%);',\n  },\n  'background-repeat': {\n    props: Object.entries(COR_BACKGROUND_REPEATS),\n    function: 'backdrop-repeat: u.bg-repeat(%val%);',\n  },\n  'background-size': {\n    props: Object.entries(COR_BACKGROUND_SIZES),\n    function: 'backdrop-size: u.bg-size(%val%);',\n  },\n  'blur': {\n    props: Object.entries(COR_BLURS),\n    function: 'filter: blur(u.blur(%val%));',\n  },\n  'border-radius': {\n    unit: 'rem',\n    props: Object.entries(COR_ROUNDEDS),\n    function: 'border-radius: u.rounded(%val%);'\n  },\n  'border-style': {\n    props: Object.entries(COR_BORDER_STYLES),\n    function: 'border-style: u.border-style(%val%)',\n  },\n  'border-width': {\n    unit: 'px',\n    props: Object.entries(COR_BORDER_SIZES),\n    function: 'border-width: border-width(%val%);',\n  },\n  'box-shadow': {\n    props: Object.entries(COR_BOX_SHADOWS),\n    function: 'box-shadow: u.shadow(%val%);',\n  },\n  // 'breakpoints': {props: Object.entries({})},\n  'brightness': {\n    props: Object.entries(COR_BRIGHTNESS),\n    function: 'filter: brightness(u.brightness(%val%));',\n  },\n  // 'colors': {props: Object.entries({})},\n  'contrast': {\n    props: Object.entries(COR_CONTRASTS),\n    function: 'filter: contrast(u.contrast(%val%));',\n  },\n  'cursor': {\n    props: Object.entries(COR_CURSORS),\n    function: 'cursor: u.cursor(%val%);',\n  },\n  // 'flexbox': {props: Object.entries({})},\n  'font-size': {\n    unit: 'rem',\n    props: Object.entries(COR_FONT_SIZES),\n    function: 'font-size: u.fs(%val%);',\n  },\n  'font-weight': {\n    props: Object.entries(COR_FONT_WEIGHTS),\n    function: 'font-weight: u.font-weight(%val%);',\n  },\n  'grayscale': {\n    props: Object.entries(COR_GRAYSCALES),\n    function: 'filter: grayscale(u.grayscale(%val%));',\n  },\n  'height': {\n    unit: 'rem',\n    props: Object.entries(COR_HEIGHTS),\n    function: 'height: u.height(%val%);',\n  },\n  'hue-rotate': {\n    props: Object.entries(COR_HUE_ROTATES),\n    function: 'filter: hue-rotate(u.hue-rotate(%val%));',\n  },\n  'invert': {\n    props: Object.entries(COR_INVERTS),\n    function: 'filter: invert(u.invert(%val%));',\n  },\n  'letter-spacing': {\n    unit: 'em',\n    props: Object.entries(COR_LETTER_SPACINGS),\n    function: 'letter-spacing: u.tracking(%val%);',\n  },\n  'line-height': {\n    props: Object.entries(COR_LINE_HEIGHTS),\n    function: 'line-height: u.leading(%val%);',\n  },\n  'list-style': {\n    props: Object.entries(COR_LINE_STYLES),\n    function: 'list-style-type: u.list-styles(%val%);',\n  },\n  'margin': {\n    unit: 'rem',\n    props: Object.entries(COR_MARGINS),\n    function: 'margin: u.margin(%val%);',\n  },\n  'max-height': {\n    props: Object.entries(COR_MAX_SIZES),\n    function: 'max-height: u.max-h(%val%);',\n  },\n  'max-width': {\n    props: Object.entries(COR_MAX_SIZES),\n    function: 'max-width: u.max-w(%val%);',\n  },\n  'min-height': {\n    props: Object.entries(COR_MIN_SIZES),\n    function: 'min-heigth: u.min-h(%val%);',\n  },\n  'min-width': {\n    props: Object.entries(COR_MIN_SIZES),\n    function: 'min-width: u.min-w(%val%);',\n  },\n  'mix-blend': {\n    props: Object.entries(COR_MIX_BLENDS),\n    function: 'mix-blend-mode: u.mix-blend(%val%);',\n  },\n  'opacity': {\n    props: Object.entries(COR_OPACITIES),\n    function: 'opacity: u.opacity(%val%);',\n  },\n  'overflow': {\n    props: Object.entries(COR_OVERFLOWS),\n    function: 'overflow: u.overflow(%val%);',\n  },\n  'overflow-x': {\n    props: Object.entries(COR_OVERFLOWS_X),\n    function: 'overflow-x: u.overflow-x(%val%);',\n  },\n  'overflow-y': {\n    props: Object.entries(COR_OVERFLOWS_Y),\n    function: 'overflow-y: u.overflow-y(%val%);',\n  },\n  'overflow-webkit': {\n    props: Object.entries(COR_OVERFLOWS_WEBKIT),\n    function: '-webkit-overflow-scrolling: u.overflow-webkit(%val%);',\n  },\n  'padding': {\n    props: Object.entries(COR_PADDINGS),\n    function: 'padding: u.padding(%val%);',\n  },\n  'pointer-events': {\n    props: Object.entries(COR_POINTER_EVENTS),\n    function: 'pointer-events: u.pointer-events(%val%);',\n  },\n  'position': {\n    props: Object.entries(COR_POSITIONS),\n    function: 'position: u.position(%val%);',\n  },\n  'resize': {\n    props: Object.entries(COR_RESIZINGS),\n    function: 'resize: u.resize(%val%);',\n  },\n  'saturate': {\n    props: Object.entries(COR_SATURATE),\n    function: 'filter: saturate(u.saturate(%val%));',\n  },\n  'scroll-behavior': {\n    props: Object.entries(COR_SCROLL_BEHAVIORS),\n    function: 'scroll-behavior: u.scroll-behavior(%val%);',\n  },\n  'scroll-snap-align': {\n    props: Object.entries(COR_SCROLL_SNAP_ALIGNS),\n    function: 'scroll-snap-align: u.scroll-snap-align(%val%);',\n  },\n  'scroll-snap-stop': {\n    props: Object.entries(COR_SCROLL_SNAP_STOPS),\n    function: 'scroll-snap-stop: u.scroll-snap-stop(%val%);',\n  },\n  'scroll-snap-type': {\n    props: Object.entries(COR_SCROLL_SNAP_TYPES),\n    function: 'scroll-snap-type: u.scroll-snap-type(%val%);',\n  },\n  'sepia': {\n    props: Object.entries(COR_SEPIAS),\n    function: 'filter: sepia(u.sepia(%val%));',\n  },\n  'text-align': {\n    props: Object.entries(COR_TEXT_ALIGNS),\n    function: 'text-align: u.text-align(%val%);',\n  },\n  'text-decoration': {\n    props: Object.entries(COR_TEXT_DECORATIONS),\n    function: 'text-decoration: u.text-decoration(%val%);',\n  },\n  'text-transform': {\n    props: Object.entries(COR_TEXT_TRANSFORMATIONS),\n    function: 'text-transform: u.text-transform(%val%);',\n  },\n  'touch-action': {\n    props: Object.entries(COR_TOUCH_ACTIONS),\n    function: 'touch-action: u.touch-action(%val%);',\n  },\n  'underline-offset': {\n    props: Object.entries(COR_UNDERLINE_OFFSETS),\n    function: 'text-underline-offset: u.underline-offset(%val%);',\n  },\n  'user-select': {\n    props: Object.entries(COR_USER_SELECTIONS),\n    function: 'user-select: u.user-select(%val%);',\n  },\n  // 'vars': {props: Object.entries({})},\n  'vertical-align': {\n    props: Object.entries(COR_VERTICAL_ALIGNS),\n    function: 'vertical-align: u.vertical-align(%val%);',\n  },\n  'white-spaces': {\n    props: Object.entries(COR_WHITE_SPACES),\n    function: 'white-space: u.white-space(%val%);',\n  },\n  'width': {\n    props: Object.entries(COR_WIDTHS),\n    function: 'width: u.width(%val%);',\n  },\n  'will-change': {\n    props: Object.entries(COR_WILL_CHANGES),\n    function: 'will-change: u.will-change(%val%);',\n  },\n  'word-break': {\n    props: Object.entries(COR_WORD_BREAKS),\n    function: 'word-break: u.word-break(%val%);',\n  },\n  'z-index': {\n    props: Object.entries(COR_Z_INDEXES),\n    function: 'z-index: u.z(%val%);',\n  },\n};"
+        },
+        {
+          "name": "TCorVerticalAligns",
+          "type": "type",
+          "content": "export type TCorVerticalAligns = \"baseline\" | \"top\" | \"middle\" | \"bottom\" | \"text-top\" | \"text-bottom\" | \"sub\" | \"super\";"
+        },
+        {
+          "name": "RCorVerticalAligns",
+          "type": "record",
+          "content": "export type RCorVerticalAligns = Record<TCorVerticalAligns, string>;"
+        },
+        {
+          "name": "COR_VERTICAL_ALIGNS",
+          "type": "const",
+          "content": "export const COR_VERTICAL_ALIGNS: RCorVerticalAligns = {\n  \"baseline\": \"baseline\",\n  \"top\": \"top\",\n  \"middle\": \"middle\",\n  \"bottom\": \"bottom\",\n  \"text-top\": \"text-top\",\n  \"text-bottom\": \"text-bottom\",\n  \"sub\": \"sub\",\n  \"super\": \"super\",\n};"
+        },
+        {
+          "name": "TCorVwSizes",
+          "type": "type",
+          "content": "export type TCorVwSizes = '0' | 'px' | 'auto' | '20' | '25' | '33' | '40' | '50' | '60' | '66' | '75' | '80' | 'full' | 'screen' | 'min' | 'max' | 'fit';"
+        },
+        {
+          "name": "RCorVwSizes",
+          "type": "record",
+          "content": "export type RCorVwSizes = Record<TCorVwSizes, string>;"
+        },
+        {
+          "name": "COR_VW_SIZES",
+          "type": "const",
+          "content": "export const COR_VW_SIZES: RCorVwSizes = {\n  \"0\": '0',\n  \"px\": '1px',\n  \"auto\": 'auto',\n  \"20\": '20%',\n  \"25\": '25%',\n  \"33\": '33%',\n  \"40\": '40%',\n  \"50\": '50%',\n  \"60\": '60%',\n  \"66\": '66%',\n  \"75\": '75%',\n  \"80\": '80%',\n  \"full\": '100%',\n  \"screen\": '100vh',\n  \"min\": 'min-content',\n  \"max\": 'max-content',\n  \"fit\": 'fit-content'\n};"
+        },
+        {
+          "name": "TCorWhiteSpaces",
+          "type": "type",
+          "content": "export type TCorWhiteSpaces = \"normal\" | \"nowrap\" | \"pre\" | \"pre-line\" | \"pre-wrap\";"
+        },
+        {
+          "name": "RCorWhiteSpaces",
+          "type": "record",
+          "content": "export type RCorWhiteSpaces = Record<TCorWhiteSpaces, string>;"
+        },
+        {
+          "name": "COR_WHITE_SPACES",
+          "type": "const",
+          "content": "export const COR_WHITE_SPACES: RCorWhiteSpaces = {\n  \"normal\": \"normal\",\n  \"nowrap\": \"nowrap\",\n  \"pre\": \"pre\",\n  \"pre-line\": \"pre-line\",\n  \"pre-wrap\": \"pre-wrap\",\n};"
+        },
+        {
+          "name": "TCorWidths",
+          "type": "type",
+          "content": "export type TCorWidths = \"0\" | \"px\" | \"auto\" | \"20\" | \"25\" | \"33\" | \"40\" | \"50\" | \"60\" | \"66\" | \"75\" | \"80\" | \"full\" | \"screen\" | \"min\" | \"max\" | \"fit\";"
+        },
+        {
+          "name": "RCorWidths",
+          "type": "record",
+          "content": "export type RCorWidths = Record<TCorWidths, string>;"
+        },
+        {
+          "name": "COR_WIDTHS",
+          "type": "const",
+          "content": "export const COR_WIDTHS: RCorWidths = {\n  \"0\": \"0\",\n  \"px\": \"1px\",\n  \"auto\": \"auto\",\n  \"20\": \"20%\",\n  \"25\": \"25%\",\n  \"33\": \"33%\",\n  \"40\": \"40%\",\n  \"50\": \"50%\",\n  \"60\": \"60%\",\n  \"66\": \"66%\",\n  \"75\": \"75%\",\n  \"80\": \"80%\",\n  \"full\": \"100%\",\n  \"screen\": \"100vh\",\n  \"min\": \"min-content\",\n  \"max\": \"max-content\",\n  \"fit\": \"fit-content\",\n};"
+        },
+        {
+          "name": "TCorWillChanges",
+          "type": "type",
+          "content": "export type TCorWillChanges = \"auto\" | \"scroll\" | \"contents\" | \"transform\";"
+        },
+        {
+          "name": "RCorWillChanges",
+          "type": "record",
+          "content": "export type RCorWillChanges = Record<TCorWillChanges, string>;"
+        },
+        {
+          "name": "COR_WILL_CHANGES",
+          "type": "const",
+          "content": "export const COR_WILL_CHANGES: RCorWillChanges = {\n  \"auto\": \"auto\",\n  \"scroll\": \"scroll\",\n  \"contents\": \"contents\",\n  \"transform\": \"transform\",\n};"
+        },
+        {
+          "name": "TCorWordBreaks",
+          "type": "type",
+          "content": "export type TCorWordBreaks =\n  \"normal\" | \"words\" | \"all\";"
+        },
+        {
+          "name": "RCorWordBreaks",
+          "type": "record",
+          "content": "export type RCorWordBreaks = Record<TCorWordBreaks, string>;"
+        },
+        {
+          "name": "COR_WORD_BREAKS",
+          "type": "const",
+          "content": "export const COR_WORD_BREAKS: RCorWordBreaks = {\n  \"normal\": \"normal\",\n  \"words\": \"words\",\n  \"all\": \"all\",\n};"
+        },
+        {
+          "name": "TCorZIndexes",
+          "type": "type",
+          "content": "export type TCorZIndexes = \"watermark\" | \"page-wrapper\" | \"site-header\" | \"site-footer\" | \"nav\" | \"goto-top-btn\" | \"modal\" | \"toaster\" | \"loader\";"
+        },
+        {
+          "name": "RCorZIndexes",
+          "type": "record",
+          "content": "export type RCorZIndexes = Record<TCorZIndexes, string>;"
+        },
+        {
+          "name": "COR_Z_INDEXES",
+          "type": "const",
+          "content": "export const COR_Z_INDEXES: RCorZIndexes = {\n  \"watermark\": '5',\n  \"page-wrapper\": '10',\n  \"site-header\": '20',\n  \"site-footer\": '30',\n  \"nav\": '40',\n  \"goto-top-btn\": '50',\n  \"modal\": '1000',\n  \"toaster\": '2000',\n  \"loader\": '3000',\n};"
+        }
+      ]
+    }
+  ]
+}

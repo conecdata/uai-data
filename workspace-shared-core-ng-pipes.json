@@ -1,0 +1,51 @@
+{
+  "data": [
+    {
+      "id": "shared/core-ng/pipes",
+      "data": {
+        "duration": [
+          {
+            "name": "CorDurationPipe",
+            "type": "pipe",
+            "content": "@Pipe({\n  name: 'duration',\n  standalone: true,\n  pure: true\n})\nexport class CorDurationPipe implements PipeTransform {\n\n  transform(totalSeconds: number | null | undefined): string {\n    return duration(totalSeconds);\n  }\n}"
+          }
+        ],
+        "empty": [
+          {
+            "name": "CorEmptyPipe",
+            "type": "pipe",
+            "content": "@Pipe({\n  name: 'empty'\n})\nexport class CorEmptyPipe implements PipeTransform {\n  transform(val: any): boolean {\n    return empty(val);\n  }\n}"
+          }
+        ],
+        "exists": [
+          {
+            "name": "CorExistsPipe",
+            "type": "pipe",
+            "content": "@Pipe({\n  name: 'exists'\n})\nexport class CorExistsPipe implements PipeTransform {\n  transform(val: any): boolean {\n    return exists(val);\n  }\n}"
+          }
+        ],
+        "is-empty-object": [
+          {
+            "name": "CorIsEmpbyObjPipe",
+            "type": "pipe",
+            "content": "@Pipe({\n  name: 'isEmptyObj'\n})\nexport class CorIsEmpbyObjPipe implements PipeTransform {\n  transform(val: any): boolean {\n    return isEmptyObject(val);\n  }\n}"
+          }
+        ],
+        "paginate": [
+          {
+            "name": "CorPaginatePipe",
+            "type": "pipe",
+            "content": "@Pipe({\n  name: 'paginate',\n  pure: true,\n})\nexport class CorPaginatePipe implements PipeTransform {\n  // transform<T>(items: T[], page: number, itemsPerPage: number): T[] {\n  //   if (!items?.length) return [];\n  //   const start = (page - 1) * itemsPerPage;\n  //   const end = start + itemsPerPage;\n  //   // console.log({ page, itemsPerPage, start, end });\n  //   return items.slice(start, end);\n  // }\n\n  transform<T>(items: T[], pag: Partial<ICorPaginationChange>): T[] {\n    if (!items?.length) return [];\n\n    const page = pag?.page ?? 1;\n    const itemsPerPage = pag?.itemsPerPage ?? items.length;\n\n    if (page <= 0 || itemsPerPage <= 0) return items;\n\n    const start = (page - 1) * itemsPerPage;\n    const end = start + itemsPerPage;\n\n    return items.slice(start, end);\n  }\n}"
+          }
+        ],
+        "truncate": [
+          {
+            "name": "CorTruncatePipe",
+            "type": "pipe",
+            "content": "@Pipe({\n  name: 'truncate',\n  standalone: true,\n  pure: true,\n})\nexport class CorTruncatePipe implements PipeTransform {\n  transform(value: string | null | undefined, length = 50, suffix = '…'): string {\n    if (!value) return '';\n    return value.length > length ? value.slice(0, length) + suffix : value;\n  }\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

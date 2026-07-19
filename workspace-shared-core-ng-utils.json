@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "id": "shared/core-ng/utils/lifecycles",
+      "data": [
+        {
+          "name": "onDestroy",
+          "type": "function",
+          "content": "export const onDestroy = (): Subject<void> => {\r\n  const destroyAction$ = new Subject<void>();\r\n  const viewRef = inject(ChangeDetectorRef) as ViewRef;\r\n\r\n  viewRef?.onDestroy(() => {\r\n    destroyAction$?.next();\r\n    destroyAction$?.complete();\r\n  });\r\n\r\n  return destroyAction$;\r\n};"
+        }
+      ]
+    },
+    {
+      "id": "shared/core-ng/utils/resources",
+      "data": [
+        {
+          "name": "TResourceStatus",
+          "type": "type",
+          "content": "// models\nexport type TResourceStatus = \"loading\" | \"resolved\" | \"error\" | \"idle\";"
+        },
+        {
+          "name": "IMockResourceResponse",
+          "type": "interface",
+          "content": "export interface IMockResourceResponse {\n  error(): Error | null;\n  value(): any;\n  status(): TResourceStatus | null;\n  reload(): void;\n}"
+        },
+        {
+          "name": "mockResource",
+          "type": "function",
+          "content": "export function mockResource<T>(\n  data?: T,\n  error?: Error,\n  isLoading?: boolean,\n): IMockResourceResponse {\n  // console.log({ data, error });\n  const isLoadingStatus: boolean | null = isLoading ?? null;\n  const err: Error | null =\n    isLoadingStatus === true ? null : !!error ? error : null;\n  const val: T | null =\n    isLoadingStatus === true ? null : !err ? data || null : null;\n  const stat: TResourceStatus =\n    isLoadingStatus === true\n      ? \"loading\"\n      : !!error\n        ? \"error\"\n        : !!val\n          ? \"resolved\"\n          : \"idle\";\n  // console.log({ err, val, stat });\n  return {\n    error: (): Error | null => err,\n    value: (): T | null => val,\n    status: (): TResourceStatus => stat,\n    reload: () => console.log(\"Mocked reload.\"),\n  };\n}"
+        }
+      ]
+    }
+  ]
+}

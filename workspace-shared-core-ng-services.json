@@ -1,0 +1,21 @@
+{
+  "data": [
+    {
+      "id": "shared/core-ng/services",
+      "data": {
+        "theme": [
+          {
+            "name": "IThemeState",
+            "type": "interface",
+            "content": "// models\nexport interface IThemeState {\n  isDarkMode: boolean;\n}"
+          },
+          {
+            "name": "CorThemeService",
+            "type": "service",
+            "content": "@Injectable({ providedIn: \"root\" })\nexport class CorThemeService {\n  // store\n  #state = signal<IThemeState>({\n    isDarkMode: false,\n  });\n\n  // selectors\n  isDarkMode = computed<boolean>(() => !!this.#state()?.isDarkMode);\n\n  // actions\n  setIsDarkMode(isDarkMode: boolean) {\n    this.#state.update((state: any) => ({ ...state, isDarkMode }));\n  }\n\n  // constructor\n  constructor() {\n    // effect(() => console.log(this.#state()));\n\n    effect(() => {\n      document.documentElement.setAttribute(\n        \"data-theme\",\n        !!this.isDarkMode() ? \"dark\" : \"light\",\n      );\n    });\n  }\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

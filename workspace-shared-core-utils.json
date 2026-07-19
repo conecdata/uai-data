@@ -1,0 +1,469 @@
+{
+  "data": [
+    {
+      "id": "shared/core/utils/apis",
+      "data": [
+        {
+          "name": "ICorLinkPreview",
+          "type": "interface",
+          "content": "// models\nexport interface ICorLinkPreview {\n  url: string;\n  title?: string;\n  description?: string;\n  image?: string;\n  favicon?: string;\n  site?: string;\n\n  id?: string;\n}"
+        },
+        {
+          "name": "fetchLinkPreviews",
+          "type": "function",
+          "content": "export async function fetchLinkPreviews(\n  urls: string[],\n  onProgress?: (progress: {\n    completed: number;\n    total: number;\n    current?: ICorLinkPreview;\n  }) => void\n): Promise<ICorLinkPreview[]> {\n\n  let completed = 0;\n  const total = urls.length;\n\n  const normalize = (u: string) => /^https?:\\/\\//.test(u) ? u : `https://${u}`;\n\n  const extractYoutubeId = (url: string) => {\n    const match = url.match(/(?:youtube\\.com.*v=|youtu\\.be\\/)([^&]+)/);\n    return match ? match[1] : null;\n  };\n\n  const tasks = urls.map(async (u) => {\n    const url = normalize(u);\n\n    let result: ICorLinkPreview;\n\n    try {\n      if (url.includes('youtube.com') || url.includes('youtu.be')) {\n        const id = extractYoutubeId(url);\n\n        result = {\n          url,\n          title: \"YouTube Video\",\n          image: `https://img.youtube.com/vi/${id}/hqdefault.jpg`,\n          favicon: `https://www.google.com/s2/favicons?domain=youtube.com`,\n          site: \"YouTube\"\n        };\n      } else {\n        const api = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true`;\n\n        const res = await fetch(api);\n        const json = await res.json();\n        const data = json.data;\n\n        result = {\n          url,\n          title: data.title,\n          description: data.description,\n          image: data.screenshot?.url || data.image?.url,\n          favicon:\n            data.logo?.url ||\n            `https://www.google.com/s2/favicons?domain=${new URL(url).hostname}`,\n          site: data.publisher\n        };\n      }\n    } catch {\n      result = { url, title: url };\n    }\n\n    // 🔥 update progress\n    completed++;\n    onProgress?.({\n      completed,\n      total,\n      current: result\n    });\n\n    return result;\n  });\n\n  return Promise.all(tasks);\n}"
+        }
+      ]
+    },
+    {
+      "id": "shared/core/utils/arrays",
+      "data": [
+        {
+          "name": "compareValues",
+          "type": "function",
+          "content": "// https://www.sitepoint.com/sort-an-array-of-objects-in-javascript\r\n// Usage: ARRAY.sort(compareValues('nome'));\r\nexport function compareValues(key: any, order = 'asc') {\r\n  // console.log(key, order);\r\n  return function innerSort(a: any, b: any) {\r\n    // console.log(get(a, key, null), get(b, key, null));\r\n    // console.log(!a.hasOwnProperty(key), !b.hasOwnProperty(key));\r\n    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {\r\n      // property doesn't exist on either object\r\n      return 0;\r\n    } // if \r\n\r\n    const varA = (typeof a[key] === 'string')\r\n      ? desacentua(a[key]).toUpperCase() : a?.[key] ?? null;\r\n    const varB = (typeof b[key] === 'string')\r\n      ? desacentua(b[key]).toUpperCase() : b?.[key] ?? null;\r\n    // console.log(varA, varB);\r\n\r\n    let comparison = 0;\r\n    if (varA > varB) {\r\n      comparison = 1;\r\n    } else if (varA < varB) {\r\n      comparison = -1;\r\n    } // else\r\n    return (\r\n      (order === 'desc') ? (comparison * -1) : comparison\r\n    );\r\n  };\r\n}"
+        },
+        {
+          "name": "getRandomItem",
+          "type": "function",
+          "content": "export function getRandomItem<T>(arr: T[] = []): T {\r\n  const POS = Math.floor(Math.random() * arr.length);\r\n  return arr[POS];\r\n}"
+        },
+        {
+          "name": "getRandomNumbers",
+          "type": "function",
+          "content": "export const getRandomNumbers = (\n  qtde: number,\n  min: number,\n  max: number\n) => {\n  const RES: number[] = [];\n\n  for (let i = 0; i < qtde; i++) {\n    RES.push(randomRange(min, max));\n  } // for\n\n  return RES;\n}"
+        },
+        {
+          "name": "sameArray",
+          "type": "function",
+          "content": "// // 3rd\r\n// import {\r\n//   isEmpty,\r\n//   xor,\r\n// } from 'lodash-es';\r\n\r\n// export const sameArray = (a1: any[], a2: any[]): boolean => isEmpty(xor(a1, a2));\r\n\r\n// console.log(sameArray([1, 2, 3], [3, 2, 1])); // true\r\n// console.log(sameArray([1, 2, 3], [1, 2, 3, 4])); // false\r\n// console.log(sameArray([], [])); // true\r\n// console.log(sameArray([1, 1, 2], [1, 2, 2])); // false (com versão rigorosa)\r\n// console.log(sameArray(['a', 'b'], ['b', 'a'])); // true\r\n// console.log(sameArray([1, 2], [1, 2, 1])); // false\r\n\r\nexport const sameArray = (a1: any[], a2: any[]): boolean => {\r\n  if (!Array.isArray(a1) || !Array.isArray(a2) || a1.length !== a2.length) {\r\n    return false;\r\n  }\r\n\r\n  // Conta frequência de cada elemento\r\n  const freq1 = new Map();\r\n  const freq2 = new Map();\r\n\r\n  for (const item of a1) {\r\n    freq1.set(item, (freq1.get(item) || 0) + 1);\r\n  }\r\n\r\n  for (const item of a2) {\r\n    freq2.set(item, (freq2.get(item) || 0) + 1);\r\n  }\r\n\r\n  // Compara mapas de frequência\r\n  if (freq1.size !== freq2.size) return false;\r\n\r\n  for (const [key, value] of freq1) {\r\n    if (freq2.get(key) !== value) {\r\n      return false;\r\n    }\r\n  }\r\n\r\n  return true;\r\n};"
+        },
+        {
+          "name": "uniqueBy",
+          "type": "function",
+          "content": "export const uniqueBy = <T>(array: T[], key: keyof T): T[] => {\n  const seen = new Set();\n  return array.filter(item => {\n    const value = item[key];\n    if (seen.has(value)) return false;\n    seen.add(value);\n    return true;\n  });\n}"
+        },
+        {
+          "name": "uniqueListBy",
+          "type": "function",
+          "content": "export const uniqueListBy = (arr: any[], key: string): any[] => {\r\n  return [...new Map(arr.map(item => [item[key], item])).values()];\r\n};"
+        }
+      ]
+    },
+    {
+      "id": "shared/core/utils/convert",
+      "data": [
+        {
+          "name": "base64toFile",
+          "type": "function",
+          "content": "export const base64toFile = (\r\n  base64: string,\r\n  filename: string\r\n): File => {\r\n  const ARR = base64.split(',');\r\n  // const MIME = (ARR[0].match(/:(.*?);/)[1]) || undefined;\r\n  let mime: string = '';\r\n  if (ARR && ARR.length) {\r\n    mime = ((ARR[0].match(/:(.*?);/) || [])[1]) || '';\r\n  } // if\r\n  const BSTR = atob(ARR[1]);\r\n  let n = BSTR.length;\r\n  const U8ARR = new Uint8Array(n);\r\n  while (n--) {\r\n    U8ARR[n] = BSTR.charCodeAt(n);\r\n  } // while\r\n  return new File([U8ARR], filename, { type: mime });\r\n};"
+        },
+        {
+          "name": "blobToFile",
+          "type": "function",
+          "content": "export const blobToFile = (\r\n  blob: Blob,\r\n  fileName: string\r\n): File => {\r\n  const B: any = blob;\r\n  B.lastModifiedDate = new Date();\r\n  B.name = fileName;\r\n\r\n  //Cast to a File() type\r\n  // return <File>blob;\r\n  return <any>blob;\r\n};"
+        },
+        {
+          "name": "breakFone",
+          "type": "function",
+          "content": "export const breakFone = (val: string) => {\r\n  const VAL = !!val ? val.toString().trim().replace(/^\\+|-|\\(|\\)/g, '') : '';\r\n  // console.log(val);\r\n\r\n  const RET: ICorFoneInfoRet = {\r\n    country: '',\r\n    ddd: '',\r\n    number: '',\r\n    n1: '',\r\n    n2: '',\r\n    cellphone: VAL.length % 2 !== 0,\r\n  };\r\n\r\n  switch (VAL.length) {\r\n    case 8:\r\n      RET.country = '';\r\n      RET.ddd = '';\r\n      RET.number = VAL;\r\n      RET.n1 = VAL.slice(0, 4);\r\n      RET.n2 = VAL.slice(4);\r\n      break;\r\n\r\n    case 9:\r\n      RET.country = '';\r\n      RET.ddd = '';\r\n      RET.number = VAL;\r\n      RET.n1 = VAL.slice(0, 5);\r\n      RET.n2 = VAL.slice(5);\r\n      break;\r\n\r\n    case 10:\r\n      RET.country = '';\r\n      RET.ddd = VAL.slice(0, 2);\r\n      RET.number = VAL.slice(2);\r\n      RET.n1 = VAL.slice(2, 6);\r\n      RET.n2 = VAL.slice(6);\r\n      break;\r\n\r\n    case 11:\r\n      RET.country = '';\r\n      RET.ddd = VAL.slice(0, 2);\r\n      RET.number = VAL.slice(2);\r\n      RET.n1 = VAL.slice(2, 7);\r\n      RET.n2 = VAL.slice(7);\r\n      break;\r\n\r\n    case 12:\r\n      RET.country = VAL.slice(0, 2);\r\n      RET.ddd = VAL.slice(2, 4);\r\n      RET.number = VAL.slice(4);\r\n      RET.n1 = VAL.slice(4, 8);\r\n      RET.n2 = VAL.slice(8);\r\n      break;\r\n\r\n    case 13:\r\n      RET.country = VAL.slice(0, 2);\r\n      RET.ddd = VAL.slice(2, 4);\r\n      RET.number = VAL.slice(4);\r\n      RET.n1 = VAL.slice(4, 9);\r\n      RET.n2 = VAL.slice(9);\r\n      break;\r\n\r\n    default:\r\n      return null;\r\n  } // switch\r\n\r\n  // console.log(RET);\r\n  return RET;\r\n};"
+        },
+        {
+          "name": "date2id",
+          "type": "function",
+          "content": "// // 3rd\r\n// import moment from 'moment';\r\n\r\n// export const date2id = (date: Date): string => {\r\n//   if (date) {\r\n//     return moment(date).format('YYYYMMDD');\r\n//   } else {\r\n//     return '';\r\n//   } // else\r\n// };\r\n\r\n// console.log(date2id(new Date(2024, 5, 15))); // \"20240615\"\r\n// console.log(date2id(new Date(1985, 11, 25))); // \"19851225\"\r\n// console.log(date2id(new Date(2024, 0, 1))); // \"20240101\"\r\n// console.log(date2id(new Date('invalid'))); // \"\"\r\n// console.log(date2id(null)); // \"\"\r\n// console.log(date2id(undefined)); // \"\"\r\n\r\nexport const date2id = (date: Date): string => {\r\n  if (date instanceof Date && !isNaN(date.getTime())) {\r\n    return date.toLocaleDateString('pt-BR', {\r\n      year: 'numeric',\r\n      month: '2-digit',\r\n      day: '2-digit'\r\n    }).replace(/\\//g, '').split('').reverse().join('').slice(0, 8);\r\n  }\r\n\r\n  return '';\r\n};"
+        },
+        {
+          "name": "duration",
+          "type": "function",
+          "content": "export const duration = (totalSeconds: number | null | undefined): string => {\n  if (!totalSeconds && totalSeconds !== 0) return '';\n\n  const h = Math.floor(totalSeconds / 3600);\n  const m = Math.floor((totalSeconds % 3600) / 60);\n  const s = totalSeconds % 60;\n\n  if (h > 0) {\n    return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;\n  }\n\n  return `${m}:${s.toString().padStart(2, '0')}`;\n}"
+        },
+        {
+          "name": "fixFone",
+          "type": "function",
+          "content": "export const fixFone = (fone: string): string => {\r\n  if (fone) {\r\n    const FONE: ICorFoneInfoRet | null = breakFone(fone);\r\n    // console.log(FONE);\r\n    return (FONE?.ddd || '') + (FONE?.number || '');\r\n  } else {\r\n    return '';\r\n  } // else\r\n};"
+        },
+        {
+          "name": "id2date",
+          "type": "function",
+          "content": "// // 3rd\r\n// import moment from 'moment';\r\n\r\n// export const id2date = (id: string): Date | null => {\r\n//   if (id) {\r\n//     return moment(id, 'YYYYMMDD').toDate();\r\n//   } else {\r\n//     return null;\r\n//   } // else\r\n// };\r\n\r\n// console.log(id2date('20240615')); // Sat Jun 15 2024 00:00:00\r\n// console.log(id2date('19851225')); // Wed Dec 25 1985 00:00:00\r\n// console.log(id2date('20240229')); // Thu Feb 29 2024 (ano bissexto)\r\n// console.log(id2date('20230229')); // null (data inválida)\r\n// console.log(id2date('invalid')); // null\r\n// console.log(id2date('')); // null\r\n\r\nexport const id2date = (id: string): Date | null => {\r\n  if (id && /^\\d{8}$/.test(id)) {\r\n    const year = parseInt(id.slice(0, 4), 10);\r\n    const month = parseInt(id.slice(4, 6), 10);\r\n    const day = parseInt(id.slice(6, 8), 10);\r\n\r\n    const date = new Date(year, month - 1, day);\r\n\r\n    // Verifica se a data construída corresponde aos valores originais\r\n    return (date.getFullYear() === year &&\r\n      date.getMonth() === month - 1 &&\r\n      date.getDate() === day) ? date : null;\r\n  }\r\n\r\n  return null;\r\n};"
+        },
+        {
+          "name": "min2time",
+          "type": "function",
+          "content": "export const min2time = (value: number, hours: boolean = true): string => {\r\n  if (typeof value === 'number') {\r\n    const H: string = lpad(`${Math.trunc(value / 60)}`);\r\n    const M: string = lpad(`${value % 60}`);\r\n    // console.log({\r\n    //     H,\r\n    //     M\r\n    // });\r\n    let str: string = `${H === '24' ? '00' : H}:${M}`;\r\n    if (hours) {\r\n      str = str.replace(':', 'h');\r\n    } // if\r\n    return str;\r\n  } else {\r\n    return '';\r\n  } // else\r\n};"
+        },
+        {
+          "name": "strToFloat",
+          "type": "function",
+          "content": "export const strToFloat = (str: string): number => {\r\n  return (parseFloat((str || '').replace(',', '.')) || 0);\r\n};"
+        },
+        {
+          "name": "time2min",
+          "type": "function",
+          "content": "// //  3rd\r\n// import moment from 'moment';\r\n\r\n// export const time2min = (S: string): number => {\r\n//   if (typeof S === 'string') {\r\n//     const T: any = moment(S, 'HH:mm');\r\n//     return T.hours() * 60 + T.minutes();\r\n//   } else {\r\n//     return 0;\r\n//   } // else\r\n// };\r\n\r\n// console.log(time2min('14:30')); // 870\r\n// console.log(time2min('09:15')); // 555\r\n// console.log(time2min('00:00')); // 0\r\n// console.log(time2min('23:59')); // 1439\r\n// console.log(time2min('invalid')); // 0\r\n\r\nexport const time2min = (s: string): number => {\r\n  if (typeof s === 'string' && s.trim()) {\r\n    // Verifica se o formato está correto (HH:mm)\r\n    const timeRegex = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])$/;\r\n    const match = s.trim().match(timeRegex);\r\n\r\n    if (match) {\r\n      const hours = parseInt(match[1], 10);\r\n      const minutes = parseInt(match[2], 10);\r\n      return hours * 60 + minutes;\r\n    }\r\n\r\n    return 0; // Formato inválido\r\n  }\r\n\r\n  return 0;\r\n};"
+        }
+      ]
+    },
+    {
+      "id": "shared/core/utils/data",
+      "data": [
+        {
+          "name": "empty",
+          "type": "function",
+          "content": "export const empty = (val: any): boolean => val === null || val === undefined ? true : false;"
+        },
+        {
+          "name": "exists",
+          "type": "function",
+          "content": "export const exists = (val: any): boolean => val !== null && val !== undefined ? true : false;"
+        }
+      ]
+    },
+    {
+      "id": "shared/core/utils/data-types",
+      "data": [
+        {
+          "name": "grouptBy",
+          "type": "function",
+          "content": "/*\r\ngroupBy(\r\n  vehicle => vehicle.make,\r\n  [\r\n    { make: 'tesla', model: '3' },\r\n    { make: 'tesla', model: 'y' },\r\n    { make: 'ford', model: 'mach-e' },\r\n  ]\r\n);\r\n\r\n{ \r\n  tesla: [...],\r\n  ford: [...],\r\n}\r\n*/\r\nexport const grouptBy = (fn: any, list: any[] = []) => (\r\n  (list || [])\r\n    .reduce(\r\n      (prev, next) => (\r\n        {\r\n          ...prev,\r\n          [fn(next)]: [...(prev[fn(next)] || []), next],\r\n        }\r\n      ),\r\n      {}\r\n    )\r\n);"
+        },
+        {
+          "name": "isArray",
+          "type": "function",
+          "content": "export function isArray(arr: any): boolean {\r\n  return arr && arr.constructor === Array;\r\n}"
+        },
+        {
+          "name": "isEmptyObject",
+          "type": "function",
+          "content": "export const isEmptyObject = (obj: Object): boolean => {\r\n  return obj && Object.keys(obj).length === 0 && obj.constructor === Object;\r\n};"
+        },
+        {
+          "name": "isObject",
+          "type": "function",
+          "content": "export const isObject = (obj: any): boolean => obj !== null && typeof obj === 'object';"
+        }
+      ]
+    },
+    {
+      "id": "shared/core/utils/datetime",
+      "data": [
+        {
+          "name": "sleep",
+          "type": "function",
+          "content": "// await sleep(1000)\r\nexport const sleep = async (duration: number = 0) => {\r\n  new Promise(resolve => setTimeout(resolve, duration));\r\n};"
+        }
+      ]
+    },
+    {
+      "id": "shared/core/utils/formats",
+      "data": [
+        {
+          "name": "buildPhone",
+          "type": "function",
+          "content": "export function buildPhone( // E.164\r\n  country: string,\r\n  area: string,\r\n  prefix: string,\r\n  line: string,\r\n): string {\r\n  const NUM = country + area + prefix + line;\r\n  return `+${NUM}`;\r\n}"
+        },
+        {
+          "name": "formataBRL",
+          "type": "function",
+          "content": "export const formataBRL = (value: number): string =>\r\n  new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);"
+        },
+        {
+          "name": "formataCEP",
+          "type": "function",
+          "content": "export function formataCEP(cep: string): string {\r\n  const CEP: string = (cep ? `${cep}` : '').replace(/\\D/g, '');\r\n  switch (CEP.length) {\r\n    // case 9:\r\n    // if (CEP[5] === '-') {\r\n    //   return CEP;\r\n    // } else {\r\n    //   return '';\r\n    // } // else\r\n\r\n    case 8:\r\n      return `${CEP.substr(0, 5)}-${CEP.substr(5)}`;\r\n\r\n    default:\r\n      return '';\r\n  } // switch\r\n}"
+        },
+        {
+          "name": "formataCNPJ",
+          "type": "function",
+          "content": "export function formataCNPJ(cnpj: string): string {\r\n  if (isCnpj(cnpj)) {\r\n    //retira os caracteres indesejados...\r\n    const CNPJ: string = cnpj.replace(/[^\\d]/g, '');\r\n    //realizar a formatação...\r\n    return CNPJ.replace(/(\\d{2})(\\d{3})(\\d{3})(\\d{4})(\\d{2})/, '$1.$2.$3/$4-$5');\r\n  } // if\r\n\r\n  return '';\r\n}"
+        },
+        {
+          "name": "formataCpfCnpj",
+          "type": "function",
+          "content": "export function formataCpfCnpj(cpfCnpj: string): string {\r\n  if (isCpf(cpfCnpj)) {\r\n    return formataCPF(cpfCnpj);\r\n  } else if (isCnpj(cpfCnpj)) {\r\n    return formataCNPJ(cpfCnpj);\r\n  } // else\r\n\r\n  return '';\r\n}"
+        },
+        {
+          "name": "formataCPF",
+          "type": "function",
+          "content": "export function formataCPF(cpf: string): string {\r\n  if (isCpf(cpf)) {\r\n    //retira os caracteres indesejados...\r\n    const CPF: string = cpf.replace(/[^\\d]/g, '');\r\n    //realizar a formatação...\r\n    return CPF.replace(/(\\d{3})(\\d{3})(\\d{3})(\\d{2})/, '$1.$2.$3-$4');\r\n  } // if\r\n  return '';\r\n}"
+        },
+        {
+          "name": "formataCurrency",
+          "type": "function",
+          "content": "export function formataCurrency(\r\n  num: number,\r\n  currency: boolean = true\r\n): string {\r\n  // const NUM: number = parseFloat(num.toFixed(2));\r\n  return (new Intl.NumberFormat(\r\n    'pt-BR',\r\n    {\r\n      style: 'currency',\r\n      currency: 'BRL',\r\n    })\r\n    .format(num)\r\n    .replace('R$', !!currency ? 'R$ ' : '')\r\n    .split('.')\r\n    .join(',')\r\n    .trim()\r\n  );\r\n}"
+        },
+        {
+          "name": "formataNCM",
+          "type": "function",
+          "content": "export function formataNCM(ncm: string): string {\r\n  const NCM: string = (ncm ? `${ncm}` : '').replace(/\\D/g, '');\r\n  switch (NCM.length) {\r\n    // case 9:\r\n    //   if (NCM[5] === '-') {\r\n    //     return NCM;\r\n    //   } else {\r\n    //     return '';\r\n    //   } // else\r\n\r\n    case 8:\r\n      return `${NCM.substr(0, 4)}.${NCM.substr(4, 2)}.${NCM.substr(6)}`;\r\n\r\n    default:\r\n      return '';\r\n  } // switch\r\n}"
+        },
+        {
+          "name": "formataNumber",
+          "type": "function",
+          "content": "export function formataNumber(\r\n  num: number,\r\n  minIntegerDigits: number = 1,\r\n  minDecimalDigits: number = 2\r\n): string {\r\n  // const NUM: number = parseFloat(num.toFixed(2));\r\n  // return num.toLocaleString(\r\n  //   'pt-br',\r\n  //   {\r\n  //     minimumFractionDigits: minDecimalDigits,\r\n  //     maximumFractionDigits: minDecimalDigits,\r\n  //   }\r\n  // );\r\n  return new Intl.NumberFormat(\r\n    'pt-BR',\r\n    {\r\n      minimumIntegerDigits: minIntegerDigits,\r\n      minimumFractionDigits: minDecimalDigits,\r\n      maximumFractionDigits: minDecimalDigits\r\n    }\r\n  ).format(num);\r\n}"
+        },
+        {
+          "name": "formataTelefone",
+          "type": "function",
+          "content": "export function formataTelefone(\r\n  val: string,\r\n  removeCountry: boolean = false\r\n) {\r\n  // console.log(breakFone('12345678')); // 8\r\n  // console.log(breakFone('999249134')); // 9\r\n  // console.log(breakFone('3412345678')); // 10\r\n  // console.log(breakFone('34123456789')); // 11\r\n  // console.log(breakFone('+553412345678')); // 12\r\n  // console.log(breakFone('+5534123456789')); // 13\r\n  const FI: ICorFoneInfoRet | null = breakFone(val);\r\n  if (FI) {\r\n    const DDD: string = FI.ddd ? `(${FI.ddd}) ` : '';\r\n    const RET: string = `${removeCountry ? '' : FI.country} ${DDD}${FI.n1}-${FI.n2}`.trim();\r\n\r\n    return RET;\r\n  } else {\r\n    return '';\r\n  } // else\r\n}"
+        }
+      ]
+    },
+    {
+      "id": "shared/core/utils/imgs",
+      "data": [
+        {
+          "name": "checkImg",
+          "type": "function",
+          "content": "export const checkImg = (\r\n  imgSrc: string,\r\n  // onSuccess: any,\r\n  // onError: any = null,\r\n): Promise<boolean> => {\r\n  return new Promise(\r\n    (resolve) => {\r\n      const IMG = new Image();\r\n      IMG.onload = () => resolve(true);\r\n      IMG.onerror = () => resolve(false);\r\n      // if (onSuccess && typeof onSuccess === 'function') {\r\n      //   IMG.onload = onSuccess;\r\n      //   resolve(true);\r\n      // } // if \r\n      // if (onError && typeof onError === 'function') {\r\n      //   IMG.onerror = onError;\r\n      //   resolve(false);\r\n      // } // if\r\n      IMG.src = imgSrc;\r\n    }\r\n  );\r\n};"
+        }
+      ]
+    },
+    {
+      "id": "shared/core/utils/numbers",
+      "data": [
+        {
+          "name": "nextId",
+          "type": "function",
+          "content": "export function nextId(): number {\r\n  const NEXT: string = (new Date()).getTime().toString() + guid(5, 10);\r\n  // console.log(NEXT);\r\n  return Number(NEXT);\r\n}"
+        },
+        {
+          "name": "randomRange",
+          "type": "function",
+          "content": "export function randomRange(\r\n  min: number,\r\n  max: number\r\n): number {\r\n  return Math.floor(Math.random() * (max - min + 1) + min);\r\n}"
+        }
+      ]
+    },
+    {
+      "id": "shared/core/utils/strings",
+      "data": [
+        {
+          "name": "buildUrl",
+          "type": "function",
+          "content": "/*\n  // example:\n  var url = \"http://example.com/\";\n\n  var parameters = {\n    name: \"George Washington\",\n    dob: \"17320222\"\n  };\n\n  console.log(buildUrl(url, parameters));\n  // => http://www.example.com/?name=George%20Washington&dob=17320222\n*/\n\nexport function buildUrl(url: string, parameters: any) {\n  var qs = \"\";\n  for (var key in parameters) {\n    var value = parameters[key];\n    qs += encodeURIComponent(key) + \"=\" + encodeURIComponent(value) + \"&\";\n  } // for\n\n  if (!!qs.length) {\n    qs = qs.substring(0, qs.length - 1); //chop off last \"&\"\n    url = url + \"?\" + qs;\n  } // if\n\n  return url;\n}"
+        },
+        {
+          "name": "desacentua",
+          "type": "function",
+          "content": "export const desacentua = (text: string) => {\r\n  // const a: string = 'àáäâãèéëêìíïîòóöôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ·/_,:;';\r\n  // const b: string = 'aaaaaeeeeiiiioooouuuuncsyoarsnpwgnmuxzh------';\r\n  if (text) {\r\n    const a: string = 'àáäâãèéëêìíïîòóöôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ';\r\n    const b: string = 'aaaaaeeeeiiiioooouuuuncsyoarsnpwgnmuxzh';\r\n    const p: any = new RegExp(a.split('').join('|'), 'g');\r\n    return (text || '').toString().toLowerCase().trim()\r\n      .replace(p, (c: string) => b.charAt(a.indexOf(c))); // Replace special chars\r\n    // .replace(/&/g, '-and-') // Replace & with 'and'\r\n    // .replace(/[\\s\\W-]+/g, '-') // Replace spaces, non-word characters and dashes with a single dash (-)\r\n  } else {\r\n    return '';\r\n  } // else\r\n};"
+        },
+        {
+          "name": "endereco2Str",
+          "type": "function",
+          "content": "export const endereco2Str = (\r\n  // endereco: ICorViacepApi,\r\n  // showLocalidadeUf: boolean = false\r\n) => {\r\n  // console.log(endereco);\r\n  // if (!!endereco) {\r\n  //   return `${endereco?.bairro} - ${endereco?.logradouro}, ${endereco?.nro} ${endereco?.complemento}`.trim() + (!!endereco?.referencia ? ` - Referência: ${endereco?.referencia}` : '') + (!!showLocalidadeUf ? ` - ${endereco?.localidade}/${endereco?.uf}` : '');\r\n  // } // if\r\n  return '';\r\n};"
+        },
+        {
+          "name": "guid",
+          "type": "function",
+          "content": "//#region guid\r\n/*\r\n * Generates a GUID string.\r\n * @returns {String} The generated GUID.\r\n * @example af8a8416-6e18-a307-bd9c-f2c947bbb3aa\r\n * @author Slavik Meltser (slavik@meltser.info).\r\n * @link http://slavik.meltser.info/?p=142\r\n */\r\nexport const guid = (size: number = 8, base: number = 16): string => {\r\n  let s: string = '';\r\n  while (s.length < size) {\r\n    s += Math.random().toString(base).substr(2);\r\n  } // while\r\n  return s.substr(0, size);\r\n  // var p = (Math.random().toString(base) + '0'.repeat(length)).substr(2, 8);\r\n  // return s ? \"-\" + p.substr(0, 4) + \"-\" + p.substr(4, 4) : p;\r\n};"
+        },
+        {
+          "name": "lpad",
+          "type": "function",
+          "content": "export const lpad = (\r\n  text: string, \r\n  size: number = 2,\r\n  char: string = '0' \r\n  ) => {\r\n  let txt: string = text || '';\r\n  while (txt.length < size) {\r\n    txt = char + txt;\r\n  } // while\r\n  return txt;\r\n};"
+        },
+        {
+          "name": "lzpadStr",
+          "type": "function",
+          "content": "export const lzpadStr = (text: string) => {\r\n  const NRO: any = +onlyNumbers(text);\r\n  if (!isNaN(NRO) || NRO > 0) {\r\n    return `${NRO}`;\r\n  } // if\r\n\r\n  return '';\r\n};"
+        },
+        {
+          "name": "onlyAlpha",
+          "type": "function",
+          "content": "export const onlyAlpha = (text: string) => {\r\n  return `${text}`.replace(/[0-9]/g, '').replace(/[^\\w\\s]/gi, '');\r\n};"
+        },
+        {
+          "name": "onlyAlphaNumeric",
+          "type": "function",
+          "content": "export const onlyAlphaNumeric = (text: string) => {\r\n  return `${text}`.replace(/[^a-z0-9]/gi, '');\r\n};"
+        },
+        {
+          "name": "onlyNumbers",
+          "type": "function",
+          "content": "export const onlyNumbers = (text: string) => {\r\n  return `${text}`.replace(/\\D/g, '');\r\n};"
+        },
+        {
+          "name": "paddy",
+          "type": "function",
+          "content": "export const paddy = (num: number, padlen: number, padchar: string): string => {\n  const PAD_CHAR = padchar ?? '0';\n  const PAD = new Array(1 + padlen).join(PAD_CHAR);\n  return (PAD + num).slice(-PAD.length);\n}"
+        },
+        {
+          "name": "IParsedUrl",
+          "type": "interface",
+          "content": "export interface IParsedUrl {\n  origin: string;\n  params: Record<string, string | string[]>;\n}"
+        },
+        {
+          "name": "parseUrl",
+          "type": "function",
+          "content": "export const parseUrl = (urlString: string): IParsedUrl | null => {\n  if (!(urlString || '').trim()) return null;\n\n  const url = new URL(urlString);\n  const params: Record<string, string | string[]> = {};\n\n  // Extract query parameters\n  for (const [key, value] of url.searchParams.entries()) {\n    const allValues = url.searchParams.getAll(key);\n    params[key] = allValues.length > 1 ? allValues : value;\n  }\n\n  return {\n    origin: url.origin, // Returns e.g., \"https://example.com\"\n    params\n  };\n}"
+        },
+        {
+          "name": "randomStr",
+          "type": "function",
+          "content": "export const randomStr = (): string => {\n  return (new Date().getTime().toString(36) +\n    Math.floor(Math.random() * 1e6).toString(36));\n}"
+        },
+        {
+          "name": "removeTrailingSlash",
+          "type": "function",
+          "content": "export let removeTrailingSlash = (path: string) =>\n  (path || \"\").replace(/\\/+$/, \"\");"
+        },
+        {
+          "name": "scrambleString",
+          "type": "function",
+          "content": "export const scrambleString = (str: string): string => {\n  const arr: string[] = str.split('');\n  for (let i = arr.length - 1; i > 0; i--) {\n    const j = Math.floor(Math.random() * (i + 1));\n    [arr[i], arr[j]] = [arr[j], arr[i]];\n  }\n  return arr.join('');\n}"
+        },
+        {
+          "name": "strHash",
+          "type": "function",
+          "content": "export const strHash = (s: string): number => {\r\n  return Math.abs(\r\n    s.split('').reduce(\r\n      function(a, b) {\r\n        const A = ((a << 5) - a) + b.charCodeAt(0);\r\n        return A & A;\r\n      }, 0)\r\n  );\r\n};"
+        },
+        {
+          "name": "tcenter",
+          "type": "function",
+          "content": "export function tcenter(\r\n  txt: string,\r\n  len: number,\r\n  sep: string = ' '\r\n): string {\r\n  txt = txt.trim();\r\n  const L: number = len - txt.length;\r\n  if (L > 0) {\r\n    const L1: number = Math.trunc(L / 2);\r\n    const L2: number = L1 + L % 2;\r\n    // console.log(txt, len, L, L1, L2);\r\n    return sep.repeat(L1) + txt + sep.repeat(L2);\r\n  };\r\n  return txt.slice(0, len);\r\n}"
+        },
+        {
+          "name": "toProperCase",
+          "type": "function",
+          "content": "export const toProperCase = (text: string): string => {\r\n  if (text) {\r\n    const TEXT: string = (text || '').trim();\r\n    return TEXT.replace(\r\n      /\\w\\S*/g,\r\n      (substr) => substr.charAt(0).toUpperCase() + substr.substr(1).toLowerCase()\r\n    );\r\n  } else {\r\n    return '';\r\n  } // else\r\n};"
+        }
+      ]
+    },
+    {
+      "id": "shared/core/utils/styles",
+      "data": [
+        {
+          "name": "breakpoint",
+          "type": "function",
+          "content": "export function breakpoint(width: number): TCorBreakpoints {\n  const entries = Object.entries(COR_BREAKPOINTS) as [TCorBreakpoints, number][];\n\n  const sorted = entries.sort((a, b) => b[1] - a[1]);\n\n  const found = sorted.find(([, value]) => width >= value);\n\n  return found ? found[0] : 'xs';\n}"
+        },
+        {
+          "name": "colorToRgb",
+          "type": "function",
+          "content": "export function colorToRgb(color: string): [number, number, number] {\n  const s = color.trim().toLowerCase();\n\n  // ── HEX ─────────────────────────────────────────────────────────────\n  if (s.startsWith('#')) {\n    const hex = s.slice(1);\n    if (hex.length === 3) {\n      return [\n        parseInt(hex[0] + hex[0], 16),\n        parseInt(hex[1] + hex[1], 16),\n        parseInt(hex[2] + hex[2], 16),\n      ];\n    }\n    return [\n      parseInt(hex.slice(0, 2), 16),\n      parseInt(hex.slice(2, 4), 16),\n      parseInt(hex.slice(4, 6), 16),\n    ];\n  }\n\n  // ── HSL ──────────────────────────────────────────────────────────────\n  const hslMatch = s.match(/^hsla?\\(\\s*([\\d.]+)\\s*,\\s*([\\d.]+)%\\s*,\\s*([\\d.]+)%/);\n  if (hslMatch) {\n    const h = parseFloat(hslMatch[1]) / 360;\n    const sat = parseFloat(hslMatch[2]) / 100;\n    const l = parseFloat(hslMatch[3]) / 100;\n    return hslToRgb(h, sat, l);\n  }\n\n  // ── RGB ───────────────────────────────────────────────────────────────\n  const rgbMatch = s.match(/^rgba?\\(\\s*([\\d.]+)\\s*,\\s*([\\d.]+)\\s*,\\s*([\\d.]+)/);\n  if (rgbMatch) {\n    return [parseFloat(rgbMatch[1]), parseFloat(rgbMatch[2]), parseFloat(rgbMatch[3])];\n  }\n\n  // ── NAMED COLOR ───────────────────────────────────────────────────────\n  // Render onto a canvas pixel to let the browser resolve any named color\n  const ctx = document.createElement('canvas').getContext('2d')!;\n  ctx.fillStyle = color;\n  const resolved = ctx.fillStyle; // browser normalizes to hex or rgb(...)\n  if (resolved !== color) return colorToRgb(resolved); // recurse once\n  return [0, 0, 0]; // fallback: unknown → black\n}"
+        },
+        {
+          "name": "cssVar",
+          "type": "function",
+          "content": "export const cssVar = (id: string, scope: string = ''): any => {\n  const scopeVal = !!scope ? document.querySelector(scope) : document.documentElement;\n  const data: any = !!scopeVal ? getComputedStyle(scopeVal).getPropertyValue(id) : null;\n  // console.log({ scopeVal, id, data });\n  // const list: any = !!scopeVal ? getComputedStyle(scopeVal) : null;\n  // console.log({ list });\n\n  return data || null;\n}"
+        },
+        {
+          "name": "hexToRgb",
+          "type": "function",
+          "content": "export const hexToRgb = (hex: string): TCorRgb => {\n  return [\n    parseInt(hex.slice(1, 3), 16),\n    parseInt(hex.slice(3, 5), 16),\n    parseInt(hex.slice(5, 7), 16),\n  ];\n}"
+        },
+        {
+          "name": "hslToRgb",
+          "type": "function",
+          "content": "export function hslToRgb(h: number, s: number, l: number): [number, number, number] {\n  if (s === 0) {\n    const v = Math.round(l * 255);\n    return [v, v, v];\n  }\n  const q = l < 0.5 ? l * (1 + s) : l + s - l * s;\n  const p = 2 * l - q;\n  return [\n    Math.round(hueToChannel(p, q, h + 1 / 3) * 255),\n    Math.round(hueToChannel(p, q, h) * 255),\n    Math.round(hueToChannel(p, q, h - 1 / 3) * 255),\n  ];\n}"
+        },
+        {
+          "name": "hslStrToRgb",
+          "type": "function",
+          "content": "export function hslStrToRgb(hsl: string): TCorRgb {\n  // Extract numbers from the string\n  const regex = /hsl\\(\\s*(\\d+),\\s*(\\d+)%?,\\s*(\\d+)%?\\s*\\)/i;\n  const match = hsl.match(regex);\n\n  if (!match) {\n    // throw new Error(\"Invalid HSL string format\");\n    return [0, 0, 0];\n  }\n\n  const h = parseInt(match[1], 10);\n  const s = parseInt(match[2], 10) / 100;\n  const l = parseInt(match[3], 10) / 100;\n\n  const c = (1 - Math.abs(2 * l - 1)) * s;\n  const x = c * (1 - Math.abs((h / 60) % 2 - 1));\n  const m = l - c / 2;\n\n  let r = 0, g = 0, b = 0;\n\n  if (0 <= h && h < 60) { r = c; g = x; b = 0; }\n  else if (60 <= h && h < 120) { r = x; g = c; b = 0; }\n  else if (120 <= h && h < 180) { r = 0; g = c; b = x; }\n  else if (180 <= h && h < 240) { r = 0; g = x; b = c; }\n  else if (240 <= h && h < 300) { r = x; g = 0; b = c; }\n  else if (300 <= h && h < 360) { r = c; g = 0; b = x; }\n\n  r = Math.round((r + m) * 255);\n  g = Math.round((g + m) * 255);\n  b = Math.round((b + m) * 255);\n\n  return [r, g, b];\n}"
+        },
+        {
+          "name": "hslStrToRgba",
+          "type": "function",
+          "content": "export function hslStrToRgba(hsl: string, alpha: number = 1): string {\n  // Extract numbers from the string\n  const regex = /hsl\\(\\s*(\\d+),\\s*(\\d+)%?,\\s*(\\d+)%?\\s*\\)/i;\n  const match = hsl.match(regex);\n\n  if (!match) {\n    // throw new Error(\"Invalid HSL string format\");\n    return hsl;\n  }\n\n  const h = parseInt(match[1], 10);\n  const s = parseInt(match[2], 10) / 100;\n  const l = parseInt(match[3], 10) / 100;\n\n  const c = (1 - Math.abs(2 * l - 1)) * s;\n  const x = c * (1 - Math.abs((h / 60) % 2 - 1));\n  const m = l - c / 2;\n\n  let r = 0, g = 0, b = 0;\n\n  if (0 <= h && h < 60) { r = c; g = x; b = 0; }\n  else if (60 <= h && h < 120) { r = x; g = c; b = 0; }\n  else if (120 <= h && h < 180) { r = 0; g = c; b = x; }\n  else if (180 <= h && h < 240) { r = 0; g = x; b = c; }\n  else if (240 <= h && h < 300) { r = x; g = 0; b = c; }\n  else if (300 <= h && h < 360) { r = c; g = 0; b = x; }\n\n  r = Math.round((r + m) * 255);\n  g = Math.round((g + m) * 255);\n  b = Math.round((b + m) * 255);\n\n  return `rgba(${r}, ${g}, ${b}, ${alpha})`;\n}"
+        },
+        {
+          "name": "hueToChannel",
+          "type": "function",
+          "content": "export function hueToChannel(p: number, q: number, t: number): number {\n  if (t < 0) t += 1;\n  if (t > 1) t -= 1;\n  if (t < 1 / 6) return p + (q - p) * 6 * t;\n  if (t < 1 / 2) return q;\n  if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;\n  return p;\n}"
+        },
+        {
+          "name": "lerp",
+          "type": "function",
+          "content": "/* \n  Linear interpolation (lerp) between two RGB colors.\n\n  Given:\n  a: start color [r, g, b]\n  b: end color [r, g, b]\n  t: interpolation factor (usually between 0 and 1)\n\n  It returns a new color that is t% of the way from a to b.\n*/\nexport const lerp = (a: TCorRgb, b: TCorRgb, t: number): TCorRgb => {\n  const tt = Math.max(0, Math.min(1, t));\n  return [\n    Math.round(a[0] + (b[0] - a[0]) * tt),\n    Math.round(a[1] + (b[1] - a[1]) * tt),\n    Math.round(a[2] + (b[2] - a[2]) * tt),\n  ];\n}"
+        },
+        {
+          "name": "luminance",
+          "type": "function",
+          "content": "export function luminance(color: string): string {\n  // Normalize to rgb values\n  const [r, g, b] = colorToRgb(color);\n\n  // Relative luminance (WCAG formula)\n  // return 0.299 * (r / 255) + 0.587 * (g / 255) + 0.114 * (b / 255);\n\n  const inverted = [\n    255 - r,\n    255 - g,\n    255 - b\n  ];\n\n  return `rgb(${inverted.join(', ')})`;\n\n}"
+        },
+        {
+          "name": "paintBg",
+          "type": "function",
+          "content": "export const paintBg = (\n  ctx: CanvasRenderingContext2D,\n  w: number,\n  h: number,\n  color = '#070a18'\n): void => {\n  ctx.fillStyle = color;\n  ctx.fillRect(0, 0, w, h);\n}"
+        },
+        {
+          "name": "rgb2rgba",
+          "type": "function",
+          "content": "export const rgb2rgba = (col: TCorRgb, alpha: number): string => {\n  const clamp = (v: number, min: number, max: number) =>\n    Math.min(Math.max(v, min), max);\n\n  const r = clamp(col[0], 0, 255);\n  const g = clamp(col[1], 0, 255);\n  const b = clamp(col[2], 0, 255);\n  const a = clamp(alpha, 0, 1);\n\n  return `rgba(${r},${g},${b},${a})`;\n}"
+        }
+      ]
+    },
+    {
+      "id": "shared/core/utils/ui",
+      "data": [
+        {
+          "name": "avatar",
+          "type": "function",
+          "content": "//#endregion\r\n\r\nexport function avatar(config: any): string {\r\n  let prefix = '?'; // reset prefix\r\n  let options = '';\r\n  [\r\n    'size',\r\n    'fontSize',\r\n    'length',\r\n    'name',\r\n    'rounded',\r\n    'bold',\r\n    'background',\r\n    'color',\r\n    'uppercase',\r\n  ]\r\n    .forEach(key => {\r\n      const VAL = config[key];\r\n      // console.log(VAL);\r\n      if (VAL) {\r\n        options += `${prefix}${key}=${VAL}`;\r\n        prefix = '&'; // update prefix\r\n      } // if\r\n    });\r\n  // console.log(options);\r\n\r\n  const URL = encodeURI(`${UI_AVATARS_API}/${options}`);\r\n  return URL;\r\n}"
+        },
+        {
+          "name": "navFlatten",
+          "type": "function",
+          "content": "// utils\nexport const navFlatten = (items: ICorNavItem[]): ICorNavItem[] => {\n  return items.flatMap(\n    (i: ICorNavItem) => [\n      { ...i, children: [] }, // remove nesting\n      ...(i.children?.length ? navFlatten(i.children) : [])\n    ]\n  );\n}"
+        }
+      ]
+    },
+    {
+      "id": "shared/core/utils/validations",
+      "data": [
+        {
+          "name": "fixBarcode",
+          "type": "function",
+          "content": "export function fixBarcode(\r\n  barcode: string,\r\n  cod: any = ''\r\n): string {\r\n  const BARCODE: string = String(Number(barcode));\r\n  return (\r\n    BARCODE.length < 8\r\n    || BARCODE === String(cod)\r\n  )\r\n    ? ''\r\n    : BARCODE;\r\n}"
+        },
+        {
+          "name": "isBarcode",
+          "type": "function",
+          "content": "export function isBarcode(barcode: string): boolean {\r\n  const BARCODE: string = `${barcode}`.replace(/[^\\d]+/g, '').trim();\r\n  return (BARCODE == barcode) && (BARCODE.length >= 8);\r\n}"
+        },
+        {
+          "name": "isCEP",
+          "type": "function",
+          "content": "export function isCEP(cep: string): boolean {\r\n  const CEP: string = `${cep}`.replace(/[^\\d]+/g, '');\r\n  return !!(CEP && CEP.length === 8);\r\n}"
+        },
+        {
+          "name": "isCnpj",
+          "type": "function",
+          "content": "export function isCnpj(cnpj: string): boolean {\r\n  const CNPJ: string = `${cnpj}`.replace(/[^\\d]+/g, '');\r\n\r\n  if (!CNPJ) return false;\r\n\r\n  if (CNPJ.length !== 14) {\r\n    return false;\r\n  } // if\r\n\r\n  // Elimina CNPJs invalidos conhecidos\r\n  if (CNPJ === '00000000000000' ||\r\n    CNPJ === '11111111111111' ||\r\n    CNPJ === '22222222222222' ||\r\n    CNPJ === '33333333333333' ||\r\n    CNPJ === '44444444444444' ||\r\n    CNPJ === '55555555555555' ||\r\n    CNPJ === '66666666666666' ||\r\n    CNPJ === '77777777777777' ||\r\n    CNPJ === '88888888888888' ||\r\n    CNPJ === '99999999999999') {\r\n    return false;\r\n  } // if\r\n\r\n  // Valida DVs\r\n  let tamanho: number = CNPJ.length - 2;\r\n  let soma: number = 0;\r\n  let pos: number = tamanho - 7;\r\n  let numeros: string = CNPJ.substring(0, tamanho);\r\n  const DIGITOS = CNPJ.substring(tamanho);\r\n\r\n  for (let i = tamanho; i >= 1; i--) {\r\n    soma += +numeros.charAt(tamanho - i) * pos--;\r\n    if (pos < 2) {\r\n      pos = 9;\r\n    } // if\r\n  } // for\r\n\r\n  let resultado: number = soma % 11 < 2 ? 0 : 11 - soma % 11;\r\n  if (resultado !== +DIGITOS.charAt(0)) {\r\n    return false;\r\n  } // if\r\n\r\n  tamanho = tamanho + 1;\r\n  numeros = CNPJ.substring(0, tamanho);\r\n  soma = 0;\r\n  pos = tamanho - 7;\r\n  for (let i = tamanho; i >= 1; i--) {\r\n    soma += +numeros.charAt(tamanho - i) * pos--;\r\n    if (pos < 2) {\r\n      pos = 9;\r\n    } // if\r\n  } // for\r\n\r\n  resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;\r\n  if (resultado !== +DIGITOS.charAt(1)) {\r\n    return false;\r\n  } // if\r\n\r\n  return true;\r\n}"
+        },
+        {
+          "name": "isCpfCnpj",
+          "type": "function",
+          "content": "//#endregion\r\n\r\nexport function isCpfCnpj(cpfCnpj: string): boolean {\r\n  return isCpf(cpfCnpj) || isCnpj(cpfCnpj);\r\n}"
+        },
+        {
+          "name": "isCpf",
+          "type": "function",
+          "content": "export function isCpf(cpf: string): boolean {\r\n  const CPF: string = `${cpf}`.replace(/[^\\d]+/g, '');\r\n  let digitosIguais: boolean = true;\r\n\r\n  if (!CPF) return false;\r\n\r\n  if (CPF.length !== 11) {\r\n    return false;\r\n  } // if\r\n\r\n  for (let i = 0; i < CPF.length - 1; i++) {\r\n    if (CPF.charAt(i) !== CPF.charAt(i + 1)) {\r\n      digitosIguais = false;\r\n      break;\r\n    } // if\r\n  } // for\r\n\r\n  if (!digitosIguais) {\r\n    let numeros: string = CPF.substring(0, 9);\r\n    const DIGITOS: string = CPF.substring(9);\r\n    let soma: number = 0;\r\n\r\n    for (let i = 10; i > 1; i--) {\r\n      soma += +numeros.charAt(10 - i) * i;\r\n    } // for\r\n\r\n    let resultado: number = soma % 11 < 2 ? 0 : 11 - soma % 11;\r\n    if (resultado !== +DIGITOS.charAt(0)) {\r\n      return false;\r\n    } // if\r\n\r\n    numeros = CPF.substring(0, 10);\r\n    soma = 0;\r\n    for (let i = 11; i > 1; i--) {\r\n      soma += +numeros.charAt(11 - i) * i;\r\n    } // for\r\n\r\n    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;\r\n    if (resultado !== +DIGITOS.charAt(1)) {\r\n      return false;\r\n    } // if\r\n    return true;\r\n  } // if\r\n\r\n  return false;\r\n}"
+        },
+        {
+          "name": "isEmail",
+          "type": "function",
+          "content": "export function isEmail(email: string): boolean {\r\n  const sQtext = '[^\\\\x0d\\\\x22\\\\x5c\\\\x80-\\\\xff]';\r\n  const sDtext = '[^\\\\x0d\\\\x5b-\\\\x5d\\\\x80-\\\\xff]';\r\n  const sAtom = '[^\\\\x00-\\\\x20\\\\x22\\\\x28\\\\x29\\\\x2c\\\\x2e\\\\x3a-\\\\x3c\\\\x3e\\\\x40\\\\x5b-\\\\x5d\\\\x7f-\\\\xff]+';\r\n  const sQuotedPair = '\\\\x5c[\\\\x00-\\\\x7f]';\r\n  const sDomainLiteral = '\\\\x5b(' + sDtext + '|' + sQuotedPair + ')*\\\\x5d';\r\n  const sQuotedString = '\\\\x22(' + sQtext + '|' + sQuotedPair + ')*\\\\x22';\r\n  const sDomainRef = sAtom;\r\n  const sSubDomain = '(' + sDomainRef + '|' + sDomainLiteral + ')';\r\n  const sWord = '(' + sAtom + '|' + sQuotedString + ')';\r\n  const sDomain = sSubDomain + '(\\\\x2e' + sSubDomain + ')*';\r\n  const sLocalPart = sWord + '(\\\\x2e' + sWord + ')*';\r\n  const sAddrSpec = sLocalPart + '\\\\x40' + sDomain; // complete RFC822 email address spec\r\n  const sValidEmail = '^' + sAddrSpec + '$'; // as whole string\r\n\r\n  const reValidEmail = new RegExp(sValidEmail);\r\n\r\n  return reValidEmail.test(email);\r\n}"
+        },
+        {
+          "name": "isFoneCel",
+          "type": "function",
+          "content": "export function isFoneCel(fone: string): boolean {\r\n  const FONE: string = `${fone}`.replace(/[^\\d]+/g, '');\r\n  return !!(!!FONE && [9, 11, 13, 14].includes(FONE.length));\r\n}"
+        },
+        {
+          "name": "isFoneFixo",
+          "type": "function",
+          "content": "export function isFoneFixo(fone: string): boolean {\r\n  const FONE: string = `${fone}`.replace(/[^\\d]+/g, '');\r\n  return !!(FONE && FONE.length === 10);\r\n}"
+        },
+        {
+          "name": "isIE",
+          "type": "function",
+          "content": "export function isIE(ie: string): boolean {\r\n  const IE: string = `${ie}`.replace(/[^\\d]+/g, '').trim();\r\n  return IE === ie;\r\n}"
+        }
+      ]
+    }
+  ]
+}

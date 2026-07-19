@@ -1,0 +1,55 @@
+{
+  "data": [
+    {
+      "id": "shared/core/models/consts",
+      "data": {
+        "dow": [
+          {
+            "name": "ICorDow",
+            "type": "interface",
+            "content": "export interface ICorDow {\n  nomeCurto: string;\n  nomeLongo: string;\n}"
+          },
+          {
+            "name": "TCorDow",
+            "type": "type",
+            "content": "export type TCorDow = 0 | 1 | 2 | 3 | 4 | 5 | 6;"
+          },
+          {
+            "name": "RCorDow",
+            "type": "record",
+            "content": "export type RCorDow = Record<TCorDow, ICorDow>;"
+          },
+          {
+            "name": "COR_DOW",
+            "type": "const",
+            "content": "export const COR_DOW: RCorDow = {\n  0: {\n    nomeCurto: 'Dom',\n    nomeLongo: 'Domingo'\n  },\n  1: {\n    nomeCurto: 'Seg',\n    nomeLongo: 'Segunda-feira'\n  },\n  2: {\n    nomeCurto: 'Ter',\n    nomeLongo: 'Terça-feira'\n  },\n  3: {\n    nomeCurto: 'Qua',\n    nomeLongo: 'Quarta-feira'\n  },\n  4: {\n    nomeCurto: 'Qui',\n    nomeLongo: 'Quinta-feira'\n  },\n  5: {\n    nomeCurto: 'Sex',\n    nomeLongo: 'Sexta-feira'\n  },\n  6: {\n    nomeCurto: 'Sáb',\n    nomeLongo: 'Sábado'\n  },\n};"
+          }
+        ],
+        "pag-items-per-page": [
+          {
+            "name": "COR_PAG_ITEMS_PER_PAGE",
+            "type": "const",
+            "content": "export const COR_PAG_ITEMS_PER_PAGE: number[] = [\n  2,\n  3,\n  4,\n  5,\n  6,\n  7,\n  8,\n  9,\n  10,\n  11,\n  12,\n  13,\n  14,\n  15,\n  16,\n  17,\n  18,\n  19,\n  20,\n  21,\n  22,\n  23,\n  24,\n  25,\n  26,\n  27,\n  28,\n  29,\n  30,\n  31,\n  32,\n  33,\n  34,\n  35,\n  36,\n  37,\n  38,\n  39,\n  40,\n  41,\n  42,\n  43,\n  44,\n  45,\n  46,\n  47,\n  48,\n  49,\n  50,\n  55,\n  60,\n  65,\n  70,\n  75,\n  80,\n  85,\n  90,\n  95,\n  100\n];"
+          }
+        ],
+        "ufs": [
+          {
+            "name": "COR_SIGLAS_UFS",
+            "type": "const",
+            "content": "export const COR_SIGLAS_UFS = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MS', 'MT', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'] as const;"
+          },
+          {
+            "name": "TCorUf",
+            "type": "type",
+            "content": "export type TCorUf = typeof COR_SIGLAS_UFS[number];"
+          },
+          {
+            "name": "COR_UF_NOME",
+            "type": "const",
+            "content": "export const COR_UF_NOME: RCorUf = {\n  AC: 'Acre',\n  AL: 'Alagoas',\n  AM: 'Amazonas',\n  AP: 'Amapá',\n  BA: 'Bahia',\n  CE: 'Ceará',\n  DF: 'Distrito Federal',\n  ES: 'Espírito Santo',\n  GO: 'Goiás',\n  MA: 'Maranhão',\n  MS: 'Mato Grosso do Sul',\n  MT: 'Mato Grosso',\n  MG: 'Minas Gerais',\n  PA: 'Pará',\n  PB: 'Paraíba',\n  PR: 'Paraná',\n  PE: 'Pernambuco',\n  PI: 'Piauí',\n  RJ: 'Rio de Janeiro',\n  RN: 'Rio Grande do Norte',\n  RS: 'Rio Grande do Sul',\n  RO: 'Rondônia',\n  RR: 'Roraima',\n  SC: 'Santa Catarina',\n  SP: 'São Paulo',\n  SE: 'Sergipe',\n  TO: 'Tocantins',\n};"
+          }
+        ]
+      }
+    }
+  ]
+}

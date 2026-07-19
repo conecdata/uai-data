@@ -3,6 +3,23 @@
     {
       "id": "shared/core-ng/services",
       "data": {
+        "data": [
+          {
+            "name": "TCorDataInfo",
+            "type": "type",
+            "content": "// models\nexport type TCorDataInfo =\n  | \"const\"\n  | \"component\"\n  | \"directive\"\n  | \"event\"\n  | \"function\"\n  | \"interface\"\n  | \"pipe\"\n  | \"service\"\n  | \"record\"\n  | \"type\";"
+          },
+          {
+            "name": "ICorDataInfo",
+            "type": "interface",
+            "content": "export interface ICorDataInfo {\n  name: string;\n  type: TCorDataInfo;\n  content: string;\n}"
+          },
+          {
+            "name": "CorDataService",
+            "type": "service",
+            "content": "@Injectable({ providedIn: \"root\" })\nexport class CorDataService {\n  private readonly usuario = \"conecdata\";\n  private readonly repo = \"uai-data\";\n  private readonly branch = \"main\";\n\n  // constructor\n  constructor(private http: HttpClient) {}\n\n  // methods\n  /**\n   * getByFileName\n   * @param fileName string\n   * @returns Observable<T>\n   */\n  getByFileName<T = any>(fileName: string): Observable<T> {\n    const url = `https://cdn.jsdelivr.net/gh/${this.usuario}/${this.repo}@${this.branch}/${fileName}`;\n    return this.http.get<T>(url);\n  }\n}"
+          }
+        ],
         "theme": [
           {
             "name": "IThemeState",

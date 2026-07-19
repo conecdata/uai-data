@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "id": "shared/core-appwrite/models/interfaces",
+      "data": {
+        "row": [
+          {
+            "name": "IAppWriteRow",
+            "type": "interface",
+            "content": "export interface IAppWriteRow {\n  $id: string;\n  $createdAt: string;\n  $updatedAt: string;\n  $databaseId: string;\n  $tableId: string;\n  $permissions: string[];\n  $sequence: number;\n}"
+          }
+        ],
+        "write-return": [
+          {
+            "name": "IAppWriteReturn",
+            "type": "interface",
+            "content": "export interface IAppWriteReturn<T> {\n  total: number;\n  rows: T[];\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

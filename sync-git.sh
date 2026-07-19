@@ -11,3 +11,6 @@ while read path action file; do
   sleep 2
 done
 
+curl -s "https://purge.jsdelivr.net/gh/conecdata/uai-data@main/workspace-shared-core-ng-services.json" > /dev/null
+
+

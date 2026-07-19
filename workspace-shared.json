@@ -2551,51 +2551,6 @@
       ]
     },
     {
-      "id": "shared/core-test/models/interfaces",
-      "data": [
-        {
-          "name": "IAppWriteRow",
-          "type": "interface",
-          "content": "export interface IAppWriteRow {\n  $id: string;\n  $createdAt: string;\n  $updatedAt: string;\n  $databaseId: string;\n  $tableId: string;\n  $permissions: string[];\n  $sequence: number;\n}"
-        },
-        {
-          "name": "IAppWriteReturn",
-          "type": "interface",
-          "content": "export interface IAppWriteReturn<T> {\n  total: number;\n  rows: T[];\n}"
-        }
-      ]
-    },
-    {
-      "id": "shared/core-test/utils/apis",
-      "data": [
-        {
-          "name": "ICorLinkPreview",
-          "type": "interface",
-          "content": "// models\nexport interface ICorLinkPreview {\n  url: string;\n  title?: string;\n  description?: string;\n  image?: string;\n  favicon?: string;\n  site?: string;\n\n  id?: string;\n}"
-        },
-        {
-          "name": "fetchLinkPreviews",
-          "type": "function",
-          "content": "export async function fetchLinkPreviews(\n  urls: string[],\n  onProgress?: (progress: {\n    completed: number;\n    total: number;\n    current?: ICorLinkPreview;\n  }) => void\n): Promise<ICorLinkPreview[]> {\n\n  let completed = 0;\n  const total = urls.length;\n\n  const normalize = (u: string) => /^https?:\\/\\//.test(u) ? u : `https://${u}`;\n\n  const extractYoutubeId = (url: string) => {\n    const match = url.match(/(?:youtube\\.com.*v=|youtu\\.be\\/)([^&]+)/);\n    return match ? match[1] : null;\n  };\n\n  const tasks = urls.map(async (u) => {\n    const url = normalize(u);\n\n    let result: ICorLinkPreview;\n\n    try {\n      if (url.includes('youtube.com') || url.includes('youtu.be')) {\n        const id = extractYoutubeId(url);\n\n        result = {\n          url,\n          title: \"YouTube Video\",\n          image: `https://img.youtube.com/vi/${id}/hqdefault.jpg`,\n          favicon: `https://www.google.com/s2/favicons?domain=youtube.com`,\n          site: \"YouTube\"\n        };\n      } else {\n        const api = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true`;\n\n        const res = await fetch(api);\n        const json = await res.json();\n        const data = json.data;\n\n        result = {\n          url,\n          title: data.title,\n          description: data.description,\n          image: data.screenshot?.url || data.image?.url,\n          favicon:\n            data.logo?.url ||\n            `https://www.google.com/s2/favicons?domain=${new URL(url).hostname}`,\n          site: data.publisher\n        };\n      }\n    } catch {\n      result = { url, title: url };\n    }\n\n    // 🔥 update progress\n    completed++;\n    onProgress?.({\n      completed,\n      total,\n      current: result\n    });\n\n    return result;\n  });\n\n  return Promise.all(tasks);\n}"
-        }
-      ]
-    },
-    {
-      "id": "shared/core-test/utils/arrays",
-      "data": [
-        {
-          "name": "compareValues",
-          "type": "function",
-          "content": "// https://www.sitepoint.com/sort-an-array-of-objects-in-javascript\r\n// Usage: ARRAY.sort(compareValues('nome'));\r\nexport function compareValues(key: any, order = 'asc') {\r\n  // console.log(key, order);\r\n  return function innerSort(a: any, b: any) {\r\n    // console.log(get(a, key, null), get(b, key, null));\r\n    // console.log(!a.hasOwnProperty(key), !b.hasOwnProperty(key));\r\n    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {\r\n      // property doesn't exist on either object\r\n      return 0;\r\n    } // if \r\n\r\n    const varA = (typeof a[key] === 'string')\r\n      ? desacentua(a[key]).toUpperCase() : a?.[key] ?? null;\r\n    const varB = (typeof b[key] === 'string')\r\n      ? desacentua(b[key]).toUpperCase() : b?.[key] ?? null;\r\n    // console.log(varA, varB);\r\n\r\n    let comparison = 0;\r\n    if (varA > varB) {\r\n      comparison = 1;\r\n    } else if (varA < varB) {\r\n      comparison = -1;\r\n    } // else\r\n    return (\r\n      (order === 'desc') ? (comparison * -1) : comparison\r\n    );\r\n  };\r\n}"
-        },
-        {
-          "name": "uniqueListBy",
-          "type": "function",
-          "content": "export const uniqueListBy = (arr: any[], key: string): any[] => {\r\n  return [...new Map(arr.map((item) => [item[key], item])).values()];\r\n};"
-        }
-      ]
-    },
-    {
       "id": "shared/core-web/utils/printing",
       "data": [
         {

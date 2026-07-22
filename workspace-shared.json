@@ -86,7 +86,7 @@
         {
           "name": "ICorSchemaInfo",
           "type": "interface",
-          "content": "export interface ICorSchemaInfo {\n  name: string;\n  type: TCorSchemaInfo;\n  content: string;\n}"
+          "content": "export interface ICorSchemaInfo {\n  name: string;\n  type: TCorSchemaInfo;\n  content: string;\n  id?: string;\n}"
         },
         {
           "name": "ICorSchemaRet",
@@ -1411,7 +1411,7 @@
         {
           "name": "schemaById",
           "type": "function",
-          "content": "// export function schemaById(\n//   json: { data: ICorSchemaRet[\"data\"] },\n//   id: string,\n// ): ICorSchemaInfo[] {\n//   const entry = json?.data?.find((item) => item.id === id);\n//   return entry?.data ?? [];\n// }\n\n/**\n * schemaById\n * Retorna a lista de ICorDataInfo correspondente ao id informado.\n */\nexport function schemaById(json: ICorSchemaRet, id: string): ICorSchemaInfo[] {\n  const entry = json?.data?.find((item) => item.id === id);\n  return entry?.data ?? [];\n}"
+          "content": "/**\n * schemaById\n * Retorna a lista de ICorDataInfo correspondente ao id informado.\n */\n// export function schemaById(json: ICorSchemaRet, id: string): ICorSchemaInfo[] {\n//   const entry = json?.data?.find((item) => item.id === id);\n//   return entry?.data ?? [];\n// }\n\n/**\n * schemaById\n * Retorna a lista de ICorSchemaInfo de todas as entradas cujo id\n * comece com o id informado (concatenando os resultados).\n */\n// export function schemaById(json: ICorSchemaRet, id: string): ICorSchemaInfo[] {\n//   const entries = json?.data?.filter((item) => item.id?.startsWith(id)) ?? [];\n//   return entries.flatMap((entry) => entry.data ?? []);\n// }\n\n/**\n * schemaById\n * Retorna a lista de ICorSchemaInfo de todas as entradas cujo id\n * comece com o id informado, incluindo o id de origem em cada item.\n */\nexport function schemaById(json: ICorSchemaRet, id: string, filter: string = ''): ICorSchemaInfo[] {\n  const entries = json?.data?.filter((item) => item.id?.startsWith(id)) ?? [];\n  return entries\n    .flatMap((entry) =>\n      (entry.data ?? []).map((info: ICorSchemaInfo) => ({ ...info, id: entry.id })),\n    )\n    .filter((item: ICorSchemaInfo) => item.name?.toLowerCase().includes(filter.toLowerCase()));\n}"
         },
         {
           "name": "schemaByName",
@@ -1441,7 +1441,7 @@
         {
           "name": "desacentua",
           "type": "function",
-          "content": "export const desacentua = (text: string) => {\r\n  // const a: string = 'àáäâãèéëêìíïîòóöôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ·/_,:;';\r\n  // const b: string = 'aaaaaeeeeiiiioooouuuuncsyoarsnpwgnmuxzh------';\r\n  if (text) {\r\n    const a: string = 'àáäâãèéëêìíïîòóöôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ';\r\n    const b: string = 'aaaaaeeeeiiiioooouuuuncsyoarsnpwgnmuxzh';\r\n    const p: any = new RegExp(a.split('').join('|'), 'g');\r\n    return (text || '').toString().toLowerCase().trim()\r\n      .replace(p, (c: string) => b.charAt(a.indexOf(c))); // Replace special chars\r\n    // .replace(/&/g, '-and-') // Replace & with 'and'\r\n    // .replace(/[\\s\\W-]+/g, '-') // Replace spaces, non-word characters and dashes with a single dash (-)\r\n  } else {\r\n    return '';\r\n  } // else\r\n};"
+          "content": "export const desacentua = (text: string): string => {\r\n  if (!text) return \"\";\r\n\r\n  return text\r\n    .toString()\r\n    .toLowerCase()\r\n    .trim()\r\n    .replace(ACCENT_REGEX, (c) => ACCENT_MAP.get(c) ?? c);\r\n};"
         },
         {
           "name": "endereco2Str",
@@ -1774,6 +1774,11 @@
           "content": "@Pipe({\n  name: 'exists'\n})\nexport class CorExistsPipe implements PipeTransform {\n  transform(val: any): boolean {\n    return exists(val);\n  }\n}"
         },
         {
+          "name": "CorFilterByPipe",
+          "type": "pipe",
+          "content": "@Pipe({\n  name: 'filterBy',\n  standalone: true,\n  pure: true,\n})\nexport class CorFilterByPipe implements PipeTransform {\n  transform<T>(\n    items: T[] | null | undefined,\n    searchTerm: string | null | undefined,\n    field?: keyof T,\n  ): T[] {\n    if (!items?.length) {\n      return [];\n    }\n\n    const term = (searchTerm || '').trim().toLowerCase();\n\n    if (!term) {\n      return items;\n    }\n\n    return items.filter((item: T) => {\n      const value = field ? item[field] : item;\n      return String(value ?? '').toLowerCase().includes(term);\n    });\n  }\n}"
+        },
+        {
           "name": "CorIsEmpbyObjPipe",
           "type": "pipe",
           "content": "@Pipe({\n  name: 'isEmptyObj'\n})\nexport class CorIsEmpbyObjPipe implements PipeTransform {\n  transform(val: any): boolean {\n    return isEmptyObject(val);\n  }\n}"
@@ -1786,7 +1791,7 @@
         {
           "name": "CorSchemaByIdPipe",
           "type": "pipe",
-          "content": "@Pipe({\n  name: \"schemaById\",\n  standalone: true,\n  pure: true,\n})\nexport class CorSchemaByIdPipe implements PipeTransform {\n  transform(\n    json: ICorSchemaRet | null | undefined,\n    id: string,\n  ): ICorSchemaInfo[] {\n    if (!json) return [];\n    return schemaById(json, id);\n  }\n}"
+          "content": "@Pipe({\n  name: \"schemaById\",\n  standalone: true,\n  pure: true,\n})\nexport class CorSchemaByIdPipe implements PipeTransform {\n  transform(\n    json: ICorSchemaRet | null | undefined,\n    id: string,\n    filter: string = \"\",\n  ): ICorSchemaInfo[] {\n    if (!json) return [];\n    return schemaById(json, id, filter);\n  }\n}"
         },
         {
           "name": "CorSchemaByNamePipe",
@@ -1797,6 +1802,11 @@
           "name": "CorSchemaGroupByTypePipe",
           "type": "pipe",
           "content": "@Pipe({\n  name: \"schemaGroupByType\",\n  standalone: true,\n  pure: true,\n})\nexport class CorSchemaGroupByTypePipe implements PipeTransform {\n  transform(\n    data: ICorSchemaInfo[] | null | undefined,\n  ): ICorSchemaInfoGroupByType[] {\n    if (!data) return [];\n    return schemaGroupByType(data);\n  }\n}"
+        },
+        {
+          "name": "CorSortObjPipe",
+          "type": "pipe",
+          "content": "@Pipe({\n  name: 'sortObj',\n  standalone: true,\n  pure: true,\n})\nexport class CorSortObjPipe implements PipeTransform {\n  transform<T extends Record<string, any>>(\n    value: T[] | null | undefined,\n    key: string,\n    order: 'asc' | 'desc' = 'asc'\n  ): T[] {\n    if (!value || !Array.isArray(value)) {\n      return [];\n    } // if\n\n    return [...value].sort(compareValues(key, order));\n  }\n}"
         },
         {
           "name": "CorTruncatePipe",

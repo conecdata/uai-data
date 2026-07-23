@@ -976,12 +976,12 @@
         {
           "name": "COR_THEMES_IDS",
           "type": "const",
-          "content": "export const COR_THEMES_IDS: string[] = [\n  'primary-400', 'primary-500', 'primary-600', 'primary-contrast',\n  'secondary-400', 'secondary-500', 'secondary-600', 'secondary-contrast',\n  'success-400', 'success-500', 'success-600', 'success-contrast',\n  'danger-400', 'danger-500', 'danger-600', 'danger-contrast',\n  'warning-400', 'warning-500', 'warning-600', 'warning-contrast',\n  'info-400', 'info-500', 'info-600', 'info-contrast',\n  'light-400', 'light-500', 'light-600', 'light-contrast',\n  'dark-400', 'dark-500', 'dark-600', 'dark-contrast',\n] as const;"
+          "content": "export const COR_THEMES_IDS: string[] = [\n  'primary-400',\n  'primary-500',\n  'primary-600',\n  'primary-contrast',\n  'secondary-400',\n  'secondary-500',\n  'secondary-600',\n  'secondary-contrast',\n  'success-400',\n  'success-500',\n  'success-600',\n  'success-contrast',\n  'danger-400',\n  'danger-500',\n  'danger-600',\n  'danger-contrast',\n  'warning-400',\n  'warning-500',\n  'warning-600',\n  'warning-contrast',\n  'info-400',\n  'info-500',\n  'info-600',\n  'info-contrast',\n  'light-400',\n  'light-500',\n  'light-600',\n  'light-contrast',\n  'dark-400',\n  'dark-500',\n  'dark-600',\n  'dark-contrast',\n] as const;"
         },
         {
           "name": "TCorThemesIds",
           "type": "type",
-          "content": "export type TCorThemesIds = typeof COR_THEMES[number];"
+          "content": "export type TCorThemesIds = (typeof COR_THEMES)[number];"
         },
         {
           "name": "COR_THEMES",
@@ -1221,6 +1221,16 @@
       ]
     },
     {
+      "id": "shared/core/utils/charts",
+      "data": [
+        {
+          "name": "obj2Chart",
+          "type": "function",
+          "content": "export function obj2Chart(data: any): IChartItem[] {\n  return Object.entries(data).map(([key, rawValue]): IChartItem => {\n    // Campos como \"total\": \"100%\" vêm como string com '%'\n    if (typeof rawValue === \"string\") {\n      const numeric = parseFloat(rawValue.replace(\"%\", \"\"));\n      return {\n        key,\n        value: numeric,\n        percentage: numeric,\n      };\n    }\n\n    // Campos numéricos normais\n    return {\n      key,\n      value: rawValue as number,\n    };\n  });\n}"
+        }
+      ]
+    },
+    {
       "id": "shared/core/utils/convert",
       "data": [
         {
@@ -1408,6 +1418,21 @@
     {
       "id": "shared/core/utils/schemas",
       "data": [
+        {
+          "name": "aggregateSchemasByType",
+          "type": "function",
+          "content": "export function aggregateSchemasByType(\n  data: ICorSchemaInfo[],\n): Record<TCorSchemaInfo, number> {\n  const result: Record<TCorSchemaInfo, number> = {\n    const: 0,\n    component: 0,\n    directive: 0,\n    event: 0,\n    function: 0,\n    interface: 0,\n    pipe: 0,\n    service: 0,\n    record: 0,\n    type: 0,\n  };\n\n  for (const item of data) {\n    result[item.type]++;\n  }\n\n  return result;\n}"
+        },
+        {
+          "name": "flattenSchema",
+          "type": "function",
+          "content": "/**\n * Converte um ICorSchemaRet em uma lista plana de ICorSchemaInfo,\n * incluindo o id (caminho do grupo + nome do item).\n */\nexport function flattenSchema(ret: ICorSchemaRet): ICorSchemaInfo[] {\n  return ret.data.flatMap((group) =>\n    group.data.map((item) => ({\n      ...item,\n      id: `${group.id}/${item.name}`,\n    })),\n  );\n}"
+        },
+        {
+          "name": "purgeSchemasTypes",
+          "type": "function",
+          "content": "export function purgeSchemasTypes(\n  data: ICorSchemaRet,\n  typesToPurge: TCorSchemaInfo[],\n): ICorSchemaRet {\n  return {\n    data: data.data\n      .map((group) => ({\n        ...group,\n        data: group.data.filter((item) => !typesToPurge.includes(item.type)),\n      }))\n      .filter((group) => group.data.length > 0),\n  };\n}"
+        },
         {
           "name": "schemaById",
           "type": "function",
@@ -1992,6 +2017,61 @@
           "name": "CorCardComponent",
           "type": "component",
           "content": "@Component({\n  selector: \"cor-card\",\n  imports: [\n    // modules\n    CommonModule,\n  ],\n  templateUrl: \"./card.html\",\n  styleUrl: \"./card.scss\",\n})\nexport class CorCardComponent {}"
+        }
+      ]
+    },
+    {
+      "id": "shared/core-ng/ui/chart",
+      "data": [
+        {
+          "name": "TChartType",
+          "type": "type",
+          "content": "// ==========================================================================\n// MODEL\n// ==========================================================================\n\nexport type TChartType = \"pie\" | \"donut\" | \"bar\" | \"column\";"
+        },
+        {
+          "name": "TChartColor",
+          "type": "type",
+          "content": "export type TChartColor = string;"
+        },
+        {
+          "name": "IChartItem",
+          "type": "interface",
+          "content": "export interface IChartItem {\n  key: string;\n  value: number;\n  percentage?: number;\n  color?: TChartColor;\n}"
+        },
+        {
+          "name": "IChartTypeConfig",
+          "type": "interface",
+          "content": "export interface IChartTypeConfig {\n  showLegendOnChart?: boolean;\n  showLegendPanel?: boolean;\n  colorBgChips?: string;\n  colorTextChips?: string;\n  colorTracks?: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\"; // apenas bar/column - '' = transparente (sem track)\n  showTitle?: boolean;\n  showTotal?: boolean;\n  showGrid?: boolean;\n  showHoverEffect?: boolean;\n}"
+        },
+        {
+          "name": "IChartConfig",
+          "type": "interface",
+          "content": "export interface IChartConfig extends IChartTypeConfig {\n  title?: string;\n  colorBorder?: TChartColor; // ADICIONADO\n  widthBorderPx?: number; // ADICIONADO\n  byType?: Partial<Record<TChartType, IChartTypeConfig>>;\n}"
+        },
+        {
+          "name": "CHART_CONFIG_DEFAULT",
+          "type": "const",
+          "content": "// ==========================================================================\n// CONSTANTS\n// ==========================================================================\n\nexport const CHART_CONFIG_DEFAULT: Required<IChartTypeConfig> = {\n  showLegendOnChart: true,\n  showLegendPanel: true,\n  colorBgChips: \"base-300\", // '' = usa a cor dinâmica de cada item (não força cor fixa)\n  colorTextChips: \"\", // '' = usa o contraste dinâmico de cada item\n  colorTracks: \"base-200\", // '' = transparente (sem track por padrão)\n  showTitle: true,\n  showTotal: false,\n  showGrid: false,\n  showHoverEffect: true,\n};"
+        },
+        {
+          "name": "COR_CHART_DEFAULT",
+          "type": "const",
+          "content": "export const COR_CHART_DEFAULT: TChartColor[] = [\n  \"primary-500\",\n  \"success-500\",\n  \"warning-500\",\n  \"danger-500\",\n  \"info-500\",\n  \"secondary-500\",\n];"
+        },
+        {
+          "name": "CHART_BORDER_COLOR_DEFAULT",
+          "type": "const",
+          "content": "export const CHART_BORDER_COLOR_DEFAULT: TChartColor = \"base-100\";"
+        },
+        {
+          "name": "CHART_BORDER_WIDTH_DEFAULT",
+          "type": "const",
+          "content": "// ADICIONADO\nexport const CHART_BORDER_WIDTH_DEFAULT = 1;"
+        },
+        {
+          "name": "CorChartComponent",
+          "type": "component",
+          "content": "// mantido, usado apenas para o \"pie\"\n\n// ==========================================================================\n// COMPONENT\n// ==========================================================================\n\n@Component({\n  selector: \"cor-chart\",\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: \"./chart.html\",\n  styleUrls: [\"./chart.scss\"],\n})\nexport class CorChartComponent {\n  // ---------- Injects ----------\n  #corThemeServ: CorThemeService = inject(CorThemeService);\n\n  // ---------- Inputs (signal-based) ----------\n  type = input<TChartType>(\"bar\");\n  items = input<IChartItem[]>([]);\n  config = input<IChartConfig | undefined>(undefined);\n\n  // ---------- Inputs individuais (prioridade sobre `config`) ----------\n  title = input<string | undefined>(undefined);\n  showLegendOnChart = input<boolean | undefined>(undefined);\n  showLegendPanel = input<boolean | undefined>(undefined);\n  showTitle = input<boolean | undefined>(undefined);\n  showTotal = input<boolean | undefined>(undefined);\n  showGrid = input<boolean | undefined>(undefined);\n  showHoverEffect = input<boolean | undefined>(undefined);\n  colorBorder = input<TChartColor | undefined>(undefined);\n  widthBorderPx = input<number | undefined>(undefined);\n\n  // ---------- State ----------\n  hoveredKey = signal<string | null>(null);\n\n  // ---------- Privates ----------\n  /**\n   * Gatilho reativo de tema. Sempre que o tema (claro/escuro) mudar no\n   * CorThemeService, este signal muda de valor e força o recálculo de\n   * todos os computeds/métodos de cor que o leem.\n   */\n  private readonly isDarkMode = computed<boolean>(() =>\n    this.#corThemeServ.isDarkMode(),\n  );\n\n  // ---------- Derived config ----------\n  resolvedConfig: Signal<IChartTypeConfig> = computed(() => {\n    const type = this.type();\n    const globalCfg = this.config() ?? {};\n    const typeCfg = globalCfg.byType?.[type] ?? {};\n\n    return {\n      showLegendOnChart:\n        this.showLegendOnChart() ??\n        typeCfg.showLegendOnChart ??\n        globalCfg.showLegendOnChart ??\n        CHART_CONFIG_DEFAULT.showLegendOnChart,\n      showLegendPanel:\n        this.showLegendPanel() ??\n        typeCfg.showLegendPanel ??\n        globalCfg.showLegendPanel ??\n        CHART_CONFIG_DEFAULT.showLegendPanel,\n      colorBgChips:\n        typeCfg.colorBgChips ??\n        globalCfg.colorBgChips ??\n        CHART_CONFIG_DEFAULT.colorBgChips,\n      colorTextChips:\n        typeCfg.colorTextChips ??\n        globalCfg.colorTextChips ??\n        CHART_CONFIG_DEFAULT.colorTextChips,\n      colorTracks:\n        typeCfg.colorTracks ??\n        globalCfg.colorTracks ??\n        CHART_CONFIG_DEFAULT.colorTracks,\n      showTitle:\n        this.showTitle() ??\n        typeCfg.showTitle ??\n        globalCfg.showTitle ??\n        CHART_CONFIG_DEFAULT.showTitle,\n      showTotal:\n        this.showTotal() ??\n        typeCfg.showTotal ??\n        globalCfg.showTotal ??\n        CHART_CONFIG_DEFAULT.showTotal,\n      showGrid:\n        this.showGrid() ??\n        typeCfg.showGrid ??\n        globalCfg.showGrid ??\n        CHART_CONFIG_DEFAULT.showGrid,\n      showHoverEffect:\n        this.showHoverEffect() ??\n        typeCfg.showHoverEffect ??\n        globalCfg.showHoverEffect ??\n        CHART_CONFIG_DEFAULT.showHoverEffect,\n    };\n  });\n\n  totalValue = computed(() =>\n    this.items().reduce((sum, item) => sum + item.value, 0),\n  );\n\n  chartTitle = computed(() => this.title() ?? this.config()?.title ?? \"\");\n\n  /** Maior valor entre os itens, usado para normalizar o tamanho das barras */\n  maxValue = computed(() => {\n    const values = this.items().map((i) => i.value);\n    return values.length ? Math.max(...values) : 1;\n  });\n\n  /** Geometria angular (início/fim em radianos) de cada fatia do pie/donut */\n  private sliceGeometries = computed<ISliceGeometry[]>(() => {\n    const items = this.items();\n    const total = items.reduce((sum, i) => sum + i.value, 0);\n\n    if (total <= 0) return [];\n\n    let cumulative = 0;\n    const fullCircle = Math.PI * 2;\n\n    return items.map((item) => {\n      const startAngle = (cumulative / total) * fullCircle - Math.PI / 2;\n      cumulative += item.value;\n      const endAngle = (cumulative / total) * fullCircle - Math.PI / 2;\n      return { key: item.key, startAngle, endAngle };\n    });\n  });\n\n  private getGeometry(item: IChartItem): ISliceGeometry | null {\n    return this.sliceGeometries().find((g) => g.key === item.key) ?? null;\n  }\n\n  // ---------- Border (divisão entre fatias) ----------\n\n  resolvedBorderColor = computed<TChartColor>(() => {\n    this.isDarkMode(); // gatilho de recálculo no toggle de tema\n    return (\n      this.colorBorder() ??\n      this.config()?.colorBorder ??\n      CHART_BORDER_COLOR_DEFAULT\n    );\n  });\n\n  resolveContrastColorVar(item: IChartItem, idx: number): string {\n    this.isDarkMode(); // gatilho de recálculo no toggle de tema\n\n    const colorVar = this.resolveColorVar(item, idx); // ex: \"var(--clr-primary-500)\"\n    const match = colorVar.match(/var\\((--clr-[a-zA-Z]+)-\\d+\\)/);\n    if (match) {\n      return `var(${match[1]}-contrast)`;\n    }\n    return \"#fff\"; // fallback\n  }\n\n  resolvedBorderWidthPx = computed<number>(\n    () =>\n      this.widthBorderPx() ??\n      this.config()?.widthBorderPx ??\n      CHART_BORDER_WIDTH_DEFAULT,\n  );\n\n  /** Converte qualquer token \"nome-500\" para var(--clr-nome-500) */\n  resolveTokenVar(color: TChartColor): string {\n    this.isDarkMode(); // gatilho de recálculo no toggle de tema\n\n    const match = color.match(/^(.*)-(\\d{2,3})$/);\n    if (!match) return color;\n    const [, name, shade] = match;\n    return `var(--clr-${name}-${shade})`;\n  }\n\n  borderColorVar = computed<string>(() => {\n    this.isDarkMode(); // gatilho de recálculo no toggle de tema\n    return this.resolveTokenVar(this.resolvedBorderColor());\n  });\n\n  borderWidthPx = computed<number>(() => this.resolvedBorderWidthPx());\n\n  // ---------- Color resolution ----------\n\n  resolveColor(item: IChartItem, index: number): TChartColor {\n    this.isDarkMode(); // gatilho de recálculo no toggle de tema\n\n    return item.color && item.color !== \"\"\n      ? item.color\n      : COR_CHART_DEFAULT[index % COR_CHART_DEFAULT.length];\n  }\n\n  resolveColorVar(item: IChartItem, index: number): string {\n    this.isDarkMode(); // gatilho de recálculo no toggle de tema\n\n    const palette = [\n      \"primary\",\n      \"base\",\n      \"success\",\n      \"warning\",\n      \"info\",\n      \"cta\",\n      \"danger\",\n    ];\n    const key = palette[index % palette.length];\n    return `var(--clr-${key}-500)`;\n  }\n\n  resolveChipBg(item: IChartItem, idx: number): string {\n    this.isDarkMode(); // gatilho de recálculo no toggle de tema\n\n    const configColor = this.resolvedConfig().colorBgChips;\n    return configColor\n      ? `var(--clr-${configColor})`\n      : this.resolveColorVar(item, idx);\n  }\n\n  resolveChipText(item: IChartItem, idx: number): string {\n    this.isDarkMode(); // gatilho de recálculo no toggle de tema\n\n    const configColor = this.resolvedConfig().colorTextChips;\n    return configColor\n      ? `var(--clr-${configColor})`\n      : this.resolveContrastColorVar(item, idx);\n  }\n\n  resolveTrackColor(): string {\n    this.isDarkMode(); // gatilho de recálculo no toggle de tema\n\n    const trackColor = this.resolvedConfig().colorTracks;\n    return trackColor ? `var(--clr-${trackColor})` : \"transparent\";\n  }\n\n  showTracks(): boolean {\n    const type = this.type(); // 'bar' | 'column' | outros\n    return (\n      (type === \"bar\" || type === \"column\") &&\n      !!this.resolvedConfig().colorTracks\n    );\n  }\n\n  // ---------- Size / Value formatting ----------\n\n  getBarSize(item: IChartItem): number {\n    if (item.percentage != null) return item.percentage;\n    const max = this.maxValue();\n    return max > 0 ? (item.value / max) * 100 : 0;\n  }\n\n  formatValue(item: IChartItem): string {\n    // Só exibe como percentual se a propriedade \"percentage\" foi explicitamente definida no item\n    if (item.percentage !== undefined && item.percentage !== null) {\n      return `${item.percentage}%`;\n    }\n\n    // Caso contrário, exibe o valor bruto (sem %)\n    return `${item.value}`;\n  }\n\n  // ---------- Hover handling ----------\n\n  onItemHover(item: IChartItem): void {\n    if (!this.resolvedConfig().showHoverEffect) return;\n    this.hoveredKey.set(item.key);\n  }\n\n  onItemLeave(): void {\n    if (!this.resolvedConfig().showHoverEffect) return;\n    this.hoveredKey.set(null);\n  }\n\n  isHovered(item: IChartItem): boolean {\n    return (\n      this.resolvedConfig().showHoverEffect === true &&\n      this.hoveredKey() === item.key\n    );\n  }\n\n  isDimmed(item: IChartItem): boolean {\n    const hovered = this.hoveredKey();\n    return (\n      this.resolvedConfig().showHoverEffect === true &&\n      hovered !== null &&\n      hovered !== item.key\n    );\n  }\n\n  // ---------- Geometry (pie/donut) ----------\n\n  private polarToCartesian(\n    cx: number,\n    cy: number,\n    radius: number,\n    angleRad: number,\n  ): { x: number; y: number } {\n    return {\n      x: cx + radius * Math.cos(angleRad),\n      y: cy + radius * Math.sin(angleRad),\n    };\n  }\n\n  /** Path 2D de uma fatia de pizza ou anel (donut) */\n  getSlicePath(item: IChartItem): string {\n    const geo = this.getGeometry(item);\n    if (!geo) return \"\";\n\n    const { startAngle, endAngle } = geo;\n    const isFullCircle = endAngle - startAngle >= Math.PI * 2 - 0.0001;\n    const outer = OUTER_RADIUS;\n    const isDonut = this.type() === \"donut\";\n    const inner = isDonut ? DONUT_INNER_RADIUS : 0;\n\n    if (isFullCircle) {\n      const p1 = this.polarToCartesian(CENTER_X, CENTER_Y, outer, startAngle);\n      const p2 = this.polarToCartesian(\n        CENTER_X,\n        CENTER_Y,\n        outer,\n        startAngle + Math.PI,\n      );\n\n      if (!isDonut) {\n        return [\n          `M ${p1.x} ${p1.y}`,\n          `A ${outer} ${outer} 0 1 1 ${p2.x} ${p2.y}`,\n          `A ${outer} ${outer} 0 1 1 ${p1.x} ${p1.y}`,\n          \"Z\",\n        ].join(\" \");\n      }\n\n      const ip1 = this.polarToCartesian(CENTER_X, CENTER_Y, inner, startAngle);\n      const ip2 = this.polarToCartesian(\n        CENTER_X,\n        CENTER_Y,\n        inner,\n        startAngle + Math.PI,\n      );\n      return [\n        `M ${p1.x} ${p1.y}`,\n        `A ${outer} ${outer} 0 1 1 ${p2.x} ${p2.y}`,\n        `A ${outer} ${outer} 0 1 1 ${p1.x} ${p1.y}`,\n        `M ${ip1.x} ${ip1.y}`,\n        `A ${inner} ${inner} 0 1 0 ${ip2.x} ${ip2.y}`,\n        `A ${inner} ${inner} 0 1 0 ${ip1.x} ${ip1.y}`,\n        \"Z\",\n      ].join(\" \");\n    }\n\n    const largeArc = endAngle - startAngle > Math.PI ? 1 : 0;\n\n    const outerStart = this.polarToCartesian(\n      CENTER_X,\n      CENTER_Y,\n      outer,\n      startAngle,\n    );\n    const outerEnd = this.polarToCartesian(CENTER_X, CENTER_Y, outer, endAngle);\n\n    if (!isDonut) {\n      return [\n        `M ${CENTER_X} ${CENTER_Y}`,\n        `L ${outerStart.x} ${outerStart.y}`,\n        `A ${outer} ${outer} 0 ${largeArc} 1 ${outerEnd.x} ${outerEnd.y}`,\n        \"Z\",\n      ].join(\" \");\n    }\n\n    const innerStart = this.polarToCartesian(\n      CENTER_X,\n      CENTER_Y,\n      inner,\n      endAngle,\n    );\n    const innerEnd = this.polarToCartesian(\n      CENTER_X,\n      CENTER_Y,\n      inner,\n      startAngle,\n    );\n\n    return [\n      `M ${outerStart.x} ${outerStart.y}`,\n      `A ${outer} ${outer} 0 ${largeArc} 1 ${outerEnd.x} ${outerEnd.y}`,\n      `L ${innerStart.x} ${innerStart.y}`,\n      `A ${inner} ${inner} 0 ${largeArc} 0 ${innerEnd.x} ${innerEnd.y}`,\n      \"Z\",\n    ].join(\" \");\n  }\n\n  private getLabelRadius(): number {\n    if (this.type() === \"donut\") {\n      // Centraliza o label na faixa visível do anel\n      return (OUTER_RADIUS + DONUT_INNER_RADIUS) / 2;\n    }\n    return OUTER_RADIUS * LABEL_RADIUS_RATIO;\n  }\n\n  getLabelX(item: IChartItem): number {\n    const geo = this.getGeometry(item);\n    if (!geo) return CENTER_X;\n    const midAngle = (geo.startAngle + geo.endAngle) / 2;\n    const radius = this.getLabelRadius();\n    return this.polarToCartesian(CENTER_X, CENTER_Y, radius, midAngle).x;\n  }\n\n  getLabelY(item: IChartItem): number {\n    const geo = this.getGeometry(item);\n    if (!geo) return CENTER_Y;\n    const midAngle = (geo.startAngle + geo.endAngle) / 2;\n    const radius = this.getLabelRadius();\n    return this.polarToCartesian(CENTER_X, CENTER_Y, radius, midAngle).y;\n  }\n\n  trackByKey(_index: number, item: IChartItem): string {\n    return item.key;\n  }\n\n  hasVisibleSlice(item: IChartItem): boolean {\n    const geo = this.getGeometry(item);\n    if (!geo) return false;\n    // ângulo mínimo perceptível (evita renderizar labels de fatias \"zero\")\n    return geo.endAngle - geo.startAngle > 0.001;\n  }\n\n  getLabelFontSize(item: IChartItem): number {\n    const geo = this.getGeometry(item);\n    if (!geo) return 6;\n    const angleDeg = ((geo.endAngle - geo.startAngle) * 180) / Math.PI;\n\n    if (angleDeg < 10) return 3.5;\n    if (angleDeg < 20) return 4.5;\n    return 6;\n  }\n}"
         }
       ]
     },

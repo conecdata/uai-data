@@ -301,7 +301,7 @@
         {
           "name": "TCorBackgroundRepeats",
           "type": "type",
-          "content": "export type TCorBackgroundRepeats = \"repeat\" | \"no-repeat\" | \"repeat-x\" | \"repeat-y\" | \"repeat-round\" | \"repeat-space\";"
+          "content": "export type TCorBackgroundRepeats =\n  | \"repeat\"\n  | \"no-repeat\"\n  | \"repeat-x\"\n  | \"repeat-y\"\n  | \"repeat-round\"\n  | \"repeat-space\";"
         },
         {
           "name": "RCorBackgroundRepeats",
@@ -311,7 +311,7 @@
         {
           "name": "COR_BACKGROUND_REPEATS",
           "type": "const",
-          "content": "export const COR_BACKGROUND_REPEATS: RCorBackgroundRepeats = {\n  \"repeat\": \"repeat\",\n  \"no-repeat\": \"no-repeat\",\n  \"repeat-x\": \"repeat-x\",\n  \"repeat-y\": \"repeat-y\",\n  \"repeat-round\": \"repeat-round\",\n  \"repeat-space\": \"repeat-space\",\n};"
+          "content": "export const COR_BACKGROUND_REPEATS: RCorBackgroundRepeats = {\n  repeat: \"repeat\",\n  \"no-repeat\": \"no-repeat\",\n  \"repeat-x\": \"repeat-x\",\n  \"repeat-y\": \"repeat-y\",\n  \"repeat-round\": \"repeat-round\",\n  \"repeat-space\": \"repeat-space\",\n};"
         },
         {
           "name": "TCorBackgroundSizes",

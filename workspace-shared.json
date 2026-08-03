@@ -2086,7 +2086,7 @@
         {
           "name": "TGridValuesPosition",
           "type": "type",
-          "content": "export type TGridValuesPosition = \"none\" | \"start\" | \"end\";"
+          "content": "export type TGridValuesPosition = \"none\" | \"start\" | \"end\" | \"both\";"
         },
         {
           "name": "IChartItem",

@@ -2571,7 +2571,7 @@
         {
           "name": "COR_SECDIV_TYPES",
           "type": "const",
-          "content": "export const COR_SECDIV_TYPES = [\n  \"arrow\",\n  \"clouds\",\n  \"curve\",\n  \"triangle\",\n  \"tilt\",\n  \"waves\" /* 'tilt-down', 'tilt-up', */,\n] as const;"
+          "content": "export const COR_SECDIV_TYPES = [\n  \"arrow\",\n  \"clouds\",\n  \"curve\",\n  \"triangle\",\n  \"tilt\",\n  \"waves\",\n] as const;"
         },
         {
           "name": "TCorSecdivTypes",

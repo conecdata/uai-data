@@ -61,7 +61,7 @@
         {
           "name": "ICorFoneInfoRet",
           "type": "interface",
-          "content": "export interface ICorFoneInfoRet {\r\n  country: string;\r\n  ddd: string;\r\n  number: string;\r\n  n1: string;\r\n  n2: string;\r\n  cellphone: boolean;\r\n}"
+          "content": "export interface ICorFoneInfoRet {\n  country: string;\n  ddd: string;\n  number: string;\n  n1: string;\n  n2: string;\n  cellphone: boolean;\n}"
         }
       ]
     },
@@ -71,7 +71,7 @@
         {
           "name": "ICorLoginRet",
           "type": "interface",
-          "content": "export interface ICorLoginRet {\r\n  email: string;\r\n  senha: string;\r\n  lembrar?: boolean;\r\n}"
+          "content": "export interface ICorLoginRet {\n  email: string;\n  senha: string;\n  lembrar?: boolean;\n}"
         }
       ]
     },
@@ -111,12 +111,12 @@
         {
           "name": "ICorNavItem",
           "type": "interface",
-          "content": "export interface ICorNavItem {\n  id: string;\n  // active: boolean;\n  badge?: string;\n  caption?: string;\n  children: ICorNavItem[];\n  __count?: number;\n  extras?: any;\n  __found?: boolean;\n  // __hasIcons?: boolean;\n  // __hasTarget?: boolean;\n  icon?: string;\n  iconHovered?: string;\n  off: boolean;\n  __open?: boolean;\n  url?: string;\n  __visible?: boolean;\n\n  __countAll?: number;\n  __foundAll?: number;\n}"
+          "content": "export interface ICorNavItem {\n  id: string;\n\n  badge?: string;\n  caption?: string;\n  children: ICorNavItem[];\n  __count?: number;\n  extras?: any;\n  __found?: boolean;\n\n  icon?: string;\n  iconHovered?: string;\n  off: boolean;\n  __open?: boolean;\n  url?: string;\n  __visible?: boolean;\n\n  __countAll?: number;\n  __foundAll?: number;\n}"
         },
         {
           "name": "ICorPagInfo",
           "type": "interface",
-          "content": "export interface ICorPagInfo {\n  // user\n  page?: number;\n  perPage?: number;\n  count?: number;\n\n  // realtime\n  __pages?: {\n    last?: number;\n    maxVisible?: number;\n    list?: number[];\n  },\n  __isFirst: boolean;\n  __isLast: boolean;\n}"
+          "content": "export interface ICorPagInfo {\n\n  page?: number;\n  perPage?: number;\n  count?: number;\n\n  __pages?: {\n    last?: number;\n    maxVisible?: number;\n    list?: number[];\n  },\n  __isFirst: boolean;\n  __isLast: boolean;\n}"
         },
         {
           "name": "ICorPag",
@@ -126,7 +126,7 @@
         {
           "name": "ICorSwiperCardInfo",
           "type": "interface",
-          "content": "export interface ICorSwiperCardInfo {\r\n  id: number;\r\n  img?: string;\r\n  caption?: string;\r\n  html?: string;\r\n  cta?: {\r\n    url?: string;\r\n    caption?: string;\r\n    isActive?: boolean;\r\n  },\r\n  // url?: string;\r\n}"
+          "content": "export interface ICorSwiperCardInfo {\n  id: number;\n  img?: string;\n  caption?: string;\n  html?: string;\n  cta?: {\n    url?: string;\n    caption?: string;\n    isActive?: boolean;\n  },\n\n}"
         },
         {
           "name": "ICorTabItem",
@@ -1036,7 +1036,7 @@
         {
           "name": "COR_TRANSITION_TIMING_FUNCTIONS",
           "type": "const",
-          "content": "export const COR_TRANSITION_TIMING_FUNCTIONS = [\n  \"linear\" /* velocidade constante */,\n  \"ease\" /* padrão, começa lento, acelera, termina lento */,\n  \"ease-in\" /* começa lento, termina rápido */,\n  \"ease-out\" /* começa rápido, termina lento */,\n  \"ease-in-out\" /* começa lento, acelera no meio, termina lento */,\n  \"cubic-bezier\" /* pode ser personalizado */,\n] as const;"
+          "content": "export const COR_TRANSITION_TIMING_FUNCTIONS = [\n  \"linear\" ,\n  \"ease\" ,\n  \"ease-in\" ,\n  \"ease-out\" ,\n  \"ease-in-out\" ,\n  \"cubic-bezier\" ,\n] as const;"
         },
         {
           "name": "TCorTransitionTimingFunctions",
@@ -1076,7 +1076,7 @@
         {
           "name": "COR_UTILS_KEYS",
           "type": "const",
-          "content": "export const COR_UTILS_KEYS = [\n  \"aspect-ratio\",\n  \"backdrop-contrast\",\n  \"background-attachment\",\n  \"background-blur\",\n  \"background-clip\",\n  \"background-origin\",\n  \"background-position\",\n  \"background-repeat\",\n  \"background-size\",\n  \"blur\",\n  \"border-radius\",\n  \"border-style\",\n  \"border-width\",\n  \"box-shadow\",\n  // 'breakpoints' ,\n  \"brightness\",\n  // 'colors' ,\n  \"contrast\",\n  \"cursor\",\n  // 'flexbox' ,\n  \"font-size\",\n  \"font-weight\",\n  \"grayscale\",\n  \"height\",\n  \"hue-rotate\",\n  \"invert\",\n  \"letter-spacing\",\n  \"line-height\",\n  \"list-style\",\n  \"margin\",\n  \"max-height\",\n  \"max-width\",\n  \"min-height\",\n  \"min-width\",\n  \"mix-blend\",\n  \"opacity\",\n  \"overflow\",\n  \"overflow-x\",\n  \"overflow-y\",\n  \"overflow-webkit\",\n  \"padding\",\n  \"pointer-events\",\n  \"position\",\n  \"resize\",\n  \"saturate\",\n  \"scroll-behavior\",\n  \"scroll-snap-align\",\n  \"scroll-snap-stop\",\n  \"scroll-snap-type\",\n  \"sepia\",\n  \"text-align\",\n  \"text-decoration\",\n  \"text-transform\",\n  \"touch-action\",\n  \"underline-offset\",\n  \"user-select\",\n  // 'vars' ,\n  \"vertical-align\",\n  \"white-spaces\",\n  \"width\",\n  \"will-change\",\n  \"word-break\",\n  \"z-index\",\n] as const;"
+          "content": "export const COR_UTILS_KEYS = [\n  \"aspect-ratio\",\n  \"backdrop-contrast\",\n  \"background-attachment\",\n  \"background-blur\",\n  \"background-clip\",\n  \"background-origin\",\n  \"background-position\",\n  \"background-repeat\",\n  \"background-size\",\n  \"blur\",\n  \"border-radius\",\n  \"border-style\",\n  \"border-width\",\n  \"box-shadow\",\n\n  \"brightness\",\n\n  \"contrast\",\n  \"cursor\",\n\n  \"font-size\",\n  \"font-weight\",\n  \"grayscale\",\n  \"height\",\n  \"hue-rotate\",\n  \"invert\",\n  \"letter-spacing\",\n  \"line-height\",\n  \"list-style\",\n  \"margin\",\n  \"max-height\",\n  \"max-width\",\n  \"min-height\",\n  \"min-width\",\n  \"mix-blend\",\n  \"opacity\",\n  \"overflow\",\n  \"overflow-x\",\n  \"overflow-y\",\n  \"overflow-webkit\",\n  \"padding\",\n  \"pointer-events\",\n  \"position\",\n  \"resize\",\n  \"saturate\",\n  \"scroll-behavior\",\n  \"scroll-snap-align\",\n  \"scroll-snap-stop\",\n  \"scroll-snap-type\",\n  \"sepia\",\n  \"text-align\",\n  \"text-decoration\",\n  \"text-transform\",\n  \"touch-action\",\n  \"underline-offset\",\n  \"user-select\",\n\n  \"vertical-align\",\n  \"white-spaces\",\n  \"width\",\n  \"will-change\",\n  \"word-break\",\n  \"z-index\",\n] as const;"
         },
         {
           "name": "TCorUtils",
@@ -1096,7 +1096,7 @@
         {
           "name": "COR_UTILS",
           "type": "const",
-          "content": "export const COR_UTILS: RCorUtils = {\n  \"aspect-ratio\": {\n    props: Object.entries(COR_ASPECT_RATIOS),\n    function: \"aspect-ratio: u.aspect(%val%);\",\n  },\n  \"backdrop-contrast\": {\n    props: Object.entries(COR_BACKDROP_CONTRAST),\n    function: \"backdrop-contrast: u.backdrop-contrast(%val%);\",\n  },\n  \"background-attachment\": {\n    props: Object.entries(COR_BACKGROUND_ATTACHMENTS),\n    function: \"backdrop-attachment: u.backdrop-attachment(%val%);\",\n  },\n  \"background-blur\": {\n    unit: \"px\",\n    props: Object.entries(COR_BACKGROUND_BLURS),\n    function: \"backdrop-filter: u.backdrop-blur(%val%);\",\n  },\n  \"background-clip\": {\n    props: Object.entries(COR_BACKGROUND_CLIPS),\n    function: \"backdrop-clip: u.bg-clip(%val%);\",\n  },\n  \"background-origin\": {\n    props: Object.entries(COR_BACKGROUND_ORIGINS),\n    function: \"backdrop-origin: u.bg-origin(%val%);\",\n  },\n  \"background-position\": {\n    props: Object.entries(COR_BACKGROUND_POSITIONS),\n    function: \"backdrop-position: u.bg-position(%val%);\",\n  },\n  \"background-repeat\": {\n    props: Object.entries(COR_BACKGROUND_REPEATS),\n    function: \"backdrop-repeat: u.bg-repeat(%val%);\",\n  },\n  \"background-size\": {\n    props: Object.entries(COR_BACKGROUND_SIZES),\n    function: \"backdrop-size: u.bg-size(%val%);\",\n  },\n  blur: {\n    props: Object.entries(COR_BLURS),\n    function: \"filter: blur(u.blur(%val%));\",\n  },\n  \"border-radius\": {\n    unit: \"rem\",\n    props: Object.entries(COR_ROUNDEDS),\n    function: \"border-radius: u.rounded(%val%);\",\n  },\n  \"border-style\": {\n    props: Object.entries(COR_BORDER_STYLES),\n    function: \"border-style: u.border-style(%val%)\",\n  },\n  \"border-width\": {\n    unit: \"px\",\n    props: Object.entries(COR_BORDER_SIZES),\n    function: \"border-width: border-width(%val%);\",\n  },\n  \"box-shadow\": {\n    props: Object.entries(COR_BOX_SHADOWS),\n    function: \"box-shadow: u.shadow(%val%);\",\n  },\n  // 'breakpoints': {props: Object.entries({})},\n  brightness: {\n    props: Object.entries(COR_BRIGHTNESS),\n    function: \"filter: brightness(u.brightness(%val%));\",\n  },\n  // 'colors': {props: Object.entries({})},\n  contrast: {\n    props: Object.entries(COR_CONTRASTS),\n    function: \"filter: contrast(u.contrast(%val%));\",\n  },\n  cursor: {\n    props: Object.entries(COR_CURSORS),\n    function: \"cursor: u.cursor(%val%);\",\n  },\n  // 'flexbox': {props: Object.entries({})},\n  \"font-size\": {\n    unit: \"rem\",\n    props: Object.entries(COR_FONT_SIZES),\n    function: \"font-size: u.fs(%val%);\",\n  },\n  \"font-weight\": {\n    props: Object.entries(COR_FONT_WEIGHTS),\n    function: \"font-weight: u.font-weight(%val%);\",\n  },\n  grayscale: {\n    props: Object.entries(COR_GRAYSCALES),\n    function: \"filter: grayscale(u.grayscale(%val%));\",\n  },\n  height: {\n    unit: \"rem\",\n    props: Object.entries(COR_HEIGHTS),\n    function: \"height: u.height(%val%);\",\n  },\n  \"hue-rotate\": {\n    props: Object.entries(COR_HUE_ROTATES),\n    function: \"filter: hue-rotate(u.hue-rotate(%val%));\",\n  },\n  invert: {\n    props: Object.entries(COR_INVERTS),\n    function: \"filter: invert(u.invert(%val%));\",\n  },\n  \"letter-spacing\": {\n    unit: \"em\",\n    props: Object.entries(COR_LETTER_SPACINGS),\n    function: \"letter-spacing: u.tracking(%val%);\",\n  },\n  \"line-height\": {\n    props: Object.entries(COR_LINE_HEIGHTS),\n    function: \"line-height: u.leading(%val%);\",\n  },\n  \"list-style\": {\n    props: Object.entries(COR_LINE_STYLES),\n    function: \"list-style-type: u.list-styles(%val%);\",\n  },\n  margin: {\n    unit: \"rem\",\n    props: Object.entries(COR_MARGINS),\n    function: \"margin: u.margin(%val%);\",\n  },\n  \"max-height\": {\n    props: Object.entries(COR_MAX_SIZES),\n    function: \"max-height: u.max-h(%val%);\",\n  },\n  \"max-width\": {\n    props: Object.entries(COR_MAX_SIZES),\n    function: \"max-width: u.max-w(%val%);\",\n  },\n  \"min-height\": {\n    props: Object.entries(COR_MIN_SIZES),\n    function: \"min-heigth: u.min-h(%val%);\",\n  },\n  \"min-width\": {\n    props: Object.entries(COR_MIN_SIZES),\n    function: \"min-width: u.min-w(%val%);\",\n  },\n  \"mix-blend\": {\n    props: Object.entries(COR_MIX_BLENDS),\n    function: \"mix-blend-mode: u.mix-blend(%val%);\",\n  },\n  opacity: {\n    props: Object.entries(COR_OPACITIES),\n    function: \"opacity: u.opacity(%val%);\",\n  },\n  overflow: {\n    props: Object.entries(COR_OVERFLOWS),\n    function: \"overflow: u.overflow(%val%);\",\n  },\n  \"overflow-x\": {\n    props: Object.entries(COR_OVERFLOWS_X),\n    function: \"overflow-x: u.overflow-x(%val%);\",\n  },\n  \"overflow-y\": {\n    props: Object.entries(COR_OVERFLOWS_Y),\n    function: \"overflow-y: u.overflow-y(%val%);\",\n  },\n  \"overflow-webkit\": {\n    props: Object.entries(COR_OVERFLOWS_WEBKIT),\n    function: \"-webkit-overflow-scrolling: u.overflow-webkit(%val%);\",\n  },\n  padding: {\n    props: Object.entries(COR_PADDINGS),\n    function: \"padding: u.padding(%val%);\",\n  },\n  \"pointer-events\": {\n    props: Object.entries(COR_POINTER_EVENTS),\n    function: \"pointer-events: u.pointer-events(%val%);\",\n  },\n  position: {\n    props: Object.entries(COR_POSITIONS),\n    function: \"position: u.position(%val%);\",\n  },\n  resize: {\n    props: Object.entries(COR_RESIZINGS),\n    function: \"resize: u.resize(%val%);\",\n  },\n  saturate: {\n    props: Object.entries(COR_SATURATE),\n    function: \"filter: saturate(u.saturate(%val%));\",\n  },\n  \"scroll-behavior\": {\n    props: Object.entries(COR_SCROLL_BEHAVIORS),\n    function: \"scroll-behavior: u.scroll-behavior(%val%);\",\n  },\n  \"scroll-snap-align\": {\n    props: Object.entries(COR_SCROLL_SNAP_ALIGNS),\n    function: \"scroll-snap-align: u.scroll-snap-align(%val%);\",\n  },\n  \"scroll-snap-stop\": {\n    props: Object.entries(COR_SCROLL_SNAP_STOPS),\n    function: \"scroll-snap-stop: u.scroll-snap-stop(%val%);\",\n  },\n  \"scroll-snap-type\": {\n    props: Object.entries(COR_SCROLL_SNAP_TYPES),\n    function: \"scroll-snap-type: u.scroll-snap-type(%val%);\",\n  },\n  sepia: {\n    props: Object.entries(COR_SEPIAS),\n    function: \"filter: sepia(u.sepia(%val%));\",\n  },\n  \"text-align\": {\n    props: Object.entries(COR_TEXT_ALIGNS),\n    function: \"text-align: u.text-align(%val%);\",\n  },\n  \"text-decoration\": {\n    props: Object.entries(COR_TEXT_DECORATIONS),\n    function: \"text-decoration: u.text-decoration(%val%);\",\n  },\n  \"text-transform\": {\n    props: Object.entries(COR_TEXT_TRANSFORMATIONS),\n    function: \"text-transform: u.text-transform(%val%);\",\n  },\n  \"touch-action\": {\n    props: Object.entries(COR_TOUCH_ACTIONS),\n    function: \"touch-action: u.touch-action(%val%);\",\n  },\n  \"underline-offset\": {\n    props: Object.entries(COR_UNDERLINE_OFFSETS),\n    function: \"text-underline-offset: u.underline-offset(%val%);\",\n  },\n  \"user-select\": {\n    props: Object.entries(COR_USER_SELECTIONS),\n    function: \"user-select: u.user-select(%val%);\",\n  },\n  // 'vars': {props: Object.entries({})},\n  \"vertical-align\": {\n    props: Object.entries(COR_VERTICAL_ALIGNS),\n    function: \"vertical-align: u.vertical-align(%val%);\",\n  },\n  \"white-spaces\": {\n    props: Object.entries(COR_WHITE_SPACES),\n    function: \"white-space: u.white-space(%val%);\",\n  },\n  width: {\n    props: Object.entries(COR_WIDTHS),\n    function: \"width: u.width(%val%);\",\n  },\n  \"will-change\": {\n    props: Object.entries(COR_WILL_CHANGES),\n    function: \"will-change: u.will-change(%val%);\",\n  },\n  \"word-break\": {\n    props: Object.entries(COR_WORD_BREAKS),\n    function: \"word-break: u.word-break(%val%);\",\n  },\n  \"z-index\": {\n    props: Object.entries(COR_Z_INDEXES),\n    function: \"z-index: u.z(%val%);\",\n  },\n};"
+          "content": "export const COR_UTILS: RCorUtils = {\n  \"aspect-ratio\": {\n    props: Object.entries(COR_ASPECT_RATIOS),\n    function: \"aspect-ratio: u.aspect(%val%);\",\n  },\n  \"backdrop-contrast\": {\n    props: Object.entries(COR_BACKDROP_CONTRAST),\n    function: \"backdrop-contrast: u.backdrop-contrast(%val%);\",\n  },\n  \"background-attachment\": {\n    props: Object.entries(COR_BACKGROUND_ATTACHMENTS),\n    function: \"backdrop-attachment: u.backdrop-attachment(%val%);\",\n  },\n  \"background-blur\": {\n    unit: \"px\",\n    props: Object.entries(COR_BACKGROUND_BLURS),\n    function: \"backdrop-filter: u.backdrop-blur(%val%);\",\n  },\n  \"background-clip\": {\n    props: Object.entries(COR_BACKGROUND_CLIPS),\n    function: \"backdrop-clip: u.bg-clip(%val%);\",\n  },\n  \"background-origin\": {\n    props: Object.entries(COR_BACKGROUND_ORIGINS),\n    function: \"backdrop-origin: u.bg-origin(%val%);\",\n  },\n  \"background-position\": {\n    props: Object.entries(COR_BACKGROUND_POSITIONS),\n    function: \"backdrop-position: u.bg-position(%val%);\",\n  },\n  \"background-repeat\": {\n    props: Object.entries(COR_BACKGROUND_REPEATS),\n    function: \"backdrop-repeat: u.bg-repeat(%val%);\",\n  },\n  \"background-size\": {\n    props: Object.entries(COR_BACKGROUND_SIZES),\n    function: \"backdrop-size: u.bg-size(%val%);\",\n  },\n  blur: {\n    props: Object.entries(COR_BLURS),\n    function: \"filter: blur(u.blur(%val%));\",\n  },\n  \"border-radius\": {\n    unit: \"rem\",\n    props: Object.entries(COR_ROUNDEDS),\n    function: \"border-radius: u.rounded(%val%);\",\n  },\n  \"border-style\": {\n    props: Object.entries(COR_BORDER_STYLES),\n    function: \"border-style: u.border-style(%val%)\",\n  },\n  \"border-width\": {\n    unit: \"px\",\n    props: Object.entries(COR_BORDER_SIZES),\n    function: \"border-width: border-width(%val%);\",\n  },\n  \"box-shadow\": {\n    props: Object.entries(COR_BOX_SHADOWS),\n    function: \"box-shadow: u.shadow(%val%);\",\n  },\n\n  brightness: {\n    props: Object.entries(COR_BRIGHTNESS),\n    function: \"filter: brightness(u.brightness(%val%));\",\n  },\n\n  contrast: {\n    props: Object.entries(COR_CONTRASTS),\n    function: \"filter: contrast(u.contrast(%val%));\",\n  },\n  cursor: {\n    props: Object.entries(COR_CURSORS),\n    function: \"cursor: u.cursor(%val%);\",\n  },\n\n  \"font-size\": {\n    unit: \"rem\",\n    props: Object.entries(COR_FONT_SIZES),\n    function: \"font-size: u.fs(%val%);\",\n  },\n  \"font-weight\": {\n    props: Object.entries(COR_FONT_WEIGHTS),\n    function: \"font-weight: u.font-weight(%val%);\",\n  },\n  grayscale: {\n    props: Object.entries(COR_GRAYSCALES),\n    function: \"filter: grayscale(u.grayscale(%val%));\",\n  },\n  height: {\n    unit: \"rem\",\n    props: Object.entries(COR_HEIGHTS),\n    function: \"height: u.height(%val%);\",\n  },\n  \"hue-rotate\": {\n    props: Object.entries(COR_HUE_ROTATES),\n    function: \"filter: hue-rotate(u.hue-rotate(%val%));\",\n  },\n  invert: {\n    props: Object.entries(COR_INVERTS),\n    function: \"filter: invert(u.invert(%val%));\",\n  },\n  \"letter-spacing\": {\n    unit: \"em\",\n    props: Object.entries(COR_LETTER_SPACINGS),\n    function: \"letter-spacing: u.tracking(%val%);\",\n  },\n  \"line-height\": {\n    props: Object.entries(COR_LINE_HEIGHTS),\n    function: \"line-height: u.leading(%val%);\",\n  },\n  \"list-style\": {\n    props: Object.entries(COR_LINE_STYLES),\n    function: \"list-style-type: u.list-styles(%val%);\",\n  },\n  margin: {\n    unit: \"rem\",\n    props: Object.entries(COR_MARGINS),\n    function: \"margin: u.margin(%val%);\",\n  },\n  \"max-height\": {\n    props: Object.entries(COR_MAX_SIZES),\n    function: \"max-height: u.max-h(%val%);\",\n  },\n  \"max-width\": {\n    props: Object.entries(COR_MAX_SIZES),\n    function: \"max-width: u.max-w(%val%);\",\n  },\n  \"min-height\": {\n    props: Object.entries(COR_MIN_SIZES),\n    function: \"min-heigth: u.min-h(%val%);\",\n  },\n  \"min-width\": {\n    props: Object.entries(COR_MIN_SIZES),\n    function: \"min-width: u.min-w(%val%);\",\n  },\n  \"mix-blend\": {\n    props: Object.entries(COR_MIX_BLENDS),\n    function: \"mix-blend-mode: u.mix-blend(%val%);\",\n  },\n  opacity: {\n    props: Object.entries(COR_OPACITIES),\n    function: \"opacity: u.opacity(%val%);\",\n  },\n  overflow: {\n    props: Object.entries(COR_OVERFLOWS),\n    function: \"overflow: u.overflow(%val%);\",\n  },\n  \"overflow-x\": {\n    props: Object.entries(COR_OVERFLOWS_X),\n    function: \"overflow-x: u.overflow-x(%val%);\",\n  },\n  \"overflow-y\": {\n    props: Object.entries(COR_OVERFLOWS_Y),\n    function: \"overflow-y: u.overflow-y(%val%);\",\n  },\n  \"overflow-webkit\": {\n    props: Object.entries(COR_OVERFLOWS_WEBKIT),\n    function: \"-webkit-overflow-scrolling: u.overflow-webkit(%val%);\",\n  },\n  padding: {\n    props: Object.entries(COR_PADDINGS),\n    function: \"padding: u.padding(%val%);\",\n  },\n  \"pointer-events\": {\n    props: Object.entries(COR_POINTER_EVENTS),\n    function: \"pointer-events: u.pointer-events(%val%);\",\n  },\n  position: {\n    props: Object.entries(COR_POSITIONS),\n    function: \"position: u.position(%val%);\",\n  },\n  resize: {\n    props: Object.entries(COR_RESIZINGS),\n    function: \"resize: u.resize(%val%);\",\n  },\n  saturate: {\n    props: Object.entries(COR_SATURATE),\n    function: \"filter: saturate(u.saturate(%val%));\",\n  },\n  \"scroll-behavior\": {\n    props: Object.entries(COR_SCROLL_BEHAVIORS),\n    function: \"scroll-behavior: u.scroll-behavior(%val%);\",\n  },\n  \"scroll-snap-align\": {\n    props: Object.entries(COR_SCROLL_SNAP_ALIGNS),\n    function: \"scroll-snap-align: u.scroll-snap-align(%val%);\",\n  },\n  \"scroll-snap-stop\": {\n    props: Object.entries(COR_SCROLL_SNAP_STOPS),\n    function: \"scroll-snap-stop: u.scroll-snap-stop(%val%);\",\n  },\n  \"scroll-snap-type\": {\n    props: Object.entries(COR_SCROLL_SNAP_TYPES),\n    function: \"scroll-snap-type: u.scroll-snap-type(%val%);\",\n  },\n  sepia: {\n    props: Object.entries(COR_SEPIAS),\n    function: \"filter: sepia(u.sepia(%val%));\",\n  },\n  \"text-align\": {\n    props: Object.entries(COR_TEXT_ALIGNS),\n    function: \"text-align: u.text-align(%val%);\",\n  },\n  \"text-decoration\": {\n    props: Object.entries(COR_TEXT_DECORATIONS),\n    function: \"text-decoration: u.text-decoration(%val%);\",\n  },\n  \"text-transform\": {\n    props: Object.entries(COR_TEXT_TRANSFORMATIONS),\n    function: \"text-transform: u.text-transform(%val%);\",\n  },\n  \"touch-action\": {\n    props: Object.entries(COR_TOUCH_ACTIONS),\n    function: \"touch-action: u.touch-action(%val%);\",\n  },\n  \"underline-offset\": {\n    props: Object.entries(COR_UNDERLINE_OFFSETS),\n    function: \"text-underline-offset: u.underline-offset(%val%);\",\n  },\n  \"user-select\": {\n    props: Object.entries(COR_USER_SELECTIONS),\n    function: \"user-select: u.user-select(%val%);\",\n  },\n\n  \"vertical-align\": {\n    props: Object.entries(COR_VERTICAL_ALIGNS),\n    function: \"vertical-align: u.vertical-align(%val%);\",\n  },\n  \"white-spaces\": {\n    props: Object.entries(COR_WHITE_SPACES),\n    function: \"white-space: u.white-space(%val%);\",\n  },\n  width: {\n    props: Object.entries(COR_WIDTHS),\n    function: \"width: u.width(%val%);\",\n  },\n  \"will-change\": {\n    props: Object.entries(COR_WILL_CHANGES),\n    function: \"will-change: u.will-change(%val%);\",\n  },\n  \"word-break\": {\n    props: Object.entries(COR_WORD_BREAKS),\n    function: \"word-break: u.word-break(%val%);\",\n  },\n  \"z-index\": {\n    props: Object.entries(COR_Z_INDEXES),\n    function: \"z-index: u.z(%val%);\",\n  },\n};"
         },
         {
           "name": "TCorVerticalAligns",
@@ -1211,7 +1211,7 @@
         {
           "name": "ICorLinkPreview",
           "type": "interface",
-          "content": "// models\nexport interface ICorLinkPreview {\n  url: string;\n  title?: string;\n  description?: string;\n  image?: string;\n  favicon?: string;\n  site?: string;\n\n  id?: string;\n}"
+          "content": "export interface ICorLinkPreview {\n  url: string;\n  title?: string;\n  description?: string;\n  image?: string;\n  favicon?: string;\n  site?: string;\n\n  id?: string;\n}"
         },
         {
           "name": "fetchLinkPreviews",
@@ -1791,7 +1791,7 @@
         {
           "name": "JsonBinConfig",
           "type": "interface",
-          "content": "// models/json-bin.types.ts\nexport interface JsonBinConfig {\n  apiKey: string;\n  baseUrl?: string; // default: https://api.jsonbin.io/v3\n  binId?: string;\n  collectionId?: string;\n}"
+          "content": "export interface JsonBinConfig {\n  apiKey: string;\n  baseUrl?: string;\n  binId?: string;\n  collectionId?: string;\n}"
         },
         {
           "name": "JsonBinMetadata",
@@ -1811,12 +1811,12 @@
         {
           "name": "SyncStatus",
           "type": "type",
-          "content": "// models/three-way-bind.types.ts\nexport type SyncStatus = \"idle\" | \"syncing\" | \"synced\" | \"error\";"
+          "content": "export type SyncStatus = \"idle\" | \"syncing\" | \"synced\" | \"error\";"
         },
         {
           "name": "ThreeWayBindOptions",
           "type": "interface",
-          "content": "export interface ThreeWayBindOptions<T> {\n  key: string; // chave usada no localStorage\n  binId: string; // bin remoto no jsonbin.io\n  initialValue: T;\n  debounceMs?: number; // default 800ms\n  pollingIntervalMs?: number; // opcional, para puxar remoto periodicamente\n  serialize?: (value: T) => string;\n  deserialize?: (raw: string) => T;\n}"
+          "content": "export interface ThreeWayBindOptions<T> {\n  key: string;\n  binId: string;\n  initialValue: T;\n  debounceMs?: number;\n  pollingIntervalMs?: number;\n  serialize?: (value: T) => string;\n  deserialize?: (raw: string) => T;\n}"
         },
         {
           "name": "ThreeWayBind",
@@ -1856,7 +1856,7 @@
         {
           "name": "ICoreMatConfirmDialogData",
           "type": "interface",
-          "content": "// models\nexport interface ICoreMatConfirmDialogData {\n  animationIcon: TCorAnimations | '';\n  boldCancel: TCorFontWeights;\n  boldOk: TCorFontWeights;\n  boldMessage: TCorFontWeights;\n  boldTitle: TCorFontWeights;\n  captionCancel: string;\n  captionOk: string;\n  colorBgBody: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorBgCancel: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorBgFooter: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorBgHeader: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorBgOk: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorTextIcon: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorTextCancel: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorTextOk: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorTextMessage: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorTextTitle: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  hoverEffectActions: TCorBtnHoverEffect;\n  icon: string;\n  iconCancel: string;\n  iconOk: string;\n  message: string;\n  opacityIcon: TCorOpacities;\n  opacityIconsActions: TCorOpacities;\n  paddingX: TCorSpacings;\n  paddingY: TCorSpacings;\n  posActions: TCorTextAligns;\n  posIconActions: TCorTextAligns;\n  roundedActions: TCorRoundeds;\n  sizeFontCancel: TCorFontSizes;\n  sizeFontOk: TCorFontSizes;\n  sizeFontIcon: TCorFontSizes;\n  sizeFontMessage: TCorFontSizes;\n  sizeFontTitle: TCorFontSizes;\n  title: string;\n  trackingCancel: TCorLetterSpacings;\n  trackingOk: TCorLetterSpacings;\n  trackingMessage: TCorLetterSpacings;\n  trackingTitle: TCorLetterSpacings;\n  width: number;\n}"
+          "content": "export interface ICoreMatConfirmDialogData {\n  animationIcon: TCorAnimations | '';\n  boldCancel: TCorFontWeights;\n  boldOk: TCorFontWeights;\n  boldMessage: TCorFontWeights;\n  boldTitle: TCorFontWeights;\n  captionCancel: string;\n  captionOk: string;\n  colorBgBody: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorBgCancel: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorBgFooter: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorBgHeader: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorBgOk: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorTextIcon: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorTextCancel: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorTextOk: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorTextMessage: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorTextTitle: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  hoverEffectActions: TCorBtnHoverEffect;\n  icon: string;\n  iconCancel: string;\n  iconOk: string;\n  message: string;\n  opacityIcon: TCorOpacities;\n  opacityIconsActions: TCorOpacities;\n  paddingX: TCorSpacings;\n  paddingY: TCorSpacings;\n  posActions: TCorTextAligns;\n  posIconActions: TCorTextAligns;\n  roundedActions: TCorRoundeds;\n  sizeFontCancel: TCorFontSizes;\n  sizeFontOk: TCorFontSizes;\n  sizeFontIcon: TCorFontSizes;\n  sizeFontMessage: TCorFontSizes;\n  sizeFontTitle: TCorFontSizes;\n  title: string;\n  trackingCancel: TCorLetterSpacings;\n  trackingOk: TCorLetterSpacings;\n  trackingMessage: TCorLetterSpacings;\n  trackingTitle: TCorLetterSpacings;\n  width: number;\n}"
         },
         {
           "name": "COR_MAT_DIALOGS_CONFIRM_DEFAULT",
@@ -1876,12 +1876,12 @@
         {
           "name": "TCorMatInputType",
           "type": "type",
-          "content": "// tipos exclusivos do input\nexport type TCorMatInputType = \"alpha\" | \"num\";"
+          "content": "export type TCorMatInputType = \"alpha\" | \"num\";"
         },
         {
           "name": "ICoreMatInputDialogData",
           "type": "interface",
-          "content": "export interface ICoreMatInputDialogData {\n  boldCancel: TCorFontWeights;\n  boldOk: TCorFontWeights;\n  boldTitle: TCorFontWeights;\n  captionCancel: string;\n  captionOk: string;\n  colorBgBody: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBgCancel: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBgFooter: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBgHeader: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBgOk: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorTextIcon: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorTextCancel: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorTextOk: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorTextTitle: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  hoverEffectActions: TCorBtnHoverEffect;\n  iconCancel: string;\n  iconOk: string;\n  opacityIconsActions: TCorOpacities;\n  paddingX: TCorSpacings;\n  paddingY: TCorSpacings;\n  posActions: TCorTextAligns;\n  posIconActions: TCorTextAligns;\n  roundedActions: TCorRoundeds;\n  sizeFontCancel: TCorFontSizes;\n  sizeFontOk: TCorFontSizes;\n  sizeFontTitle: TCorFontSizes;\n  title: string;\n  trackingCancel: TCorLetterSpacings;\n  trackingOk: TCorLetterSpacings;\n  trackingTitle: TCorLetterSpacings;\n  width: number;\n\n  // --- específicos do body (input) ---\n  inputType: TCorMatInputType;\n  inputPlaceholder: string;\n  inputHint: string;\n  inputValue: string | number | null;\n  inputRequired: boolean;\n}"
+          "content": "export interface ICoreMatInputDialogData {\n  boldCancel: TCorFontWeights;\n  boldOk: TCorFontWeights;\n  boldTitle: TCorFontWeights;\n  captionCancel: string;\n  captionOk: string;\n  colorBgBody: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBgCancel: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBgFooter: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBgHeader: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBgOk: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorTextIcon: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorTextCancel: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorTextOk: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorTextTitle: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  hoverEffectActions: TCorBtnHoverEffect;\n  iconCancel: string;\n  iconOk: string;\n  opacityIconsActions: TCorOpacities;\n  paddingX: TCorSpacings;\n  paddingY: TCorSpacings;\n  posActions: TCorTextAligns;\n  posIconActions: TCorTextAligns;\n  roundedActions: TCorRoundeds;\n  sizeFontCancel: TCorFontSizes;\n  sizeFontOk: TCorFontSizes;\n  sizeFontTitle: TCorFontSizes;\n  title: string;\n  trackingCancel: TCorLetterSpacings;\n  trackingOk: TCorLetterSpacings;\n  trackingTitle: TCorLetterSpacings;\n  width: number;\n\n  inputType: TCorMatInputType;\n  inputPlaceholder: string;\n  inputHint: string;\n  inputValue: string | number | null;\n  inputRequired: boolean;\n}"
         },
         {
           "name": "COR_MAT_DIALOGS_INPUT_DEFAULT",
@@ -1911,7 +1911,7 @@
         {
           "name": "ICorCircleSketchProps",
           "type": "interface",
-          "content": "// models\nexport interface ICorCircleSketchProps {\n  color?: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  strokeWidth?: number;\n  rotation?: number;\n  animated?: boolean;\n  animationDuration?: number;\n  topPx?: number;\n  leftPx?: number;\n  dashed?: boolean;\n  double?: boolean;\n}"
+          "content": "export interface ICorCircleSketchProps {\n  color?: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  strokeWidth?: number;\n  rotation?: number;\n  animated?: boolean;\n  animationDuration?: number;\n  topPx?: number;\n  leftPx?: number;\n  dashed?: boolean;\n  double?: boolean;\n}"
         },
         {
           "name": "COR_CIRCLE_SKETCH_DEFAULT",
@@ -1926,7 +1926,7 @@
         {
           "name": "COR_CURVED_UNDERLINE_CURVATURES",
           "type": "const",
-          "content": "// models\nexport const COR_CURVED_UNDERLINE_CURVATURES: string[] = [\n  'none',\n  'default',\n  'deep',\n  'default-inverted',\n  'deep-inverted',\n] as const;"
+          "content": "export const COR_CURVED_UNDERLINE_CURVATURES: string[] = [\n  'none',\n  'default',\n  'deep',\n  'default-inverted',\n  'deep-inverted',\n] as const;"
         },
         {
           "name": "TCorCurvedUnderlineCurvatures",
@@ -1936,7 +1936,7 @@
         {
           "name": "ICorCurvedUnderlineProps",
           "type": "interface",
-          "content": "export interface ICorCurvedUnderlineProps {\n  color?: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  strokeWidth?: number;\n  animated?: boolean;\n  animationDuration?: number;\n  topPx?: number;\n  leftPx?: number;\n  dashed?: boolean;\n  /**\n   * Controls the curvature of the underline.\n   * - `none`             = straight line\n   * - `default`          = default curve (0.5)\n   * - `deep`             = deep curve (1.0)\n   * - `default-inverted` = default curve inverted (-0.5)\n   * - `deep-inverted`    = deep curve inverted (-1.0)\n   */\n  curvature?: TCorCurvedUnderlineCurvatures;\n}"
+          "content": "export interface ICorCurvedUnderlineProps {\n  color?: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  strokeWidth?: number;\n  animated?: boolean;\n  animationDuration?: number;\n  topPx?: number;\n  leftPx?: number;\n  dashed?: boolean;\n\n  curvature?: TCorCurvedUnderlineCurvatures;\n}"
         },
         {
           "name": "COR_CURVED_UNDERLINE_DEFAULT",
@@ -2041,7 +2041,7 @@
         {
           "name": "IThemeState",
           "type": "interface",
-          "content": "// models\nexport interface IThemeState {\n  isDarkMode: boolean;\n}"
+          "content": "export interface IThemeState {\n  isDarkMode: boolean;\n}"
         },
         {
           "name": "CorThemeService",
@@ -2056,7 +2056,7 @@
         {
           "name": "COR_ACCORDION_EXPANDED",
           "type": "const",
-          "content": "// models\nexport const COR_ACCORDION_EXPANDED: string[] = [\n  \"none\",\n  \"all\",\n  \"first\",\n  \"last\",\n] as const;"
+          "content": "export const COR_ACCORDION_EXPANDED: string[] = [\n  \"none\",\n  \"all\",\n  \"first\",\n  \"last\",\n] as const;"
         },
         {
           "name": "TCorAcordionExpanded",
@@ -2171,7 +2171,7 @@
         {
           "name": "COR_BTN_HOVER_EFFECT",
           "type": "const",
-          "content": "export const COR_BTN_HOVER_EFFECT = [\n  \"collision\",\n  \"flip\",\n  \"flip-i\",\n  \"glitch\",\n  \"glitch-i\",\n  \"goodbye-caption\",\n  \"goodbye-caption-i\",\n  \"hidden-icon\",\n  \"hidden-icon-i\",\n  \"mask-1\",\n  \"mask-2\",\n  \"mask-3\",\n  \"outline-pulse\",\n  \"outline-pulse-i\",\n  \"position-aware\",\n  \"shine\",\n  \"slice\",\n  \"smoke-trail\",\n  \"smoosh\",\n  \"sweep-bt\",\n  \"sweep-lr\",\n  \"sweep-rl\",\n  \"sweep-tb\",\n  \"text-flip\",\n  \"text-flip-i\",\n  // \"alternate\",\n  // \"center-fill\",\n  // \"cover-bt\",\n  // \"cover-lr\",\n  // \"cover-rl\",\n  // \"cover-tb\",\n  // \"lift\",\n  // \"neon-flicker\",\n  // \"scale\",\n] as const;"
+          "content": "export const COR_BTN_HOVER_EFFECT = [\n  \"collision\",\n  \"flip\",\n  \"flip-i\",\n  \"glitch\",\n  \"glitch-i\",\n  \"goodbye-caption\",\n  \"goodbye-caption-i\",\n  \"hidden-icon\",\n  \"hidden-icon-i\",\n  \"mask-1\",\n  \"mask-2\",\n  \"mask-3\",\n  \"outline-pulse\",\n  \"outline-pulse-i\",\n  \"position-aware\",\n  \"shine\",\n  \"slice\",\n  \"smoke-trail\",\n  \"smoosh\",\n  \"sweep-bt\",\n  \"sweep-lr\",\n  \"sweep-rl\",\n  \"sweep-tb\",\n  \"text-flip\",\n  \"text-flip-i\",\n\n] as const;"
         },
         {
           "name": "TCorBtnHoverEffect",
@@ -2251,7 +2251,7 @@
         {
           "name": "ICorCardsProps",
           "type": "interface",
-          "content": "export interface ICorCardsProps {\n  colorBg: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBorder: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  gap: TCorBsSpacings;\n  hoverEffect: TCorCardHoverEffect;\n  hoverFlipRotation: number;\n  hoverGrayscaleImgOpacityHovered: number;\n  hoverGrayscaleImgOpacityNormal: number;\n  hoverLiftShadow: TCorBoxShadows;\n  hoverNegativeIntensity: number; // 0 a 1\n  hoverScaleIntensity: number;\n  rounded: TCorRoundeds;\n  shadow: TCorBoxShadows;\n  sizeBorder: TCorBorderSizes;\n  verticalAlign: TCorTextAligns;\n  widthCardPx: number;\n}"
+          "content": "export interface ICorCardsProps {\n  colorBg: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBorder: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  gap: TCorBsSpacings;\n  hoverEffect: TCorCardHoverEffect;\n  hoverFlipRotation: number;\n  hoverGrayscaleImgOpacityHovered: number;\n  hoverGrayscaleImgOpacityNormal: number;\n  hoverLiftShadow: TCorBoxShadows;\n  hoverNegativeIntensity: number;\n  hoverScaleIntensity: number;\n  rounded: TCorRoundeds;\n  shadow: TCorBoxShadows;\n  sizeBorder: TCorBorderSizes;\n  verticalAlign: TCorTextAligns;\n  widthCardPx: number;\n}"
         },
         {
           "name": "COR_CARDS_DEFAULT",
@@ -2281,7 +2281,7 @@
         {
           "name": "TChartType",
           "type": "type",
-          "content": "// ==========================================================================\n// MODEL\n// ==========================================================================\n\nexport type TChartType = \"pie\" | \"donut\" | \"bar\" | \"column\";"
+          "content": "export type TChartType = \"pie\" | \"donut\" | \"bar\" | \"column\";"
         },
         {
           "name": "TChartColor",
@@ -2301,7 +2301,7 @@
         {
           "name": "IChartByTypeConfig",
           "type": "interface",
-          "content": "export interface IChartByTypeConfig {\n  colorBgChips?: TChartColor;\n  colorGridline?: TChartColor;\n  colorTextChips?: TChartColor;\n  colorTracks?: TChartColor;\n  decimalPlaces?: number;\n  donutTickness?: number;\n  gridSteps?: number;\n  gridValuesPosition?: TGridValuesPosition;\n  ignoreEmpty?: boolean;\n  opacityUnselectedLegendValues?: number; // 0 a 100\n  rounded?: TCorRoundeds;\n  show3d?: boolean;\n  showGrid?: boolean;\n  showHoverEffect?: boolean;\n  showLegendPanel?: boolean;\n  showValuesOnChart?: boolean;\n  showTitle?: boolean;\n  showTotal?: boolean;\n}"
+          "content": "export interface IChartByTypeConfig {\n  colorBgChips?: TChartColor;\n  colorGridline?: TChartColor;\n  colorTextChips?: TChartColor;\n  colorTracks?: TChartColor;\n  decimalPlaces?: number;\n  donutTickness?: number;\n  gridSteps?: number;\n  gridValuesPosition?: TGridValuesPosition;\n  ignoreEmpty?: boolean;\n  opacityUnselectedLegendValues?: number;\n  rounded?: TCorRoundeds;\n  show3d?: boolean;\n  showGrid?: boolean;\n  showHoverEffect?: boolean;\n  showLegendPanel?: boolean;\n  showValuesOnChart?: boolean;\n  showTitle?: boolean;\n  showTotal?: boolean;\n}"
         },
         {
           "name": "IChartConfig",
@@ -2311,7 +2311,7 @@
         {
           "name": "CHART_CONFIG_DEFAULT",
           "type": "const",
-          "content": "// ==========================================================================\n// CONSTANTS\n// ==========================================================================\n\nexport const CHART_CONFIG_DEFAULT: Omit<Required<IChartConfig>, \"byType\"> & {\n  byType?: Partial<Record<TChartType, IChartByTypeConfig>>;\n} = {\n  colorBgChips: \"base-200\",\n  colorGridline: \"base-300\",\n  colorTextChips: \"base-900\",\n  colorTracks: \"base-200\",\n  decimalPlaces: 0,\n  donutTickness: 50,\n  gridSteps: 5,\n  gridValuesPosition: \"start\",\n  ignoreEmpty: true,\n  opacityUnselectedLegendValues: 10,\n  rounded: \"rounded-none\",\n  show3d: false,\n  showGrid: true,\n  showHoverEffect: true,\n  showValuesOnChart: true,\n  showLegendPanel: true,\n  showTitle: true,\n  showTotal: false,\n\n  colorBorder: \"base-100\",\n  title: \"\",\n  widthBorderPx: 1,\n\n  colorTextTitle: \"base-900\",\n  alignmentTitle: \"text-center\",\n  sizeFontTitle: \"base\",\n  boldTitle: \"normal\",\n  trackingTitle: \"normal\",\n};"
+          "content": "export const CHART_CONFIG_DEFAULT: Omit<Required<IChartConfig>, \"byType\"> & {\n  byType?: Partial<Record<TChartType, IChartByTypeConfig>>;\n} = {\n  colorBgChips: \"base-200\",\n  colorGridline: \"base-300\",\n  colorTextChips: \"base-900\",\n  colorTracks: \"base-200\",\n  decimalPlaces: 0,\n  donutTickness: 50,\n  gridSteps: 5,\n  gridValuesPosition: \"start\",\n  ignoreEmpty: true,\n  opacityUnselectedLegendValues: 10,\n  rounded: \"rounded-none\",\n  show3d: false,\n  showGrid: true,\n  showHoverEffect: true,\n  showValuesOnChart: true,\n  showLegendPanel: true,\n  showTitle: true,\n  showTotal: false,\n\n  colorBorder: \"base-100\",\n  title: \"\",\n  widthBorderPx: 1,\n\n  colorTextTitle: \"base-900\",\n  alignmentTitle: \"text-center\",\n  sizeFontTitle: \"base\",\n  boldTitle: \"normal\",\n  trackingTitle: \"normal\",\n};"
         },
         {
           "name": "COR_CHART_DEFAULT",
@@ -2361,7 +2361,7 @@
         {
           "name": "ICorCheckIconProps",
           "type": "interface",
-          "content": "// models\nexport interface ICorCheckIconProps {\n  checked: boolean;\n}"
+          "content": "export interface ICorCheckIconProps {\n  checked: boolean;\n}"
         },
         {
           "name": "COR_CHECK_ICON_DEFAULT",
@@ -2421,12 +2421,12 @@
         {
           "name": "ICorCircularTextProps",
           "type": "interface",
-          "content": "export interface ICorCircularTextProps {\n  bold: TCorFontWeights;\n  clockwise: boolean;\n  color: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  duration: number;\n  // fontFamily: string;\n  fontSizePx: number;\n  letterSpacingPx: number;\n  opacity: TCorOpacities;\n  separator: string;\n  sizePx: number;\n  text: string;\n}"
+          "content": "export interface ICorCircularTextProps {\n  bold: TCorFontWeights;\n  clockwise: boolean;\n  color: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  duration: number;\n\n  fontSizePx: number;\n  letterSpacingPx: number;\n  opacity: TCorOpacities;\n  separator: string;\n  sizePx: number;\n  text: string;\n}"
         },
         {
           "name": "COR_CIRCULAR_TEXT_DEFAULT",
           "type": "const",
-          "content": "export const COR_CIRCULAR_TEXT_DEFAULT: ICorCircularTextProps = {\n  bold: \"bold\",\n  clockwise: true,\n  color: \"base-500\",\n  duration: 12 /** Spin duration in seconds */,\n  // fontFamily: \"'Black Ops One', 'Impact', sans-serif\",\n  fontSizePx: 16,\n  letterSpacingPx: 3,\n  opacity: 100,\n  separator: \" ✦ \" /** Separator inserted between repetitions */,\n  sizePx: 260 /** Outer diameter of the circle in px */,\n  text: \"Rotating text comes here\",\n};"
+          "content": "export const COR_CIRCULAR_TEXT_DEFAULT: ICorCircularTextProps = {\n  bold: \"bold\",\n  clockwise: true,\n  color: \"base-500\",\n  duration: 12 ,\n\n  fontSizePx: 16,\n  letterSpacingPx: 3,\n  opacity: 100,\n  separator: \" ✦ \" ,\n  sizePx: 260 ,\n  text: \"Rotating text comes here\",\n};"
         },
         {
           "name": "CorCircularTextComponent",
@@ -2441,7 +2441,7 @@
         {
           "name": "ICorColorSelInfo",
           "type": "interface",
-          "content": "// px per swatch minimum\nexport interface ICorColorSelInfo {\n  id: string;\n  clr: any;\n  luminance: any;\n}"
+          "content": "export interface ICorColorSelInfo {\n  id: string;\n  clr: any;\n  luminance: any;\n}"
         },
         {
           "name": "COR_COLOR_SEL_EXCEPTIONS",
@@ -2536,12 +2536,12 @@
         {
           "name": "ICorFlipCounterProps",
           "type": "interface",
-          "content": "export interface ICorFlipCounterProps {\n  boldCaption: TCorFontWeights;\n  boldCard: TCorFontWeights;\n  caption: string;\n  colorBgBottomFlippingCard:\n    | TCorBaseColorIds\n    | TCorCtaColorIds\n    | TCorThemesIds\n    | \"\";\n  colorBgCard: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBgTextBottomFlippingCard:\n    | TCorBaseColorIds\n    | TCorCtaColorIds\n    | TCorThemesIds\n    | \"\";\n  // colorBgTopCard: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | '';\n  colorLeafLineCard: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorTextCaption: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorTextCard: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  // dark: boolean;\n  duration: number;\n  gapCaption: TCorBsSpacings;\n  gapCards: TCorBsSpacings;\n  heightCard: number;\n  minDecimalDigits: number;\n  minIntegerDigits: number;\n  roundedCard: TCorRoundeds;\n  scrambleCaption: boolean;\n  sizeFontCaption: TCorFontSizes;\n  sizeFontCard: TCorFontSizes;\n  target: number;\n}"
+          "content": "export interface ICorFlipCounterProps {\n  boldCaption: TCorFontWeights;\n  boldCard: TCorFontWeights;\n  caption: string;\n  colorBgBottomFlippingCard:\n    | TCorBaseColorIds\n    | TCorCtaColorIds\n    | TCorThemesIds\n    | \"\";\n  colorBgCard: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBgTextBottomFlippingCard:\n    | TCorBaseColorIds\n    | TCorCtaColorIds\n    | TCorThemesIds\n    | \"\";\n\n  colorLeafLineCard: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorTextCaption: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorTextCard: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n\n  duration: number;\n  gapCaption: TCorBsSpacings;\n  gapCards: TCorBsSpacings;\n  heightCard: number;\n  minDecimalDigits: number;\n  minIntegerDigits: number;\n  roundedCard: TCorRoundeds;\n  scrambleCaption: boolean;\n  sizeFontCaption: TCorFontSizes;\n  sizeFontCard: TCorFontSizes;\n  target: number;\n}"
         },
         {
           "name": "COR_FLIP_COUNTER_DEFAULT",
           "type": "const",
-          "content": "export const COR_FLIP_COUNTER_DEFAULT: ICorFlipCounterProps = {\n  boldCaption: \"semibold\",\n  boldCard: \"semibold\",\n  caption: \"\",\n  colorBgBottomFlippingCard: \"secondary-400\",\n  colorBgCard: \"base-900\",\n  colorBgTextBottomFlippingCard: \"secondary-300\",\n  // colorBgTopCard: 'secondary-600',\n  colorLeafLineCard: \"base-200\",\n  colorTextCaption: \"base-contrast\",\n  colorTextCard: \"base-100\",\n  // dark: false,\n  duration: 2000,\n  gapCaption: \"3\",\n  gapCards: \"1\",\n  heightCard: 90,\n  minDecimalDigits: 0,\n  minIntegerDigits: 1,\n  roundedCard: \"rounded-lg\",\n  scrambleCaption: true,\n  sizeFontCaption: \"5xl\",\n  sizeFontCard: \"7xl\",\n  target: 0,\n};"
+          "content": "export const COR_FLIP_COUNTER_DEFAULT: ICorFlipCounterProps = {\n  boldCaption: \"semibold\",\n  boldCard: \"semibold\",\n  caption: \"\",\n  colorBgBottomFlippingCard: \"secondary-400\",\n  colorBgCard: \"base-900\",\n  colorBgTextBottomFlippingCard: \"secondary-300\",\n\n  colorLeafLineCard: \"base-200\",\n  colorTextCaption: \"base-contrast\",\n  colorTextCard: \"base-100\",\n\n  duration: 2000,\n  gapCaption: \"3\",\n  gapCards: \"1\",\n  heightCard: 90,\n  minDecimalDigits: 0,\n  minIntegerDigits: 1,\n  roundedCard: \"rounded-lg\",\n  scrambleCaption: true,\n  sizeFontCaption: \"5xl\",\n  sizeFontCard: \"7xl\",\n  target: 0,\n};"
         },
         {
           "name": "CorFlipCounterComponent",
@@ -2586,7 +2586,7 @@
         {
           "name": "COR_MAPA_BRASIL_DEFAULT",
           "type": "const",
-          "content": "export const COR_MAPA_BRASIL_DEFAULT: ICorMapaBrasilProps = {\n  off: false,\n  colorBorderUf: \"base-100\",\n  colorBgUf: \"base-400\",\n  colorBgUfOff: \"base-300\",\n  colorBgUfHover: \"base-500\",\n  colorTextUf: \"base-100\",\n  colorTextUfOff: \"secondary-500\",\n  widthBorderUfPx: 1,\n  ufs: {\n    // AM: {\n    //   // off: true,\n    //   colorBgUf: 'success-500',\n    //   colorBgUfHover: 'success-600',\n    //   colorTextUf: 'base-contrast',\n    // },\n    // BA: {\n    //   off: true,\n    // },\n    // MT: {\n    //   // off: true,\n    //   colorBgUf: 'danger-400',\n    //   colorBgUfHover: 'danger-500',\n    //   colorTextUf: 'base-contrast',\n    // },\n    // SP: {\n    //   off: true,\n    // }\n  },\n  zoomIn: true,\n};"
+          "content": "export const COR_MAPA_BRASIL_DEFAULT: ICorMapaBrasilProps = {\n  off: false,\n  colorBorderUf: \"base-100\",\n  colorBgUf: \"base-400\",\n  colorBgUfOff: \"base-300\",\n  colorBgUfHover: \"base-500\",\n  colorTextUf: \"base-100\",\n  colorTextUfOff: \"secondary-500\",\n  widthBorderUfPx: 1,\n  ufs: {\n\n  },\n  zoomIn: true,\n};"
         },
         {
           "name": "CorMapaBrasilComponent",
@@ -2606,7 +2606,7 @@
         {
           "name": "COR_NAV_DEFAULT",
           "type": "const",
-          "content": "export const COR_NAV_DEFAULT: ICorNavProps = {\n  animationIcon: '',\n  animationIconActive: '',\n  colorDropdownBg: 'base-100',\n  colorDropdownBgActive: 'base-300',\n  colorDropdownBorder: 'base-300',\n  colorDropdownText: 'base-900',\n  colorDropdownTextActive: 'base-900',\n  colorNavBgActive: 'base-600',\n  colorNavBorderActive: 'base-300',\n  colorNavText: 'base-contrast',\n  colorNavTextActive: 'base-contrast',\n  // filter: '',\n  gap: '2',\n  opacityIcon: 50,\n  paddingDropdownX: 'sm',\n  paddingDropdownY: 'sm',\n  roundedDropdown: 'rounded-none',\n  roundedNavActive: 'rounded-md',\n  paddingNavX: 'sm',\n  paddingNavY: 'sm',\n  showIcons: true,\n  sizeNavBorderActive: 'border-0',\n  sizeDropdownBorder: 'border',\n  sizeFontNav: 'base',\n  sizeFontDropdown: 'base',\n  sizeIcon: 'base',\n  widthMin: 200,\n};"
+          "content": "export const COR_NAV_DEFAULT: ICorNavProps = {\n  animationIcon: '',\n  animationIconActive: '',\n  colorDropdownBg: 'base-100',\n  colorDropdownBgActive: 'base-300',\n  colorDropdownBorder: 'base-300',\n  colorDropdownText: 'base-900',\n  colorDropdownTextActive: 'base-900',\n  colorNavBgActive: 'base-600',\n  colorNavBorderActive: 'base-300',\n  colorNavText: 'base-contrast',\n  colorNavTextActive: 'base-contrast',\n\n  gap: '2',\n  opacityIcon: 50,\n  paddingDropdownX: 'sm',\n  paddingDropdownY: 'sm',\n  roundedDropdown: 'rounded-none',\n  roundedNavActive: 'rounded-md',\n  paddingNavX: 'sm',\n  paddingNavY: 'sm',\n  showIcons: true,\n  sizeNavBorderActive: 'border-0',\n  sizeDropdownBorder: 'border',\n  sizeFontNav: 'base',\n  sizeFontDropdown: 'base',\n  sizeIcon: 'base',\n  widthMin: 200,\n};"
         },
         {
           "name": "INavConfig",
@@ -2666,7 +2666,7 @@
         {
           "name": "ICorScrollerProps",
           "type": "interface",
-          "content": "export interface ICorScrollerProps {\n  colorFade: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  gap: TCorBsSpacings;\n  pauseOnHover: boolean;\n  reverse: boolean;\n  speed: number; // secs\n  widthFade: number;\n}"
+          "content": "export interface ICorScrollerProps {\n  colorFade: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  gap: TCorBsSpacings;\n  pauseOnHover: boolean;\n  reverse: boolean;\n  speed: number;\n  widthFade: number;\n}"
         },
         {
           "name": "COR_SCROLLER_DEFAULT",
@@ -2716,12 +2716,12 @@
         {
           "name": "ICorSecdivProps",
           "type": "interface",
-          "content": "// export const COR_SECDIV_POSITIONS = ['top', 'bottom'] as const;\n// export type TCorSecdivPositions = typeof COR_SECDIV_POSITIONS[number];\nexport interface ICorSecdivProps {\n  colorBg: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorFill: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  heightPx: number;\n  // pos: TCorSecdivPositions;\n  inverted: boolean;\n  type: TCorSecdivTypes;\n}"
+          "content": "export interface ICorSecdivProps {\n  colorBg: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorFill: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  heightPx: number;\n\n  inverted: boolean;\n  type: TCorSecdivTypes;\n}"
         },
         {
           "name": "COR_SECDIV_DEFAULT",
           "type": "const",
-          "content": "export const COR_SECDIV_DEFAULT: ICorSecdivProps = {\n  colorBg: \"base-200\",\n  colorFill: \"base-100\",\n  heightPx: 50,\n  // pos: 'top',\n  inverted: true,\n  type: \"tilt\",\n};"
+          "content": "export const COR_SECDIV_DEFAULT: ICorSecdivProps = {\n  colorBg: \"base-200\",\n  colorFill: \"base-100\",\n  heightPx: 50,\n\n  inverted: true,\n  type: \"tilt\",\n};"
         },
         {
           "name": "CorSecdivComponent",
@@ -2786,7 +2786,7 @@
         {
           "name": "COR_TABLE_BORDER_TYPE",
           "type": "const",
-          "content": "// export type TCorTableBorderType = '' | 'table-bordered' | 'table-borderless';\nexport const COR_TABLE_BORDER_TYPE = [\n  \"\",\n  \"table-bordered\",\n  \"table-borderless\",\n] as const;"
+          "content": "export const COR_TABLE_BORDER_TYPE = [\n  \"\",\n  \"table-bordered\",\n  \"table-borderless\",\n] as const;"
         },
         {
           "name": "TCorTableBorderType",
@@ -2796,7 +2796,7 @@
         {
           "name": "COR_TABLE_STRIP_TYPE",
           "type": "const",
-          "content": "// export type TCorTableStripType = '' | 'table-striped' | 'table-striped-columns';\nexport const COR_TABLE_STRIP_TYPE = [\n  \"\",\n  \"table-striped\",\n  \"table-striped-columns\",\n] as const;"
+          "content": "export const COR_TABLE_STRIP_TYPE = [\n  \"\",\n  \"table-striped\",\n  \"table-striped-columns\",\n] as const;"
         },
         {
           "name": "TCorTableStripType",
@@ -2806,7 +2806,7 @@
         {
           "name": "COR_TABLE_CELL_ALIGNMENT",
           "type": "const",
-          "content": "// export type TCorTableCellAlignment = 'align-top' | 'align-middle' | 'align-bottom';\nexport const COR_TABLE_CELL_ALIGNMENT = [\n  \"align-top\",\n  \"align-middle\",\n  \"align-bottom\",\n] as const;"
+          "content": "export const COR_TABLE_CELL_ALIGNMENT = [\n  \"align-top\",\n  \"align-middle\",\n  \"align-bottom\",\n] as const;"
         },
         {
           "name": "TCorTableCellAlignment",
@@ -2836,12 +2836,12 @@
         {
           "name": "ICorTabsProps",
           "type": "interface",
-          "content": "export interface ICorTabsProps {\n  activeIndex: number;\n  // alignText: TCorTextAligns;\n  bold: TCorFontWeights;\n  boldActive: TCorFontWeights;\n  colorBg: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBgActive: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBgHover: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  // colorBgTabs: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBorder: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBorderActive: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBorderHover: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBorderTabs: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorText: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorTextActive: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorTextHover: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  full: boolean;\n  gap: TCorBsSpacings;\n  gapTabs: TCorBsSpacings;\n  off: boolean;\n  paddingX: Exclude<TCorSpacings, \"auto\">;\n  // paddingXTabs: Exclude<TCorSpacings, \"auto\">;\n  paddingY: Exclude<TCorSpacings, \"auto\">;\n  // paddingYTabs: Exclude<TCorSpacings, \"auto\">;\n  sizeBorder: TCorBorderSizes;\n  // sizeBorderTabs: TCorBorderSizes;\n  sizeFont: TCorFontSizes;\n  rounded: TCorRoundeds;\n  tracking: TCorLetterSpacings;\n}"
+          "content": "export interface ICorTabsProps {\n  activeIndex: number;\n\n  bold: TCorFontWeights;\n  boldActive: TCorFontWeights;\n  colorBg: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBgActive: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBgHover: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n\n  colorBorder: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBorderActive: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBorderHover: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBorderTabs: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorText: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorTextActive: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorTextHover: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  full: boolean;\n  gap: TCorBsSpacings;\n  gapTabs: TCorBsSpacings;\n  off: boolean;\n  paddingX: Exclude<TCorSpacings, \"auto\">;\n\n  paddingY: Exclude<TCorSpacings, \"auto\">;\n\n  sizeBorder: TCorBorderSizes;\n\n  sizeFont: TCorFontSizes;\n  rounded: TCorRoundeds;\n  tracking: TCorLetterSpacings;\n}"
         },
         {
           "name": "COR_TABS_DEFAULT",
           "type": "const",
-          "content": "export const COR_TABS_DEFAULT: ICorTabsProps = {\n  activeIndex: 0,\n  // alignText: \"text-center\",\n  bold: \"normal\",\n  boldActive: \"semibold\",\n  colorBg: \"base-200\",\n  colorBgActive: \"base-400\",\n  colorBgHover: \"base-300\",\n  // colorBgTabs: \"\",\n  colorBorder: \"\",\n  colorBorderActive: \"\",\n  colorBorderHover: \"\",\n  colorText: \"base-400\",\n  colorTextActive: \"base-contrast\",\n  colorTextHover: \"base-900\",\n  full: false,\n  gap: \"1\",\n  gapTabs: \"3\",\n  // alignTabs: 'text-center',\n  off: false,\n  paddingX: \"base\",\n  // paddingXTabs: \"none\",\n  paddingY: \"sm\",\n  // paddingYTabs: \"none\",\n  sizeBorder: \"border-2\",\n  // sizeBorderTabs: \"border-0\",\n  colorBorderTabs: \"\",\n  sizeFont: \"base\",\n  rounded: \"rounded-xl\",\n  tracking: \"normal\",\n};"
+          "content": "export const COR_TABS_DEFAULT: ICorTabsProps = {\n  activeIndex: 0,\n\n  bold: \"normal\",\n  boldActive: \"semibold\",\n  colorBg: \"base-200\",\n  colorBgActive: \"base-400\",\n  colorBgHover: \"base-300\",\n\n  colorBorder: \"\",\n  colorBorderActive: \"\",\n  colorBorderHover: \"\",\n  colorText: \"base-400\",\n  colorTextActive: \"base-contrast\",\n  colorTextHover: \"base-900\",\n  full: false,\n  gap: \"1\",\n  gapTabs: \"3\",\n\n  off: false,\n  paddingX: \"base\",\n\n  paddingY: \"sm\",\n\n  sizeBorder: \"border-2\",\n\n  colorBorderTabs: \"\",\n  sizeFont: \"base\",\n  rounded: \"rounded-xl\",\n  tracking: \"normal\",\n};"
         },
         {
           "name": "CorTabsComponent",
@@ -2871,12 +2871,12 @@
         {
           "name": "ICorTextScrollerProps",
           "type": "interface",
-          "content": "export interface ICorTextScrollerProps {\n  bold: TCorFontWeights;\n  colorAccent: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBg: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorFade: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorText: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  duration: number; // secs\n  // gap: number; // px\n  // height: number; // px\n  off: boolean;\n  // opacityFade: TCorOpacities;\n  opacitySeparator: TCorOpacities;\n  paddingX: Exclude<TCorSpacings, \"auto\">;\n  paddingY: Exclude<TCorSpacings, \"auto\">;\n  pauseOnHover: boolean;\n  separator: string;\n  // shadow: TCorBoxShadows;\n  sizeFont: TCorFontSizes;\n  texts: ITextScrollerItem[];\n  tracking: TCorLetterSpacings;\n  reverse: boolean;\n  widthFade: number;\n}"
+          "content": "export interface ICorTextScrollerProps {\n  bold: TCorFontWeights;\n  colorAccent: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorBg: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorFade: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  colorText: TCorBaseColorIds | TCorCtaColorIds | TCorThemesIds | \"\";\n  duration: number;\n\n  off: boolean;\n\n  opacitySeparator: TCorOpacities;\n  paddingX: Exclude<TCorSpacings, \"auto\">;\n  paddingY: Exclude<TCorSpacings, \"auto\">;\n  pauseOnHover: boolean;\n  separator: string;\n\n  sizeFont: TCorFontSizes;\n  texts: ITextScrollerItem[];\n  tracking: TCorLetterSpacings;\n  reverse: boolean;\n  widthFade: number;\n}"
         },
         {
           "name": "COR_TEXT_SCROLLER_DEFAULT",
           "type": "const",
-          "content": "export const COR_TEXT_SCROLLER_DEFAULT: ICorTextScrollerProps = {\n  bold: \"semibold\",\n  colorAccent: \"base-400\",\n  colorBg: \"base-900\",\n  colorFade: \"base-900\",\n  colorText: \"base-100\",\n  duration: 30, // secs for one full cycle\n  // gap: 40,\n  // height: 96,\n  off: false,\n  // opacityFade: 50,\n  opacitySeparator: 50,\n  separator: \"•\", // •\n  // shadow: 'shadow-none',\n  sizeFont: \"6xl\",\n  texts: [],\n  pauseOnHover: true,\n  paddingX: \"base\",\n  paddingY: \"md\",\n  reverse: false,\n  widthFade: 10,\n  tracking: \"widest\",\n};"
+          "content": "export const COR_TEXT_SCROLLER_DEFAULT: ICorTextScrollerProps = {\n  bold: \"semibold\",\n  colorAccent: \"base-400\",\n  colorBg: \"base-900\",\n  colorFade: \"base-900\",\n  colorText: \"base-100\",\n  duration: 30,\n\n  off: false,\n\n  opacitySeparator: 50,\n  separator: \"•\",\n\n  sizeFont: \"6xl\",\n  texts: [],\n  pauseOnHover: true,\n  paddingX: \"base\",\n  paddingY: \"md\",\n  reverse: false,\n  widthFade: 10,\n  tracking: \"widest\",\n};"
         },
         {
           "name": "CorTextScrollerComponent",
@@ -2891,7 +2891,7 @@
         {
           "name": "COR_TYPEWRITER_TRANSITIONS",
           "type": "const",
-          "content": "/**\n * How to transition between strings:\n *  'erase'   – backspace current string, then type next\n *  'clear'   – instantly wipe, then type next\n *  'append'  – keep previous text, append next on a new line\n *  'replace' – instant swap, no animation\n */\nexport const COR_TYPEWRITER_TRANSITIONS = [\n  \"erase\",\n  \"clear\",\n  \"append\",\n  \"replace\",\n] as const;"
+          "content": "export const COR_TYPEWRITER_TRANSITIONS = [\n  \"erase\",\n  \"clear\",\n  \"append\",\n  \"replace\",\n] as const;"
         },
         {
           "name": "TCorTypewriterTransitions",
@@ -2906,7 +2906,7 @@
         {
           "name": "COR_TYPEWRITER_DEFAULT",
           "type": "const",
-          "content": "export const COR_TYPEWRITER_DEFAULT: ICorTypewriterProps = {\n  bold: \"normal\",\n  colorText: \"base-900\",\n  delay: 0,\n  eraseSpeed: 60, // chars per sec\n  loop: true,\n  pauseAfterErase: 400, // ms\n  pauseAfterType: 1500, // ms\n  sizeFont: \"2xl\",\n  speed: 30, // chars per sec\n  texts: [\n    \"I build with Angular signals.\",\n    \"I type letter by letter.\",\n    \"I loop through multiple strings.\",\n    \"I am a typewriter.\",\n  ],\n  tracking: \"wide\",\n  transition: \"erase\",\n};"
+          "content": "export const COR_TYPEWRITER_DEFAULT: ICorTypewriterProps = {\n  bold: \"normal\",\n  colorText: \"base-900\",\n  delay: 0,\n  eraseSpeed: 60,\n  loop: true,\n  pauseAfterErase: 400,\n  pauseAfterType: 1500,\n  sizeFont: \"2xl\",\n  speed: 30,\n  texts: [\n    \"I build with Angular signals.\",\n    \"I type letter by letter.\",\n    \"I loop through multiple strings.\",\n    \"I am a typewriter.\",\n  ],\n  tracking: \"wide\",\n  transition: \"erase\",\n};"
         },
         {
           "name": "CorTypewriterComponent",
@@ -2921,7 +2921,7 @@
         {
           "name": "TCorViewstyles",
           "type": "type",
-          "content": "// models\nexport type TCorViewstyles = \"grid\" | \"list\" | \"table\";"
+          "content": "export type TCorViewstyles = \"grid\" | \"list\" | \"table\";"
         },
         {
           "name": "VIEWSTYLE_SEL_CONFIG_DEFAULT",
@@ -2951,7 +2951,7 @@
         {
           "name": "TResourceStatus",
           "type": "type",
-          "content": "// models\nexport type TResourceStatus = \"loading\" | \"resolved\" | \"error\" | \"idle\";"
+          "content": "export type TResourceStatus = \"loading\" | \"resolved\" | \"error\" | \"idle\";"
         },
         {
           "name": "IMockResourceResponse",
@@ -2971,7 +2971,7 @@
         {
           "name": "IPeekalinkAudioDetails",
           "type": "interface",
-          "content": "// ==================== AUDIO ====================\nexport interface IPeekalinkAudioDetails {\n  duration: number;\n  creationDate: string;\n  size: number;\n  bitRate: number;\n  audioCodec: string;\n  format: string;\n  sampleRate: number;\n  channels: number;\n  waveform: number[];\n}"
+          "content": "export interface IPeekalinkAudioDetails {\n  duration: number;\n  creationDate: string;\n  size: number;\n  bitRate: number;\n  audioCodec: string;\n  format: string;\n  sampleRate: number;\n  channels: number;\n  waveform: number[];\n}"
         },
         {
           "name": "IPeekalinkTypeAudio",
@@ -2981,7 +2981,7 @@
         {
           "name": "IPeekalinkDocumentPage",
           "type": "interface",
-          "content": "// ==================== DOCUMENT ====================\nexport interface IPeekalinkDocumentPage {\n  pageNumber: number;\n  image: IPeekalinkImageMap;\n}"
+          "content": "export interface IPeekalinkDocumentPage {\n  pageNumber: number;\n  image: IPeekalinkImageMap;\n}"
         },
         {
           "name": "IPeekalinkDocumentDetails",
@@ -2996,7 +2996,7 @@
         {
           "name": "IPeekalinkEtsyProductDetails",
           "type": "interface",
-          "content": "// ==================== ETSY ====================\nexport interface IPeekalinkEtsyProductDetails {\n  productId: string;\n  title: string;\n  description: string;\n  price: number;\n  currency: string;\n  rating: number;\n  reviewCount: number;\n  media: IPeekalinkMedia[];\n}"
+          "content": "export interface IPeekalinkEtsyProductDetails {\n  productId: string;\n  title: string;\n  description: string;\n  price: number;\n  currency: string;\n  rating: number;\n  reviewCount: number;\n  media: IPeekalinkMedia[];\n}"
         },
         {
           "name": "IPeekalinkTypeEtsyProduct",
@@ -3006,7 +3006,7 @@
         {
           "name": "IPeekalinkGithubLanguage",
           "type": "interface",
-          "content": "// ==================== GITHUB ====================\nexport interface IPeekalinkGithubLanguage {\n  name: string;\n  color: string;\n  percentage: number;\n}"
+          "content": "export interface IPeekalinkGithubLanguage {\n  name: string;\n  color: string;\n  percentage: number;\n}"
         },
         {
           "name": "IPeekalinkGithubOwner",
@@ -3026,7 +3026,7 @@
         {
           "name": "IPeekalinkImageDetails",
           "type": "interface",
-          "content": "// ==================== IMAGE ====================\nexport interface IPeekalinkImageDetails extends IPeekalinkImageMap {\n  width: number;\n  height: number;\n  size: number;\n  format: string;\n  hasAlphaChannel: boolean;\n}"
+          "content": "export interface IPeekalinkImageDetails extends IPeekalinkImageMap {\n  width: number;\n  height: number;\n  size: number;\n  format: string;\n  hasAlphaChannel: boolean;\n}"
         },
         {
           "name": "IPeekalinkTypeImage",
@@ -3036,7 +3036,7 @@
         {
           "name": "IPeekalinkInstagramUserDetails",
           "type": "interface",
-          "content": "// ==================== INSTAGRAM ====================\nexport interface IPeekalinkInstagramUserDetails {\n  id: number;\n  username: string;\n  verified: boolean;\n  name: string;\n  bio: string;\n  url: string;\n  followersCount: number;\n  followingCount: number;\n  postsCount: number;\n  visibility: string;\n  avatar: IPeekalinkImageMap;\n}"
+          "content": "export interface IPeekalinkInstagramUserDetails {\n  id: number;\n  username: string;\n  verified: boolean;\n  name: string;\n  bio: string;\n  url: string;\n  followersCount: number;\n  followingCount: number;\n  postsCount: number;\n  visibility: string;\n  avatar: IPeekalinkImageMap;\n}"
         },
         {
           "name": "IPeekalinkTypeInstagramUser",
@@ -3046,7 +3046,7 @@
         {
           "name": "IPeekalinkPageDetails",
           "type": "interface",
-          "content": "// ==================== PAGE ====================\nexport interface IPeekalinkPageDetails {\n  size?: number;\n  estimatedReadingTimeInMinutes: number;\n  screenshot: IPeekalinkImageMap;\n  htmlUrl: string;\n  markdownUrl: string;\n  rawTextUrl: string;\n}"
+          "content": "export interface IPeekalinkPageDetails {\n  size?: number;\n  estimatedReadingTimeInMinutes: number;\n  screenshot: IPeekalinkImageMap;\n  htmlUrl: string;\n  markdownUrl: string;\n  rawTextUrl: string;\n}"
         },
         {
           "name": "IPeekalinkTypePage",
@@ -3056,7 +3056,7 @@
         {
           "name": "IPeekalinkRedditUserRef",
           "type": "interface",
-          "content": "// ==================== REDDIT ====================\nexport interface IPeekalinkRedditUserRef {\n  id: number;\n  username: string;\n}"
+          "content": "export interface IPeekalinkRedditUserRef {\n  id: number;\n  username: string;\n}"
         },
         {
           "name": "IPeekalinkRedditSubredditBase",
@@ -3106,7 +3106,7 @@
         {
           "name": "IPeekalinkImageMapVariant",
           "type": "interface",
-          "content": "// ==================== SHARED ====================\n\nexport interface IPeekalinkImageMapVariant {\n  width: number;\n  height: number;\n  url: string;\n}"
+          "content": "export interface IPeekalinkImageMapVariant {\n  width: number;\n  height: number;\n  url: string;\n}"
         },
         {
           "name": "IPeekalinkImageMap",
@@ -3131,7 +3131,7 @@
         {
           "name": "IPeekalinkTextDetails",
           "type": "interface",
-          "content": "// ==================== TEXT ====================\nexport interface IPeekalinkTextDetails {\n  size: number;\n  estimatedReadingTime: number;\n  rawTextUrl: string;\n  image: IPeekalinkImageMap;\n}"
+          "content": "export interface IPeekalinkTextDetails {\n  size: number;\n  estimatedReadingTime: number;\n  rawTextUrl: string;\n  image: IPeekalinkImageMap;\n}"
         },
         {
           "name": "IPeekalinkTypeText",
@@ -3141,7 +3141,7 @@
         {
           "name": "IPeekalinkTiktokUserBase",
           "type": "interface",
-          "content": "// ==================== TIKTOK ====================\nexport interface IPeekalinkTiktokUserBase {\n  id: number;\n  username: string;\n  verified: boolean;\n  name: string;\n  bio: string;\n  url?: string;\n  visibility: string;\n  avatar: IPeekalinkImageMap;\n}"
+          "content": "export interface IPeekalinkTiktokUserBase {\n  id: number;\n  username: string;\n  verified: boolean;\n  name: string;\n  bio: string;\n  url?: string;\n  visibility: string;\n  avatar: IPeekalinkImageMap;\n}"
         },
         {
           "name": "IPeekalinkTiktokVideoDetails",
@@ -3166,7 +3166,7 @@
         {
           "name": "IPeekalinkVideoSnapshot",
           "type": "interface",
-          "content": "// ==================== VIDEO ====================\nexport interface IPeekalinkVideoSnapshot {\n  time: number;\n  image: IPeekalinkImageMap;\n}"
+          "content": "export interface IPeekalinkVideoSnapshot {\n  time: number;\n  image: IPeekalinkImageMap;\n}"
         },
         {
           "name": "IPeekalinkVideoDetails",
@@ -3181,7 +3181,7 @@
         {
           "name": "IPeekalinkXUserBase",
           "type": "interface",
-          "content": "// ==================== X (TWITTER) ====================\nexport interface IPeekalinkXUserBase {\n  id: number;\n  username: string;\n  name: string;\n  followersCount: number;\n  followingCount: number;\n  avatar: IPeekalinkImageMap;\n}"
+          "content": "export interface IPeekalinkXUserBase {\n  id: number;\n  username: string;\n  name: string;\n  followersCount: number;\n  followingCount: number;\n  avatar: IPeekalinkImageMap;\n}"
         },
         {
           "name": "IPeekalinkXPostDetails",
@@ -3206,7 +3206,7 @@
         {
           "name": "IPeekalinkYoutubeChannelBase",
           "type": "interface",
-          "content": "// ==================== YOUTUBE ====================\nexport interface IPeekalinkYoutubeChannelBase {\n  id: number;\n  username: string;\n  name: string;\n  description?: string;\n  bio?: string;\n  subscribersCount: number;\n  videosCount: number;\n  verified: boolean;\n  visibility: string;\n  isFamilySafe: boolean;\n  avatar: IPeekalinkImageMap;\n  banner: IPeekalinkImageMap;\n}"
+          "content": "export interface IPeekalinkYoutubeChannelBase {\n  id: number;\n  username: string;\n  name: string;\n  description?: string;\n  bio?: string;\n  subscribersCount: number;\n  videosCount: number;\n  verified: boolean;\n  visibility: string;\n  isFamilySafe: boolean;\n  avatar: IPeekalinkImageMap;\n  banner: IPeekalinkImageMap;\n}"
         },
         {
           "name": "IPeekalinkYoutubeVideoDetails",
@@ -3261,7 +3261,7 @@
         {
           "name": "ICorToastrServiceShowParams",
           "type": "interface",
-          "content": "export interface ICorToastrServiceShowParams {\n  closeButton: boolean; // Show close button\n  timeOut: number; // Time to live in milliseconds\n  extendedTimeOut: number; // Time to close after a user hovers over toast\n  disableTimeOut: DisableTimoutType; // Disable both timeOut and extendedTimeOut when set to true. Allows specifying which timeOut to disable, either: timeOut or extendedTimeOut\n  easing: TCorTransitionTimingFunctions; // Toast component easing\n  easeTime: string | number; // Time spent easing\n  enableHtml: boolean; // Allow html in message\n  newestOnTop: boolean; // New toast placement\n  progressBar: boolean; // Show progress bar\n  progressAnimation: ProgressAnimationType; // Changes the animation of the progress bar.\n  toastClass?: string; // CSS class(es) for toast\n  positionClass: TCorNgxToastrPositionClass; // CSS class(es) for toast container\n  titleClass?: string; // CSS class(es) for inside toast on title\n  messageClass?: string; // CSS class(es) for inside toast on message\n  tapToDismiss: boolean; // Close on click\n  onActivateTick: boolean; // Fires changeDetectorRef.detectChanges() when activated. Helps show toast from asynchronous events outside of Angular's change detection\n}"
+          "content": "export interface ICorToastrServiceShowParams {\n  closeButton: boolean;\n  timeOut: number;\n  extendedTimeOut: number;\n  disableTimeOut: DisableTimoutType;\n  easing: TCorTransitionTimingFunctions;\n  easeTime: string | number;\n  enableHtml: boolean;\n  newestOnTop: boolean;\n  progressBar: boolean;\n  progressAnimation: ProgressAnimationType;\n  toastClass?: string;\n  positionClass: TCorNgxToastrPositionClass;\n  titleClass?: string;\n  messageClass?: string;\n  tapToDismiss: boolean;\n  onActivateTick: boolean;\n}"
         }
       ]
     },
